@@ -1,0 +1,55 @@
+id: https://example.org/edm/domain/Procurement/VendorContract
+name: domain_procurement_vendor_contract
+title: Domain (Procurement) — VendorContract
+description: A master agreement with a supplier. Specializes Foundation Agreement.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Agreement
+  - ../../01_foundation/common/codelists/types/AgreementTypeEnum
+  - ../../01_foundation/common/base/AmountType
+  - enums/VendorContractLifecycleStateEnum
+
+classes:
+  VendorContract:
+    is_a: Agreement
+    description: Master agreement with a supplier.
+    slot_usage:
+      agreement_type:
+        equals_string: VENDOR_CONTRACT
+      lifecycle_state:
+        range: VendorContractLifecycleStateEnum
+        required: true
+    attributes:
+      contract_number:
+        range: string
+        required: true
+      contract_value_committed:
+        range: AmountType
+        description: Total committed contract value.
+      contract_value_consumed:
+        range: AmountType
+        description: Value consumed to date.
+      payment_terms:
+        range: string
+      sla_terms:
+        range: string
+        description: Service-level agreement terms.
+      termination_clause:
+        range: string
+        description: Termination notice and conditions.
+      auto_renewal:
+        range: boolean
+      renewal_notice_days:
+        range: integer
+        description: Days of notice required to terminate at renewal.

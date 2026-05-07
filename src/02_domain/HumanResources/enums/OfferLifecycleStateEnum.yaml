@@ -1,0 +1,30 @@
+id: https://example.org/edm/domain/HumanResources/enums/OfferLifecycleStateEnum
+name: domain_hr_offer_lifecycle_state_enum
+title: Domain (HR) — OfferLifecycleStateEnum
+description: Lifecycle states for an Offer.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OfferLifecycleStateEnum:
+    description: Lifecycle states for an Offer.
+    permissible_values:
+      DRAFT:
+      APPROVED:
+      EXTENDED:
+      NEGOTIATING:
+      ACCEPTED:
+      DECLINED:
+      EXPIRED:
+      RESCINDED:

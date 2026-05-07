@@ -1,0 +1,52 @@
+id: https://example.org/edm/domain/HumanResources/AlumniRole
+name: domain_hr_alumni_role
+title: Domain (HR) — AlumniRole
+description: >
+  A Role representing a Person's status as a former employee. Created
+  when an EmployeeRole transitions to SEPARATED.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Role
+  - ../../01_foundation/Person
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/codelists/types/RoleTypeEnum
+  - EmployeeRole
+
+classes:
+  AlumniRole:
+    is_a: Role
+    description: A Person's status as a former employee.
+    slot_usage:
+      role_type:
+        equals_string: ALUMNI
+      held_by_person:
+        required: true
+    attributes:
+      former_employer:
+        range: Organization
+        required: true
+      predecessor_employee_role:
+        range: EmployeeRole
+        required: true
+      separation_date:
+        range: date
+        required: true
+      total_tenure_years:
+        range: decimal
+      rehire_eligible:
+        range: boolean
+      rehire_eligibility_notes:
+        range: string
+      alumni_program_member:
+        range: boolean

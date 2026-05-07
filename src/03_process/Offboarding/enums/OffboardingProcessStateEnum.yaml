@@ -1,0 +1,34 @@
+id: https://example.org/edm/process/Offboarding/enums/OffboardingProcessStateEnum
+name: process_offboarding_state_enum
+title: Process (Offboarding) — OffboardingProcessStateEnum
+description: Workflow states for an OffboardingProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OffboardingProcessStateEnum:
+    description: Workflow states specific to offboarding instances.
+    permissible_values:
+      INITIATED:
+      NOTICE_RECEIVED:
+      KNOWLEDGE_TRANSFER_IN_PROGRESS:
+      KNOWLEDGE_TRANSFER_COMPLETE:
+      EXIT_INTERVIEW_SCHEDULED:
+      EXIT_INTERVIEW_COMPLETE:
+      EQUIPMENT_RETURNED:
+      ACCESS_REVOKED:
+      FINAL_PAYROLL_PROCESSED:
+      ALUMNI_ROLE_CREATED:
+      COMPLETE:
+      CANCELLED:

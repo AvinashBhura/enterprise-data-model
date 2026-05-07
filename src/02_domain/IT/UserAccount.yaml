@@ -1,0 +1,63 @@
+id: https://example.org/edm/domain/IT/UserAccount
+name: domain_it_user_account
+title: Domain (IT) — UserAccount
+description: >
+  A system identity / account belonging to a Person. The canonical
+  domain-layer view; vendor-specific accounts (OktaUser,
+  ServiceNowUser, WorkdayUser) live in the Application layer and
+  inherit from this.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Person
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - enums/UserAccountLifecycleStateEnum
+
+classes:
+  UserAccount:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A system identity / account.
+    slot_usage:
+      lifecycle_state:
+        range: UserAccountLifecycleStateEnum
+        required: true
+    attributes:
+      username:
+        range: string
+        required: true
+        description: Username / login (canonical form).
+      held_by_person:
+        range: Person
+        required: true
+        description: Person to whom this account belongs.
+      associated_role:
+        range: string
+        description: entity_id of the Role this account is associated with.
+      account_type:
+        range: string
+        description: STANDARD, PRIVILEGED, SERVICE, SHARED, EMERGENCY.
+      mfa_enabled:
+        range: boolean
+      last_login_at:
+        range: datetime
+      password_last_changed_at:
+        range: datetime
+      provisioned_at:
+        range: datetime
+      deprovisioned_at:
+        range: datetime

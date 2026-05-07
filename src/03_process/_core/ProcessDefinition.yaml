@@ -1,0 +1,88 @@
+id: https://example.org/edm/process/_core/ProcessDefinition
+name: process_core_process_definition
+title: Process (_core) — ProcessDefinition
+description: >
+  A versioned workflow specification — what steps execute in what
+  order, by which roles, with what transitions. ProcessDefinitions
+  are immutable once published; new versions create new
+  ProcessDefinition instances.
+
+  Per the Snapshot Principle: every ProcessDefinition carries a
+  version, and live ProcessInstances bind to a specific version for
+  their entire lifetime.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - ProcessStep
+  - ProcessTransition
+  - enums/ProcessDefinitionStateEnum
+
+classes:
+  ProcessDefinition:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A versioned workflow specification.
+    slot_usage:
+      lifecycle_state:
+        range: ProcessDefinitionStateEnum
+        required: true
+    attributes:
+      definition_name:
+        range: string
+        required: true
+        description: Name of the process (e.g., "Employee Onboarding").
+      version:
+        range: string
+        required: true
+        description: Semantic version of the definition (e.g., "3.2.0").
+      implements_capability:
+        range: string
+        required: true
+        description: >
+          The Domain capability this process implements (e.g.,
+          "Employee Onboarding", "Order Fulfillment"). Free-text
+          identifier of the capability for traceability.
+      applies_to_organization:
+        range: Organization
+        description: Optional — the OrganizationalUnit this definition applies to.
+      applies_to_jurisdiction:
+        range: string
+        multivalued: true
+        description: Optional — country codes this definition applies to.
+      steps:
+        range: ProcessStep
+        multivalued: true
+        required: true
+        description: The set of steps that make up this process.
+      transitions:
+        range: ProcessTransition
+        multivalued: true
+        description: Allowed transitions between steps / states.
+      published_at:
+        range: datetime
+      deprecated_at:
+        range: datetime
+      retired_at:
+        range: datetime
+      replaces_definition:
+        range: ProcessDefinition
+        description: The prior version this one supersedes.
+      authoring_team:
+        range: string
+        description: entity_id of the Team that owns / maintains this definition.

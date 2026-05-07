@@ -1,0 +1,38 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/TeamLifecycleStateEnum
+name: common_codelist_team_lifecycle_state_enum
+title: Common — TeamLifecycleStateEnum
+description: >
+  Lifecycle states for Team. Captures the "forming → performing →
+  dissolving" pattern common to teams, which differs from Organization
+  lifecycle (more legal/structural).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  TeamLifecycleStateEnum:
+    description: Entity-level lifecycle states for a Team.
+    permissible_values:
+      CHARTERED:
+        description: Formally chartered but not yet operational.
+      FORMING:
+        description: Members being recruited and onboarded.
+      ACTIVE:
+        description: Operational and working toward its purpose.
+      PAUSED:
+        description: Temporarily inactive.
+      DISSOLVING:
+        description: Wind-down in progress.
+      DISSOLVED:
+        description: Fully dissolved; retained for historical reference.

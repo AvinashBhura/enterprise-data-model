@@ -1,0 +1,40 @@
+id: https://example.org/edm/process/PurchaseApproval/PurchaseApprovalProcessDefinition
+name: process_purchase_approval_definition
+title: Process (PurchaseApproval) — PurchaseApprovalProcessDefinition
+description: A versioned purchase-approval workflow specification.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+  - ../../01_foundation/common/base/AmountType
+
+classes:
+  PurchaseApprovalProcessDefinition:
+    is_a: ProcessDefinition
+    description: Purchase-approval workflow definition.
+    attributes:
+      applies_to_categories:
+        range: string
+        multivalued: true
+        description: Spend categories this definition applies to (IT, FACILITIES, ...).
+      requires_legal_review_above:
+        range: AmountType
+        description: Legal review required for amounts above this threshold.
+      requires_executive_review_above:
+        range: AmountType
+        description: Executive review required for amounts above this threshold.
+      requires_competitive_bid_above:
+        range: AmountType
+        description: Competitive bidding required above this threshold.
+      max_approval_days:
+        range: integer

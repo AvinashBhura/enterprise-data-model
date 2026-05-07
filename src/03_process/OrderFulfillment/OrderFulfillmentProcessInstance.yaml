@@ -1,0 +1,46 @@
+id: https://example.org/edm/process/OrderFulfillment/OrderFulfillmentProcessInstance
+name: process_order_fulfillment_instance
+title: Process (OrderFulfillment) — OrderFulfillmentProcessInstance
+description: A live order-fulfillment process execution.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - OrderFulfillmentProcessDefinition
+  - enums/OrderFulfillmentStateEnum
+
+classes:
+  OrderFulfillmentProcessInstance:
+    is_a: ProcessInstance
+    description: A live order-fulfillment process execution.
+    slot_usage:
+      definition:
+        range: OrderFulfillmentProcessDefinition
+    attributes:
+      fulfillment_state:
+        range: OrderFulfillmentStateEnum
+        required: true
+      fulfillment_center_id:
+        range: string
+        description: entity_id of the Building / OrganizationalUnit fulfilling the order.
+      shipment_tracking_number:
+        range: string
+      shipping_carrier:
+        range: string
+      shipped_at:
+        range: datetime
+      delivered_at:
+        range: datetime
+      hold_reason:
+        range: string
+        description: If state is ON_HOLD, the reason.

@@ -1,0 +1,48 @@
+# Example instances — Day 5 completion
+# - OnboardingProcessInstance transitions to COMPLETE
+# - EmployeeRole transitions PENDING_START → ACTIVE
+# - Process emits final ProcessEvent
+
+# OnboardingProcessInstance final state update
+# Conforms to: src/03_process/Onboarding/OnboardingProcessInstance.yaml
+- entity_id: pri_5d3e2000-0003-4000-8000-000000000001
+  # ... unchanged fields ...
+  lifecycle_state: COMPLETED
+  state_effective_from: "2026-05-19T17:00:00Z"
+  state_history:
+    - from_state: INITIATED
+      to_state: IN_PROGRESS
+      transition_timestamp: "2026-05-13T09:00:00Z"
+    - from_state: IN_PROGRESS
+      to_state: COMPLETED
+      transition_timestamp: "2026-05-19T17:00:00Z"
+      reason: "All checklist items complete; first-week milestones achieved"
+  onboarding_state: COMPLETE
+  completed_at: "2026-05-19T17:00:00Z"
+  first_day_complete: true
+  first_week_complete: true
+
+# EmployeeRole transition to ACTIVE
+# Conforms to: src/02_domain/HumanResources/EmployeeRole.yaml
+- entity_id: rol_4c2e1000-0002-4000-8000-000000000001
+  # ... unchanged fields ...
+  lifecycle_state: ACTIVE
+  state_effective_from: "2026-05-15T00:00:00Z"
+  state_history:
+    - from_state: PENDING_START
+      to_state: ONBOARDING
+      transition_timestamp: "2026-05-12T08:00:00Z"
+    - from_state: ONBOARDING
+      to_state: ACTIVE
+      transition_timestamp: "2026-05-19T17:00:00Z"
+      reason: "Onboarding complete"
+
+# Final ProcessEvent
+# Conforms to: src/03_process/_core/ProcessEvent.yaml
+- entity_id: evt_7f5g4000-0005-4000-8000-000000000001
+  process_instance_id: pri_5d3e2000-0003-4000-8000-000000000001
+  event_type: INSTANCE_COMPLETED
+  occurred_at: "2026-05-19T17:00:00Z"
+  actor_person: prs_hr_partner
+  actor_role: rol_hr_partner_role
+  payload: '{"outcome": "successful", "duration_days": 7}'

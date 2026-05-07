@@ -1,0 +1,38 @@
+id: https://example.org/edm/process/_core/enums/ProcessInstanceStateEnum
+name: process_core_instance_state_enum
+title: Process (_core) — ProcessInstanceStateEnum
+description: Generic lifecycle states for a ProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  ProcessInstanceStateEnum:
+    description: Generic lifecycle states for any ProcessInstance.
+    permissible_values:
+      INITIATED:
+        description: Instance created; first step not yet started.
+      IN_PROGRESS:
+        description: Active execution.
+      PAUSED:
+        description: Temporarily paused.
+      WAITING:
+        description: Awaiting external input or dependency.
+      COMPLETED:
+        description: All required steps finished successfully.
+      CANCELLED:
+        description: Cancelled before completion.
+      FAILED:
+        description: Failed; cannot continue.
+      MIGRATED:
+        description: Terminated to migrate to a new ProcessDefinition version.

@@ -1,0 +1,48 @@
+id: https://example.org/edm/process/Onboarding/OnboardingProcessDefinition
+name: process_onboarding_definition
+title: Process (Onboarding) — OnboardingProcessDefinition
+description: >
+  A versioned onboarding workflow specification. Multiple definitions
+  may exist concurrently (US Engineering v3.2, EMEA Sales v2.1,
+  Contractor v1.4) and operate on the same Domain entities
+  (EmployeeRole, OnboardingChecklist).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+  - ../../02_domain/HumanResources/OnboardingChecklist
+
+classes:
+  OnboardingProcessDefinition:
+    is_a: ProcessDefinition
+    description: An onboarding workflow definition.
+    attributes:
+      based_on_checklist:
+        range: OnboardingChecklist
+        required: true
+        description: The OnboardingChecklist template this definition implements.
+      target_employment_types:
+        range: string
+        multivalued: true
+        description: Employment types this definition applies to (FULL_TIME, INTERN, ...).
+      target_position_types:
+        range: string
+        multivalued: true
+        description: Position-type taxonomy nodes this definition applies to.
+      typical_duration_days:
+        range: integer
+        description: Expected total duration of the onboarding process.
+      includes_relocation:
+        range: boolean
+      includes_visa_process:
+        range: boolean

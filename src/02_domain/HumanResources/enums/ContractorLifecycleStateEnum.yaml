@@ -1,0 +1,30 @@
+id: https://example.org/edm/domain/HumanResources/enums/ContractorLifecycleStateEnum
+name: domain_hr_contractor_lifecycle_state_enum
+title: Domain (HR) — ContractorLifecycleStateEnum
+description: Lifecycle states for a ContractorRole.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  ContractorLifecycleStateEnum:
+    description: Lifecycle states specific to ContractorRole.
+    permissible_values:
+      PROPOSED:
+      CONTRACT_SIGNED:
+      ACTIVE:
+      EXTENDED:
+      SUSPENDED:
+      ENDED:
+      CONVERTED:
+        description: Converted to an EmployeeRole.

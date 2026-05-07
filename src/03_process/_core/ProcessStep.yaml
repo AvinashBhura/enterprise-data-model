@@ -1,0 +1,73 @@
+id: https://example.org/edm/process/_core/ProcessStep
+name: process_core_process_step
+title: Process (_core) — ProcessStep
+description: >
+  A single step in a ProcessDefinition. Specializes Foundation
+  Activity. Defines what must happen at this step — who is responsible,
+  what triggers it, what completes it.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Activity
+  - ../../01_foundation/common/codelists/types/ActivityTypeEnum
+  - ../../01_foundation/common/codelists/types/RoleTypeEnum
+
+classes:
+  ProcessStep:
+    is_a: Activity
+    description: A single step within a ProcessDefinition.
+    slot_usage:
+      activity_type:
+        equals_string: PROCESS_STEP
+    attributes:
+      step_name:
+        range: string
+        required: true
+      step_code:
+        range: string
+        required: true
+        description: Short code for referencing this step.
+      sequence_number:
+        range: integer
+        description: Suggested execution order; transitions enforce actual flow.
+      responsible_role:
+        range: RoleTypeEnum
+        description: Type of Role responsible for completing this step.
+      responsible_team:
+        range: string
+        description: entity_id of the specific Team responsible, if applicable.
+      expected_duration_hours:
+        range: decimal
+        description: Expected time to complete the step.
+      preconditions:
+        range: ProcessStep
+        multivalued: true
+        description: Steps that must complete before this one can start.
+      is_required:
+        range: boolean
+        description: Whether the step is mandatory (vs. conditional).
+      is_automated:
+        range: boolean
+        description: Whether the step is performed by automation.
+      automation_handler:
+        range: string
+        description: Reference to the automation handler / function.
+      input_specification:
+        range: string
+        description: Free-text spec of expected inputs.
+      output_specification:
+        range: string
+        description: Free-text spec of expected outputs.
+      sla_hours:
+        range: decimal
+        description: SLA target for step completion.

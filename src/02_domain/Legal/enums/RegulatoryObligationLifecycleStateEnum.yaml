@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/Legal/enums/RegulatoryObligationLifecycleStateEnum
+name: domain_legal_regulatory_obligation_lifecycle_state_enum
+title: Domain (Legal) — RegulatoryObligationLifecycleStateEnum
+description: Lifecycle states for a RegulatoryObligation.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  RegulatoryObligationLifecycleStateEnum:
+    description: Lifecycle states for a RegulatoryObligation.
+    permissible_values:
+      IDENTIFIED:
+        description: Obligation identified, not yet acted upon.
+      ASSESSED:
+        description: Risk and applicability assessed.
+      IMPLEMENTED:
+        description: Compliance controls implemented.
+      MONITORING:
+        description: Active monitoring of compliance.
+      AT_RISK:
+        description: Compliance at risk; remediation needed.
+      NON_COMPLIANT:
+        description: Currently non-compliant.
+      RETIRED:
+        description: Obligation no longer applies.

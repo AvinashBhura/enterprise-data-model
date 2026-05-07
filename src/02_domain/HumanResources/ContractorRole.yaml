@@ -1,0 +1,61 @@
+id: https://example.org/edm/domain/HumanResources/ContractorRole
+name: domain_hr_contractor_role
+title: Domain (HR) — ContractorRole
+description: >
+  A Role representing a Person's engagement as an independent
+  contractor.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Role
+  - ../../01_foundation/Person
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/codelists/types/RoleTypeEnum
+  - ../../01_foundation/common/base/AmountType
+  - enums/ContractorLifecycleStateEnum
+
+classes:
+  ContractorRole:
+    is_a: Role
+    description: A Person engaged as an independent contractor.
+    slot_usage:
+      role_type:
+        equals_string: CONTRACTOR
+      held_by_person:
+        required: true
+      lifecycle_state:
+        range: ContractorLifecycleStateEnum
+        required: true
+    attributes:
+      contractor_number:
+        range: string
+      engaging_organization:
+        range: Organization
+        required: true
+      contracting_through:
+        range: Organization
+        description: Staffing/contracting firm, if applicable.
+      engagement_start:
+        range: date
+        required: true
+      engagement_end:
+        range: date
+      hourly_rate:
+        range: AmountType
+      day_rate:
+        range: AmountType
+      project_or_purpose:
+        range: string
+      reports_to_role:
+        range: string
+        description: entity_id of the EmployeeRole this contractor reports to.

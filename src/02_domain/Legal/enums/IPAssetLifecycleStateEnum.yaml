@@ -1,0 +1,44 @@
+id: https://example.org/edm/domain/Legal/enums/IPAssetLifecycleStateEnum
+name: domain_legal_ip_asset_lifecycle_state_enum
+title: Domain (Legal) — IPAssetLifecycleStateEnum
+description: Lifecycle states for an IntellectualPropertyAsset.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  IPAssetLifecycleStateEnum:
+    description: Lifecycle states for IP assets.
+    permissible_values:
+      DISCLOSURE:
+        description: Initial invention disclosure.
+      FILING_PREPARED:
+        description: Application prepared, not yet filed.
+      FILED:
+        description: Application filed with authority.
+      PUBLISHED:
+        description: Application published.
+      EXAMINATION:
+        description: Under examination.
+      GRANTED:
+        description: Granted by authority.
+      MAINTAINED:
+        description: Granted and maintenance fees current.
+      LAPSED:
+        description: Lapsed for non-payment.
+      ABANDONED:
+        description: Abandoned by applicant.
+      EXPIRED:
+        description: Reached statutory expiration.
+      INVALIDATED:
+        description: Invalidated by court or authority.

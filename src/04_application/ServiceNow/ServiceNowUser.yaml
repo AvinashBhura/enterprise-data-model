@@ -1,0 +1,42 @@
+id: https://example.org/edm/application/ServiceNow/ServiceNowUser
+name: application_servicenow_user
+title: Application (ServiceNow) — ServiceNowUser
+description: ServiceNow projection of a UserAccount.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/IT/UserAccount
+  - ../_shared/SyncMetadata
+
+classes:
+  ServiceNowUser:
+    is_a: UserAccount
+    description: ServiceNow sys_user record projection.
+    attributes:
+      snow_sys_id:
+        range: string
+        required: true
+      snow_user_name:
+        range: string
+        required: true
+      snow_active:
+        range: boolean
+      snow_primary_email:
+        range: string
+      snow_department:
+        range: string
+      snow_manager_sys_id:
+        range: string
+      sync:
+        range: SyncMetadata
+        required: true

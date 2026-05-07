@@ -1,0 +1,40 @@
+id: https://example.org/edm/domain/Sales/enums/OrderLifecycleStateEnum
+name: domain_sales_order_lifecycle_state_enum
+title: Domain (Sales) — OrderLifecycleStateEnum
+description: Lifecycle states for an Order.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OrderLifecycleStateEnum:
+    description: Lifecycle states for a customer Order.
+    permissible_values:
+      SUBMITTED:
+        description: Submitted by customer.
+      CONFIRMED:
+        description: Confirmed and accepted internally.
+      IN_FULFILLMENT:
+        description: Fulfillment in progress.
+      PARTIALLY_FULFILLED:
+        description: Partially fulfilled.
+      FULFILLED:
+        description: Fully fulfilled.
+      INVOICED:
+        description: Invoice issued.
+      CANCELLED:
+        description: Cancelled.
+      RETURNED:
+        description: Returned by customer.
+      DISPUTED:
+        description: Under dispute.

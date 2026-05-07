@@ -1,0 +1,97 @@
+id: https://example.org/edm/domain/Finance/Invoice
+name: domain_finance_invoice
+title: Domain (Finance) — Invoice
+description: >
+  An invoice — payable (AP) or receivable (AR). Specializes
+  Foundation Agreement since it represents a payment commitment.
+  Approval workflows for invoices live in the Process layer
+  (`03_process/InvoiceApproval/`).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Agreement
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/codelists/types/AgreementTypeEnum
+  - ../../01_foundation/common/base/AmountType
+  - enums/InvoiceLifecycleStateEnum
+
+classes:
+  InvoiceLine:
+    description: A single line item on an invoice.
+    attributes:
+      line_number:
+        range: integer
+        required: true
+      description:
+        range: string
+        required: true
+      quantity:
+        range: decimal
+      unit_price:
+        range: AmountType
+      line_amount:
+        range: AmountType
+        required: true
+      tax_amount:
+        range: AmountType
+      gl_account_code:
+        range: string
+
+  Invoice:
+    is_a: Agreement
+    description: An invoice (AP or AR).
+    slot_usage:
+      lifecycle_state:
+        range: InvoiceLifecycleStateEnum
+        required: true
+    attributes:
+      invoice_number:
+        range: string
+        required: true
+        description: Invoice number (natural key).
+      invoice_direction:
+        range: string
+        required: true
+        description: PAYABLE or RECEIVABLE.
+      issuer:
+        range: Organization
+        required: true
+        description: The Organization that issued the invoice.
+      bill_to:
+        range: Organization
+        required: true
+        description: The Organization being billed.
+      issue_date:
+        range: date
+        required: true
+      due_date:
+        range: date
+        required: true
+      lines:
+        range: InvoiceLine
+        multivalued: true
+        required: true
+      subtotal:
+        range: AmountType
+      tax_total:
+        range: AmountType
+      grand_total:
+        range: AmountType
+        required: true
+      amount_paid:
+        range: AmountType
+      amount_outstanding:
+        range: AmountType
+      payment_terms:
+        range: string
+        description: Payment terms (e.g., NET_30, NET_60).

@@ -1,0 +1,42 @@
+id: https://example.org/edm/foundation/common/codelists/types/TeamTypeEnum
+name: common_codelist_team_type_enum
+title: Common — TeamTypeEnum
+description: >
+  Type classifier for Team instances. Absorbs the former Collaboration
+  concept: time-boxed groups are represented as Teams with a
+  time-boxed team_type (PROJECT, TASK_FORCE, COMMITTEE).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  TeamTypeEnum:
+    description: Type classifier for Team instances.
+    permissible_values:
+      PERSISTENT:
+        description: A stable, long-lived team (e.g., Platform SRE Squad).
+      SQUAD:
+        description: A small, persistent cross-functional team.
+      PROJECT:
+        description: A time-boxed team formed for a specific project.
+      TASK_FORCE:
+        description: A short-lived team formed to address a specific issue.
+      COMMITTEE:
+        description: A governance or advisory body with scheduled meetings.
+      CROSS_FUNCTIONAL:
+        description: A team spanning multiple OrganizationalUnits.
+      TIGER_TEAM:
+        description: A rapid-response team assembled to solve a critical issue.
+      WORKING_GROUP:
+        description: A consultative group focused on a specific topic area.

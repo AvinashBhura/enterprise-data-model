@@ -1,0 +1,137 @@
+id: https://example.org/edm/foundation/Agreement
+name: foundation_agreement
+title: Foundation — Agreement
+description: >
+  A formal commitment between two or more parties, typically captured
+  in a document. Employment contracts, vendor agreements, customer
+  orders, NDAs, leases, service agreements, purchase orders, licenses
+  — all are Agreements.
+
+  Justification as Foundational:
+    - Universality: every significant relationship is governed by
+      some kind of agreement. Enterprise-wide questions like "what
+      commitments are we currently bound by?" become unanswerable
+      without a common concept.
+    - Abstraction: exists independent of specific domains or processes.
+    - Semantic Integrity: one structure across HR contracts, vendor
+      contracts, NDAs, licenses, leases.
+
+  Domain specializations (Domain layer):
+    - EmploymentContract, Offer (HumanResources)
+    - VendorContract, PurchaseOrder (Procurement)
+    - Invoice (Finance)
+    - Quote, Order (Sales)
+    - NDA, LicensingAgreement (Legal)
+    - Lease (Facilities)
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - Person
+  - Organization
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Classifiable
+  - common/base/Temporal
+  - common/base/AmountType
+  - common/base/DocumentType
+  - common/codelists/types/AgreementTypeEnum
+  - common/codelists/lifecycles/AgreementLifecycleStateEnum
+
+classes:
+
+  AgreementParty:
+    description: >
+      A single party on an Agreement. Captures which entity is party
+      to the agreement, in what capacity (e.g., "buyer", "seller",
+      "licensor"), and when they signed.
+    attributes:
+      party:
+        range: Entity
+        required: true
+        description: Reference to the Person or Organization party.
+      role:
+        range: string
+        required: true
+        description: >
+          Role of this party in the agreement (e.g., "buyer", "seller",
+          "employer", "employee", "licensor", "licensee", "disclosing",
+          "receiving").
+      signed_at:
+        range: datetime
+        description: When this party signed.
+      signed_by_person:
+        range: Person
+        description: >
+          The Person who signed on behalf of this party (especially
+          relevant when the party is an Organization).
+
+  Agreement:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+      - Temporal
+    description: >
+      A formal commitment. Concrete base class — specialized in
+      Domain layer for typed contracts. Parties are captured as
+      first-class AgreementParty records to support multi-party
+      agreements with distinct roles and signing timestamps.
+    slot_usage:
+      lifecycle_state:
+        range: AgreementLifecycleStateEnum
+    attributes:
+      agreement_type:
+        range: AgreementTypeEnum
+        required: true
+        description: Classifier (EMPLOYMENT_CONTRACT, VENDOR_CONTRACT, NDA, LEASE, ...).
+      title:
+        range: string
+        required: true
+        description: Short human-readable title.
+      reference_number:
+        range: string
+        description: >
+          Internal or external reference number for this agreement.
+          Also capturable as a natural_identifier via Identifiable
+          if multiple schemes apply.
+      parties:
+        range: AgreementParty
+        multivalued: true
+        required: true
+        description: Two or more AgreementParty records.
+      effective_from:
+        range: date
+        description: Date the agreement becomes effective.
+      effective_to:
+        range: date
+        description: Date the agreement ends (null if perpetual or auto-renewing).
+      auto_renewal:
+        range: boolean
+        description: Whether the agreement auto-renews at effective_to.
+      renewal_terms:
+        range: string
+        description: Free-text description of renewal terms.
+      total_value:
+        range: AmountType
+        description: Total monetary value of the agreement, if applicable.
+      governing_law:
+        range: string
+        description: Jurisdiction / governing law (e.g., "State of Delaware, USA").
+      signed_document:
+        range: DocumentType
+        description: Reference to the executed signed version of the agreement.
+      draft_document:
+        range: DocumentType
+        description: Reference to a draft or working version of the agreement.

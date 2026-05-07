@@ -1,0 +1,118 @@
+id: https://example.org/edm/foundation/Role
+name: foundation_role
+title: Foundation — Role
+description: >
+  A time-bound engagement of a Person or Organization with another
+  party (typically an Organization or Team). Roles are the universal
+  pivot for all "who plays what with whom" relationships.
+
+  Why Role is central:
+    - Decouples stable identity (Person) from engagement (Employee,
+      Vendor, Visitor). A Person persists; Roles begin and end.
+    - Allows a single Person to hold multiple concurrent Roles
+      (employee of one org, board member of another, contractor to a
+      third).
+    - Captures the time dimension (effective_from, effective_to)
+      without bloating the holder's schema.
+    - Per the Role Immutability rule: Roles do not mutate their core
+      terms. Changes to employing_organization or position end the
+      current Role and begin a new one.
+
+  Domain specializations of Role (in Domain layer):
+    - EmployeeRole (HumanResources)
+    - ContractorRole (HumanResources)
+    - AlumniRole (HumanResources)
+    - ManagerRole (HumanResources)
+    - VendorRole (Procurement)
+    - VisitorRole (Security)
+    - CustomerContactRole (Sales)
+    - BoardMemberRole, CommitteeChairRole, AdvisorRole (Governance)
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - Person
+  - Organization
+  - Team
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Classifiable
+  - common/base/Temporal
+  - common/codelists/types/RoleTypeEnum
+  - common/codelists/lifecycles/RoleLifecycleStateEnum
+
+classes:
+
+  Role:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+      - Temporal
+    description: >
+      A time-bound engagement. Role is concrete (not abstract) because
+      some generic engagements may be captured directly as Role
+      instances. However, in practice most Roles are Domain-layer
+      specializations.
+
+      Exactly one of held_by_person or held_by_organization must be
+      populated (enforced at the domain-specialization level or by
+      generator rules). Engagements that could be held by either
+      (like VendorRole) use a union range at their specialization.
+    slot_usage:
+      lifecycle_state:
+        range: RoleLifecycleStateEnum
+    attributes:
+      role_type:
+        range: RoleTypeEnum
+        required: true
+        description: >
+          The kind of role. Each Domain specialization binds to a
+          specific value (e.g., EmployeeRole → EMPLOYEE).
+      held_by_person:
+        range: Person
+        description: >
+          The Person who holds this role. Populated when the role is
+          held by a human (employment, visit, board membership).
+      held_by_organization:
+        range: Organization
+        description: >
+          The Organization holding this role. Populated when the role
+          is held by an organization (e.g., a corporate vendor role,
+          partner organization role).
+      engaging_party:
+        range: Entity
+        description: >
+          The party on the other side of the engagement — typically
+          the Organization (or Team) that the holder is engaged with.
+          Union target: Organization or Team.
+      role_title:
+        range: string
+        description: Human-readable title (e.g., "Senior Engineer", "Chair").
+      effective_from:
+        range: datetime
+        required: true
+        description: Start of the role engagement.
+      effective_to:
+        range: datetime
+        description: End of the role engagement (null if ongoing).
+      end_reason:
+        range: string
+        description: Reason the role ended (resignation, separation, end-of-contract).
+      authority_level:
+        range: string
+        description: >
+          Optional authority/seniority indicator (e.g., "signatory",
+          "approver", "contributor"). Specialization classes may
+          narrow this to controlled values.

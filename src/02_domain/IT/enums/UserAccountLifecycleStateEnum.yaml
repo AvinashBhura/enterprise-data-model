@@ -1,0 +1,30 @@
+id: https://example.org/edm/domain/IT/enums/UserAccountLifecycleStateEnum
+name: domain_it_user_account_lifecycle_state_enum
+title: Domain (IT) — UserAccountLifecycleStateEnum
+description: Lifecycle states for a UserAccount.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  UserAccountLifecycleStateEnum:
+    description: Lifecycle states for a UserAccount.
+    permissible_values:
+      PROVISIONING:
+      ACTIVE:
+      LOCKED:
+      DISABLED:
+      PASSWORD_RESET_REQUIRED:
+      MFA_PENDING:
+      DEPROVISIONED:
+      ARCHIVED:

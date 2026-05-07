@@ -1,0 +1,52 @@
+id: https://example.org/edm/application/ServiceNow/ServiceNowIncident
+name: application_servicenow_incident
+title: Application (ServiceNow) — ServiceNowIncident
+description: ServiceNow incident table projection.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/IT/Incident
+  - ../_shared/SyncMetadata
+
+classes:
+  ServiceNowIncident:
+    is_a: Incident
+    description: ServiceNow incident table projection.
+    attributes:
+      snow_sys_id:
+        range: string
+        required: true
+      snow_number:
+        range: string
+        required: true
+        description: Human-readable incident number (INC0098234).
+      snow_state:
+        range: string
+        description: ServiceNow native State value (1=New, 2=In Progress, 6=Resolved, ...).
+      snow_assignment_group:
+        range: string
+      snow_assigned_to_sys_id:
+        range: string
+      snow_priority:
+        range: integer
+      snow_impact:
+        range: integer
+      snow_urgency:
+        range: integer
+      snow_sla_due_at:
+        range: datetime
+      snow_url:
+        range: uri
+      sync:
+        range: SyncMetadata
+        required: true

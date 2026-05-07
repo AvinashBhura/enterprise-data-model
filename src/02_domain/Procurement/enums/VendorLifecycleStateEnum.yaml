@@ -1,0 +1,38 @@
+id: https://example.org/edm/domain/Procurement/enums/VendorLifecycleStateEnum
+name: domain_procurement_vendor_lifecycle_state_enum
+title: Domain (Procurement) — VendorLifecycleStateEnum
+description: Lifecycle states for a VendorRole.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  VendorLifecycleStateEnum:
+    description: Lifecycle states for a VendorRole.
+    permissible_values:
+      ONBOARDING:
+        description: Being onboarded as a vendor.
+      QUALIFIED:
+        description: Passed qualification but not yet active.
+      ACTIVE:
+        description: Active and approved for purchases.
+      ON_HOLD:
+        description: Temporarily on hold.
+      SUSPENDED:
+        description: Suspended (compliance, performance issues).
+      OFFBOARDING:
+        description: Being offboarded.
+      INACTIVE:
+        description: No longer active.
+      BLACKLISTED:
+        description: Permanently barred from future engagement.

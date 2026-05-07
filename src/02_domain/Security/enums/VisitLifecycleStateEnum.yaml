@@ -1,0 +1,33 @@
+id: https://example.org/edm/domain/Security/enums/VisitLifecycleStateEnum
+name: domain_security_visit_lifecycle_state_enum
+title: Domain (Security) — VisitLifecycleStateEnum
+
+description: Lifecycle states for a VisitorRole.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  VisitLifecycleStateEnum:
+    description: Lifecycle states for a VisitorRole.
+    permissible_values:
+      REQUESTED:
+      APPROVED:
+      ACTIVE:
+        description: Visitor has checked in.
+      CHECKED_OUT:
+        description: Visitor has checked out / departed.
+      EXPIRED:
+        description: Visit window passed without check-in.
+      CANCELLED:
+      DENIED:

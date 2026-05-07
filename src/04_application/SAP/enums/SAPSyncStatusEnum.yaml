@@ -1,0 +1,31 @@
+id: https://example.org/edm/application/SAP/enums/SAPSyncStatusEnum
+name: application_sap_sync_status_enum
+title: Application (SAP) — SAPSyncStatusEnum
+description: SAP-specific sync states.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  SAPSyncStatusEnum:
+    description: SAP-specific sync states.
+    permissible_values:
+      PENDING:
+      IN_PROGRESS:
+      SYNCED:
+      OUT_OF_SYNC:
+      SAP_POSTING_BLOCKED:
+        description: SAP document is posting-blocked; cannot sync.
+      SAP_PERIOD_CLOSED:
+        description: SAP fiscal period closed; further changes blocked.
+      RETIRED:

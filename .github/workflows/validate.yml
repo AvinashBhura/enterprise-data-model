@@ -1,0 +1,41 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Lint YAML
+        run: python tools/lint_yaml.py
+
+      - name: Validate schemas
+        run: python tools/validate_all.py
+
+      - name: Check dependency direction (one-way gate)
+        run: python tools/check_dependency_direction.py
+
+      - name: Check architectural rules
+        run: pytest tests/architectural_rules/ -v
+
+      - name: Run cross-layer tests
+        run: pytest tests/cross_layer/ -v
+
+      - name: Run validation tests
+        run: pytest tests/validation/ -v

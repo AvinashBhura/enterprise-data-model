@@ -1,0 +1,31 @@
+id: https://example.org/edm/application/Salesforce/enums/SalesforceSyncStatusEnum
+name: application_salesforce_sync_status_enum
+title: Application (Salesforce) — SalesforceSyncStatusEnum
+description: Salesforce-specific sync states.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  SalesforceSyncStatusEnum:
+    description: Salesforce-specific sync states.
+    permissible_values:
+      PENDING:
+      IN_PROGRESS:
+      SYNCED:
+      OUT_OF_SYNC:
+      SF_VALIDATION_ERROR:
+        description: Salesforce validation rule prevented update.
+      SF_API_LIMIT_HIT:
+        description: Salesforce API limit reached; retry deferred.
+      RETIRED:

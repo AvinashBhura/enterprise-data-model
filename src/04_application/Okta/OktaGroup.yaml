@@ -1,0 +1,40 @@
+id: https://example.org/edm/application/Okta/OktaGroup
+name: application_okta_group
+title: Application (Okta) — OktaGroup
+description: Okta projection of a Team used for access control.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Team
+  - ../_shared/SyncMetadata
+
+classes:
+  OktaGroup:
+    is_a: Team
+    description: Okta Group projection of a Team.
+    attributes:
+      okta_group_id:
+        range: string
+        required: true
+      okta_group_type:
+        range: string
+        description: Okta native group type (OKTA_GROUP, APP_GROUP, BUILT_IN).
+      okta_member_count:
+        range: integer
+      okta_apps_granted:
+        range: string
+        multivalued: true
+        description: Okta application IDs this group grants access to.
+      sync:
+        range: SyncMetadata
+        required: true

@@ -1,0 +1,43 @@
+id: https://example.org/edm/application/SAP/SAPVendor
+name: application_sap_vendor
+title: Application (SAP) — SAPVendor
+description: SAP projection of a VendorRole.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Procurement/VendorRole
+  - ../_shared/SyncMetadata
+
+classes:
+  SAPVendor:
+    is_a: VendorRole
+    description: SAP Vendor master projection.
+    attributes:
+      sap_vendor_number:
+        range: string
+        required: true
+        description: SAP LIFNR (vendor master key).
+      sap_company_code:
+        range: string
+        required: true
+        description: SAP Bukrs (company code).
+      sap_account_group:
+        range: string
+        description: SAP vendor account group.
+      sap_payment_terms_code:
+        range: string
+      sap_reconciliation_account:
+        range: string
+      sync:
+        range: SyncMetadata
+        required: true

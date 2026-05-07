@@ -1,0 +1,122 @@
+id: https://example.org/edm/foundation/Team
+name: foundation_team
+title: Foundation — Team
+description: >
+  A purposeful group formed to accomplish defined objectives. Distinct
+  from Organization in that identity is membership-and-purpose-bound
+  rather than structural or legal.
+
+  Justification as Independent Foundational (NOT a subtype of Organization):
+    - Teams' identity is defined by PURPOSE and MEMBERS; Organizations'
+      identity is defined by STRUCTURE and often LEGAL standing.
+    - Teams often span multiple Organizations (cross-functional,
+      inter-company, vendor-client).
+    - Teams form and dissolve on different timescales from Organizations.
+    - Teams never carry legal/jurisdictional semantics.
+
+  These differences are semantic, not just convenient — Team earns its
+  own Foundation slot.
+
+  The former Collaboration concept is absorbed here via team_type
+  (PROJECT, TASK_FORCE, TIGER_TEAM for time-boxed forms; PERSISTENT,
+  SQUAD for stable forms).
+
+  Domain examples:
+    - HR: "Q2 DEI Task Force" — Team with 12 members drawn from six
+      departments; exists for two quarters.
+    - Engineering: "Platform SRE Squad" — persistent Team, formal
+      membership, own charter.
+    - Sales: "Strategic Accounts Pursuit Team" — cross-functional Team
+      around specific customer accounts.
+    - Governance: "Data Governance Steering Committee" — Team of
+      senior leaders from multiple divisions.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - Organization
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Addressable
+  - common/base/RoleHolder
+  - common/base/Classifiable
+  - common/base/Temporal
+  - common/codelists/types/TeamTypeEnum
+  - common/codelists/lifecycles/TeamLifecycleStateEnum
+
+classes:
+
+  Team:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Addressable
+      - RoleHolder
+      - Classifiable
+      - Temporal
+    description: >
+      A purposeful group whose identity is defined by shared purpose
+      and membership. Teams are not subtypes of Organization —
+      membership can span Organizations and Teams have their own
+      lifecycle semantics (forming → performing → dissolving).
+
+      Members join Teams via the same Role-based pattern used for
+      Organizations: Person → Role → Team (TeamMemberRole in the HR
+      or Governance domain).
+    slot_usage:
+      lifecycle_state:
+        range: TeamLifecycleStateEnum
+    attributes:
+      name:
+        range: string
+        required: true
+        description: Team name.
+      team_type:
+        range: TeamTypeEnum
+        required: true
+        description: Team type (persistent, squad, project, task force, committee).
+      purpose:
+        range: string
+        required: true
+        description: >
+          Statement of purpose — why this team exists. Required
+          because a team without purpose has no defining identity.
+      charter_document:
+        range: string
+        description: >
+          Reference to the team's charter document (typically a
+          DocumentType reference held elsewhere).
+      sponsoring_organizations:
+        range: Organization
+        multivalued: true
+        description: >
+          Organizations sponsoring or hosting this team. Multiple
+          sponsors supported for cross-organizational teams.
+      primary_organization:
+        range: Organization
+        description: >
+          Optional — the single Organization that "owns" this team
+          administratively. Null for fully cross-organizational teams.
+      parent_team:
+        range: Team
+        description: Parent Team for sub-team / squad-of-squads relationships.
+      target_size:
+        range: integer
+        description: Planned member count.
+      formed_on:
+        range: date
+        description: Date the team was formally chartered or formed.
+      dissolved_on:
+        range: date
+        description: Date the team was formally dissolved, if applicable.

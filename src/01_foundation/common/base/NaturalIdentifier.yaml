@@ -1,0 +1,61 @@
+id: https://example.org/edm/foundation/common/base/NaturalIdentifier
+name: common_base_natural_identifier
+title: Common — NaturalIdentifier (value type)
+description: >
+  A structured natural (business) identifier with its issuing scheme.
+  Enables an entity to carry multiple natural keys (e.g., an employee
+  number AND a national ID AND a tax identifier) while preserving
+  which authority issued each.
+
+  Per the Natural Key Placement rule:
+    - Enterprise-native natural keys live on canonical entities via
+      the Identifiable base type (this type).
+    - System-of-record natural keys (e.g., workday_worker_id) live on
+      Application-layer subclasses, not here.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  xsd: http://www.w3.org/2001/XMLSchema#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  NaturalIdentifier:
+    description: >
+      A natural/business identifier value paired with the scheme that
+      issued it and the issuer. Example: value="E10847", scheme="Acme
+      employee number", issuer="Acme Corp HR".
+    attributes:
+      value:
+        range: string
+        required: true
+        description: The identifier value itself.
+      scheme:
+        range: string
+        required: true
+        description: >
+          The naming/numbering scheme. Examples: "employee_number",
+          "tax_id", "iso_country_code", "ein", "ssn".
+      issuer:
+        range: string
+        description: >
+          The authority that issued this identifier. Examples: "Acme HR",
+          "IRS", "ISO", "National Social Security Administration".
+      issued_at:
+        range: date
+        description: When the identifier was issued (if known).
+      valid_from:
+        range: date
+        description: When this identifier becomes effective.
+      valid_to:
+        range: date
+        description: When this identifier ceases to be effective (for reissued keys).

@@ -1,0 +1,70 @@
+id: https://example.org/edm/foundation/common/base/Classifiable
+name: common_base_classifiable
+title: Common — Classifiable (base type)
+description: >
+  Base type that grants an entity the capability to be classified via
+  one or more taxonomies. Classifications are structural tags (e.g.,
+  an Organization classified as a "Division" within the
+  OrganizationTypeTaxonomy; an Asset classified as "IT Equipment"
+  within the AssetTypeTaxonomy).
+
+  Classification is separate from typing (which is a codelist attribute
+  directly on the entity). Use Classifiable when an entity may be
+  classified by multiple taxonomies simultaneously or when the
+  classification reflects hierarchical position, not just a flat label.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  Classification:
+    description: >
+      A single classification assignment — names the taxonomy, the
+      specific node within it, and the time window during which this
+      classification applies (optional).
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+        description: >
+          Name of the taxonomy being used (e.g.,
+          "OrganizationTypeTaxonomy", "AssetTypeTaxonomy").
+      node_identifier:
+        range: string
+        required: true
+        description: >
+          Identifier of the specific node within the taxonomy that this
+          entity is classified under (e.g., "DIVISION", "IT_EQUIPMENT").
+      assigned_at:
+        range: datetime
+        description: When the classification was assigned.
+      effective_from:
+        range: date
+        description: Start of the period during which this classification applies.
+      effective_to:
+        range: date
+        description: End of the period during which this classification applies.
+
+  Classifiable:
+    mixin: true
+    description: >
+      Applied to entities that can be classified via one or more
+      taxonomies. Classifications are first-class records, supporting
+      multi-taxonomy classification, time-bounded classifications, and
+      reclassification history.
+    attributes:
+      classifications:
+        range: Classification
+        multivalued: true
+        description: Zero or more taxonomy classifications applied to this entity.

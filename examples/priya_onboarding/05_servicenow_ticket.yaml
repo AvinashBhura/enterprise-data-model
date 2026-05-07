@@ -1,0 +1,21 @@
+# Example instance — ServiceNow projection of the OnboardingProcessInstance.
+# Created when the IT integration syncs the new onboarding case.
+
+# Conforms to: src/04_application/ServiceNow/ServiceNowOnboardingTicket.yaml
+- entity_id: pri_5d3e2000-0003-4000-8000-000000000001  # SAME entity_id as canonical instance
+  definition: pdef_onboarding_us_eng_v3_2
+  subject_entity_id: rol_4c2e1000-0002-4000-8000-000000000001
+  subject_entity_type: EmployeeRole
+  # ... canonical OnboardingProcessInstance fields are inherited ...
+  snow_sys_id: 0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d
+  snow_request_number: "REQ0098234"
+  snow_catalog_item_sys_id: cat_item_us_eng_onboarding_v3
+  snow_requested_for_sys_id: snow_priya_user_sys_id
+  snow_assignment_group: "Onboarding Operations"
+  snow_state: "in_progress"
+  snow_url: "https://acme.service-now.com/nav_to.do?uri=sc_request.do?sys_id=0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d"
+  sync:
+    source_system: servicenow
+    source_record_id: 0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d
+    last_synced_at: "2026-05-12T08:15:00Z"
+    sync_status: SYNCED

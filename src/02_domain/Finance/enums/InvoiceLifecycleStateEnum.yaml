@@ -1,0 +1,44 @@
+id: https://example.org/edm/domain/Finance/enums/InvoiceLifecycleStateEnum
+name: domain_finance_invoice_lifecycle_state_enum
+title: Domain (Finance) — InvoiceLifecycleStateEnum
+description: Lifecycle states for an Invoice.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  InvoiceLifecycleStateEnum:
+    description: Lifecycle states for an Invoice (AP or AR).
+    permissible_values:
+      DRAFT:
+        description: Being prepared; not yet issued.
+      ISSUED:
+        description: Sent to counterparty.
+      RECEIVED:
+        description: Received from counterparty (for AP invoices).
+      IN_REVIEW:
+        description: Under review/approval.
+      APPROVED:
+        description: Approved for payment.
+      DISPUTED:
+        description: Under dispute.
+      PAID:
+        description: Fully paid.
+      PARTIALLY_PAID:
+        description: Partially paid.
+      OVERDUE:
+        description: Past due date and unpaid.
+      VOIDED:
+        description: Voided.
+      WRITTEN_OFF:
+        description: Written off as uncollectible.

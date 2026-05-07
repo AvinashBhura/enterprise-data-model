@@ -1,0 +1,37 @@
+id: https://example.org/edm/process/ContractLifecycle/enums/ContractLifecycleStateEnum
+name: process_contract_lifecycle_state_enum
+title: Process (ContractLifecycle) — ContractLifecycleStateEnum
+description: Workflow states for a ContractLifecycleProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  ContractLifecycleStateEnum:
+    description: Workflow states for contract-lifecycle management.
+    permissible_values:
+      INITIATED:
+      DRAFTING:
+      INTERNAL_REVIEW:
+      LEGAL_REVIEW:
+      NEGOTIATING:
+      AWAITING_INTERNAL_SIGNATURE:
+      AWAITING_COUNTERPARTY_SIGNATURE:
+      FULLY_EXECUTED:
+      ACTIVE:
+      RENEWAL_REVIEW:
+      AMENDING:
+      TERMINATING:
+      TERMINATED:
+      EXPIRED:
+      ARCHIVED:

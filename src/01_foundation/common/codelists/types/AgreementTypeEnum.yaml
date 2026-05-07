@@ -1,0 +1,49 @@
+id: https://example.org/edm/foundation/common/codelists/types/AgreementTypeEnum
+name: common_codelist_agreement_type_enum
+title: Common — AgreementTypeEnum
+description: Type classifier for Agreement instances.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  AgreementTypeEnum:
+    description: Types of formal agreements.
+    permissible_values:
+      EMPLOYMENT_CONTRACT:
+        description: Agreement engaging a Person as an employee.
+      OFFER:
+        description: Pre-employment offer letter.
+      VENDOR_CONTRACT:
+        description: Agreement with a supplier.
+      PURCHASE_ORDER:
+        description: A specific purchase commitment.
+      CUSTOMER_ORDER:
+        description: A specific customer purchase commitment.
+      LICENSE:
+        description: Software or IP licensing agreement.
+      NDA:
+        description: Non-disclosure agreement.
+      LEASE:
+        description: Property or equipment lease.
+      SLA:
+        description: Service-level agreement.
+      MSA:
+        description: Master services agreement.
+      PARTNERSHIP:
+        description: Strategic partnership agreement.
+      JOINT_VENTURE:
+        description: Joint-venture agreement.
+      QUOTE:
+        description: Pre-order pricing proposal.

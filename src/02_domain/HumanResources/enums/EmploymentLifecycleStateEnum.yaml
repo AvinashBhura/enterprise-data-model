@@ -1,0 +1,34 @@
+id: https://example.org/edm/domain/HumanResources/enums/EmploymentLifecycleStateEnum
+name: domain_hr_employment_lifecycle_state_enum
+title: Domain (HR) — EmploymentLifecycleStateEnum
+description: Lifecycle states for an EmployeeRole instance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  EmploymentLifecycleStateEnum:
+    description: Lifecycle states specific to EmployeeRole.
+    permissible_values:
+      OFFER_EXTENDED:
+      OFFER_ACCEPTED:
+      PENDING_START:
+      ONBOARDING:
+      ACTIVE:
+      ON_LEAVE:
+      SUSPENDED:
+      NOTICE:
+      OFFBOARDING:
+      SEPARATED:
+      RETIRED:
+      RESCINDED:

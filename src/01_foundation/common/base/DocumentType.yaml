@@ -1,0 +1,62 @@
+id: https://example.org/edm/foundation/common/base/DocumentType
+name: common_base_document_type
+title: Common — DocumentType (value type)
+description: >
+  A reference to a document held in an external system. Carries the
+  system identifier, version, and status — enough to resolve the
+  document and know which version was referenced at what time.
+
+  Used wherever entities need to point at a governed document
+  (Agreement's signed contract file, Offer's offer letter PDF,
+  OnboardingChecklist's policy reference).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  DocumentType:
+    description: >
+      A reference to a document stored in an external document
+      management system (SharePoint, Google Drive, DocuSign, etc.).
+    attributes:
+      system_id:
+        range: string
+        required: true
+        description: >
+          Identifier of the document within its source system (URI,
+          document ID, file path).
+      source_system:
+        range: string
+        required: true
+        description: >
+          The document management system that holds this document
+          (e.g., "sharepoint", "google-drive", "docusign-envelope").
+      version:
+        range: string
+        description: Document version identifier.
+      status:
+        range: string
+        description: >
+          Document status (e.g., "draft", "final", "signed", "archived").
+          Free-text because document status vocabularies vary widely
+          across DMS platforms.
+      title:
+        range: string
+        description: Human-readable document title.
+      mime_type:
+        range: string
+        description: MIME type of the document (e.g., "application/pdf").
+      url:
+        range: uri
+        description: Direct URL to retrieve the document (if available).

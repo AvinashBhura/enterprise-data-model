@@ -1,0 +1,30 @@
+id: https://example.org/edm/domain/Legal/enums/NDALifecycleStateEnum
+name: domain_legal_nda_lifecycle_state_enum
+title: Domain (Legal) — NDALifecycleStateEnum
+description: Lifecycle states for an NDA.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  NDALifecycleStateEnum:
+    description: Lifecycle states for an NDA.
+    permissible_values:
+      DRAFT:
+      IN_REVIEW:
+      AWAITING_SIGNATURES:
+      EXECUTED:
+      ACTIVE:
+      EXPIRED:
+      TERMINATED:
+      ARCHIVED:

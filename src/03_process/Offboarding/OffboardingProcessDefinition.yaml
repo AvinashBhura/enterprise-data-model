@@ -1,0 +1,39 @@
+id: https://example.org/edm/process/Offboarding/OffboardingProcessDefinition
+name: process_offboarding_definition
+title: Process (Offboarding) — OffboardingProcessDefinition
+description: A versioned offboarding workflow specification.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+
+classes:
+  OffboardingProcessDefinition:
+    is_a: ProcessDefinition
+    description: An offboarding workflow definition.
+    attributes:
+      target_employment_types:
+        range: string
+        multivalued: true
+      includes_garden_leave:
+        range: boolean
+      includes_immigration_offboarding:
+        range: boolean
+      typical_duration_days:
+        range: integer
+      separation_reasons_supported:
+        range: string
+        multivalued: true
+        description: >
+          Separation reasons this definition handles (RESIGNATION,
+          TERMINATION, RETIREMENT, END_OF_CONTRACT).

@@ -1,0 +1,46 @@
+id: https://example.org/edm/process/InvoiceApproval/InvoiceApprovalProcessInstance
+name: process_invoice_approval_instance
+title: Process (InvoiceApproval) — InvoiceApprovalProcessInstance
+description: A live invoice-approval execution.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - InvoiceApprovalProcessDefinition
+  - enums/InvoiceApprovalStateEnum
+
+classes:
+  InvoiceApprovalProcessInstance:
+    is_a: ProcessInstance
+    description: A live invoice-approval execution.
+    slot_usage:
+      definition:
+        range: InvoiceApprovalProcessDefinition
+    attributes:
+      approval_state:
+        range: InvoiceApprovalStateEnum
+        required: true
+      matched_po_id:
+        range: string
+        description: entity_id of the PurchaseOrder matched to this invoice.
+      approver_chain:
+        range: string
+        multivalued: true
+        description: entity_ids of EmployeeRoles in the approval chain (in order).
+      current_approver_role:
+        range: string
+        description: entity_id of the EmployeeRole currently expected to approve.
+      rejection_reason:
+        range: string
+      hold_reason:
+        range: string

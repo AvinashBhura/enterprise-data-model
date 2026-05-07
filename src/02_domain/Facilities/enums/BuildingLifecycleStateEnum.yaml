@@ -1,0 +1,30 @@
+id: https://example.org/edm/domain/Facilities/enums/BuildingLifecycleStateEnum
+name: domain_facilities_building_lifecycle_state_enum
+title: Domain (Facilities) — BuildingLifecycleStateEnum
+description: Lifecycle states for a Building.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  BuildingLifecycleStateEnum:
+    description: Lifecycle states for a Building.
+    permissible_values:
+      PLANNED:
+      UNDER_CONSTRUCTION:
+      OPERATIONAL:
+      UNDER_RENOVATION:
+      VACATED:
+        description: No longer occupied but still owned/leased.
+      DISPOSED:
+        description: Sold or lease ended.

@@ -1,0 +1,44 @@
+id: https://example.org/edm/application/SAP/SAPPurchaseOrder
+name: application_sap_purchase_order
+title: Application (SAP) — SAPPurchaseOrder
+description: SAP projection of a PurchaseOrder.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Procurement/PurchaseOrder
+  - ../_shared/SyncMetadata
+
+classes:
+  SAPPurchaseOrder:
+    is_a: PurchaseOrder
+    description: SAP PurchaseOrder projection.
+    attributes:
+      sap_po_number:
+        range: string
+        required: true
+        description: SAP EBELN (PO document number).
+      sap_company_code:
+        range: string
+        required: true
+      sap_purchasing_org:
+        range: string
+        description: SAP purchasing organization (EKORG).
+      sap_purchasing_group:
+        range: string
+        description: SAP purchasing group (EKGRP).
+      sap_document_type:
+        range: string
+        description: SAP PO document type (NB, FO, ZOR, etc.).
+      sync:
+        range: SyncMetadata
+        required: true

@@ -1,0 +1,140 @@
+id: https://example.org/edm/foundation/Person
+name: foundation_person
+title: Foundation — Person
+description: >
+  A human being — a specific, identifiable individual. Not an employee,
+  vendor, or customer — just the human. Relationships with the
+  enterprise (employment, vendor engagement, visitor access) are
+  captured through Roles in the Domain layer.
+
+  This is the "Who-Plays-What" principle applied at the Foundation
+  level: Person is the stable identity anchor, and Roles carry the
+  time-bound engagements.
+
+  Justification as Foundational:
+    - Universality (Highlander): one Person entity per human, referenced
+      by HR, Sales, Security, Finance — every capability sees the same
+      person.
+    - Immutability (Boring): the concept of "a person" has meant the
+      same thing for centuries.
+    - Abstraction (Independence): exists independent of whether the
+      person is currently employed, contracted, or merely known.
+    - Origin (Semantic Anchoring): inherits from Entity to declare
+      semantic membership; Entity does not force this specialization.
+
+  Domain examples:
+    - HR: Priya Menon is a Person who holds an EmployeeRole.
+    - Sales: The same Person may hold a CustomerContactRole at a
+      customer Organization.
+    - Security: The same Person may badge in as VisitorRole to a
+      partner site.
+    - Procurement: The same Person, after leaving, may return as a
+      VendorRole (independent consultant).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Addressable
+  - common/base/RoleHolder
+  - common/base/Classifiable
+  - common/codelists/standards/LanguageCode
+  - common/codelists/standards/CountryCode
+  - common/codelists/lifecycles/PersonLifecycleStateEnum
+
+classes:
+
+  Person:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Addressable
+      - RoleHolder
+      - Classifiable
+    class_uri: schema:Person
+    description: >
+      A human being. Stable identity whose relationships with the
+      enterprise are expressed through Roles. A single Person entity
+      persists across all engagements (hire, leave, return, convert to
+      consultant) — entity_id never changes.
+    slot_usage:
+      lifecycle_state:
+        range: PersonLifecycleStateEnum
+    attributes:
+      given_name:
+        range: string
+        required: true
+        description: First / given name.
+        slot_uri: schema:givenName
+      family_name:
+        range: string
+        required: true
+        description: Last / family name.
+        slot_uri: schema:familyName
+      middle_names:
+        range: string
+        multivalued: true
+        description: Middle names or initials.
+      honorific_prefix:
+        range: string
+        description: Honorific prefix (Dr., Prof., Mr., Ms.).
+        slot_uri: schema:honorificPrefix
+      honorific_suffix:
+        range: string
+        description: Honorific suffix (Jr., Sr., III, PhD).
+        slot_uri: schema:honorificSuffix
+      preferred_name:
+        range: string
+        description: Name the person prefers to be called by.
+      date_of_birth:
+        range: date
+        description: Date of birth.
+        slot_uri: schema:birthDate
+      date_of_death:
+        range: date
+        description: Date of death (if applicable).
+        slot_uri: schema:deathDate
+      gender_identity:
+        range: string
+        description: >
+          Self-reported gender identity. Free-text to respect individual
+          self-description; avoid enumerated values that may be incomplete.
+      pronouns:
+        range: string
+        description: Self-reported pronouns (e.g., "she/her", "they/them").
+      nationality:
+        range: CountryCodeEnum
+        multivalued: true
+        description: One or more nationalities held by this person.
+        slot_uri: schema:nationality
+      primary_language:
+        range: LanguageCodeEnum
+        description: Primary language used for communication.
+      additional_languages:
+        range: LanguageCodeEnum
+        multivalued: true
+        description: Additional languages spoken.
+      email_addresses:
+        range: string
+        multivalued: true
+        description: >
+          Personal email addresses. Work email belongs on the
+          EmployeeRole in the Domain layer, not here.
+        pattern: "^[\\w.\\-+]+@[\\w.\\-]+\\.\\w+$"
+      phone_numbers:
+        range: string
+        multivalued: true
+        description: Personal phone numbers (E.164 format recommended).

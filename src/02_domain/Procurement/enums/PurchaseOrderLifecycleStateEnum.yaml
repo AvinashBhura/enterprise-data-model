@@ -1,0 +1,42 @@
+id: https://example.org/edm/domain/Procurement/enums/PurchaseOrderLifecycleStateEnum
+name: domain_procurement_purchase_order_lifecycle_state_enum
+title: Domain (Procurement) — PurchaseOrderLifecycleStateEnum
+description: Lifecycle states for a PurchaseOrder.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  PurchaseOrderLifecycleStateEnum:
+    description: Lifecycle states for a PurchaseOrder.
+    permissible_values:
+      DRAFT:
+        description: Being prepared.
+      PENDING_APPROVAL:
+        description: Awaiting approval.
+      APPROVED:
+        description: Approved internally.
+      ISSUED:
+        description: Issued to vendor.
+      ACKNOWLEDGED:
+        description: Vendor has acknowledged.
+      PARTIALLY_RECEIVED:
+        description: Partially fulfilled.
+      RECEIVED:
+        description: Fully received.
+      INVOICED:
+        description: Invoice received against this PO.
+      CLOSED:
+        description: Closed.
+      CANCELLED:
+        description: Cancelled.

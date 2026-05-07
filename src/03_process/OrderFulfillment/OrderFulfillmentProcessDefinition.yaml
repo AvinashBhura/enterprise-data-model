@@ -1,0 +1,37 @@
+id: https://example.org/edm/process/OrderFulfillment/OrderFulfillmentProcessDefinition
+name: process_order_fulfillment_definition
+title: Process (OrderFulfillment) — OrderFulfillmentProcessDefinition
+description: A versioned order-fulfillment workflow specification.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+
+classes:
+  OrderFulfillmentProcessDefinition:
+    is_a: ProcessDefinition
+    description: An order-fulfillment workflow definition.
+    attributes:
+      fulfillment_model:
+        range: string
+        required: true
+        description: STOCK, MAKE_TO_ORDER, DROP_SHIP, DIGITAL_DELIVERY.
+      requires_credit_check:
+        range: boolean
+      requires_export_compliance:
+        range: boolean
+      target_lead_time_days:
+        range: integer
+      shipping_carrier_options:
+        range: string
+        multivalued: true

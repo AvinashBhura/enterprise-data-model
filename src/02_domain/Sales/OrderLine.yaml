@@ -1,0 +1,58 @@
+id: https://example.org/edm/domain/Sales/OrderLine
+name: domain_sales_order_line
+title: Domain (Sales) — OrderLine
+description: A single line item on an Order.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - ../../01_foundation/common/base/AmountType
+  - ../../01_foundation/common/base/QuantityType
+
+classes:
+  OrderLine:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A single line item on an Order.
+    attributes:
+      line_number:
+        range: integer
+        required: true
+      product_code:
+        range: string
+        required: true
+      product_description:
+        range: string
+      quantity:
+        range: QuantityType
+        required: true
+      unit_price:
+        range: AmountType
+      line_total:
+        range: AmountType
+      discount_amount:
+        range: AmountType
+      tax_amount:
+        range: AmountType
+      requested_ship_date:
+        range: date
+      promised_ship_date:
+        range: date
+      shipped_quantity:
+        range: QuantityType
+      remaining_quantity:
+        range: QuantityType

@@ -1,0 +1,67 @@
+id: https://example.org/edm/domain/Finance/Payment
+name: domain_finance_payment
+title: Domain (Finance) — Payment
+description: >
+  A money movement — outbound (paying an invoice) or inbound (receiving
+  a payment). Specializes Foundation Activity.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Activity
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/codelists/types/ActivityTypeEnum
+  - ../../01_foundation/common/base/AmountType
+  - Invoice
+  - enums/PaymentLifecycleStateEnum
+
+classes:
+  Payment:
+    is_a: Activity
+    description: A money movement.
+    slot_usage:
+      activity_type:
+        equals_string: TRANSACTION
+      lifecycle_state:
+        range: PaymentLifecycleStateEnum
+        required: true
+    attributes:
+      payment_number:
+        range: string
+        required: true
+      payment_direction:
+        range: string
+        required: true
+        description: OUTBOUND (we paid) or INBOUND (we received).
+      payer:
+        range: Organization
+        required: true
+      payee:
+        range: Organization
+        required: true
+      amount:
+        range: AmountType
+        required: true
+      payment_method:
+        range: string
+        description: ACH, WIRE, CHECK, CARD, CRYPTO.
+      payment_date:
+        range: date
+        required: true
+      cleared_date:
+        range: date
+      bank_reference:
+        range: string
+      applied_invoices:
+        range: Invoice
+        multivalued: true
+        description: Invoices this payment applies to.

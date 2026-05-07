@@ -1,0 +1,31 @@
+id: https://example.org/edm/domain/Legal/enums/LicenseLifecycleStateEnum
+name: domain_legal_license_lifecycle_state_enum
+title: Domain (Legal) — LicenseLifecycleStateEnum
+description: Lifecycle states for a LicensingAgreement.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  LicenseLifecycleStateEnum:
+    description: Lifecycle states for a LicensingAgreement.
+    permissible_values:
+      DRAFT:
+      IN_NEGOTIATION:
+      EXECUTED:
+      ACTIVE:
+      AMENDED:
+      RENEWED:
+      EXPIRED:
+      TERMINATED:
+      ARCHIVED:

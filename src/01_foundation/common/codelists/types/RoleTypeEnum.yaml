@@ -1,0 +1,50 @@
+id: https://example.org/edm/foundation/common/codelists/types/RoleTypeEnum
+name: common_codelist_role_type_enum
+title: Common — RoleTypeEnum
+description: >
+  Type classifier for Role instances. Each Domain layer Role
+  specialization binds to one value from this enum (e.g.,
+  EmployeeRole binds to EMPLOYEE; VendorRole binds to VENDOR).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  RoleTypeEnum:
+    description: Type classifier for all Role specializations.
+    permissible_values:
+      EMPLOYEE:
+        description: A Person engaged as a paid employee.
+      CONTRACTOR:
+        description: A Person engaged under a contracting arrangement.
+      VENDOR:
+        description: A Person or Organization engaged as a supplier.
+      VISITOR:
+        description: A Person granted time-bound access to a facility.
+      CUSTOMER_CONTACT:
+        description: A Person acting as contact at a customer Organization.
+      BOARD_MEMBER:
+        description: A Person serving on a governing board.
+      COMMITTEE_CHAIR:
+        description: A Person leading a committee.
+      COMMITTEE_MEMBER:
+        description: A Person serving on a committee.
+      ADVISOR:
+        description: A Person providing advisory services.
+      MANAGER:
+        description: A Person with management authority over others.
+      ALUMNI:
+        description: A former employee after separation.
+      PARTNER:
+        description: A Person or Organization acting as a strategic partner.

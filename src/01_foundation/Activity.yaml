@@ -1,0 +1,106 @@
+id: https://example.org/edm/foundation/Activity
+name: foundation_activity
+title: Foundation — Activity
+description: >
+  Something happening in time — an event, action, transaction, or
+  process step. Activities have a start, usually an end, participants,
+  and a purpose.
+
+  Justification as Foundational:
+    - Universality: every capability has events, transactions, or
+      actions to record.
+    - Abstraction: "something happening in time" is semantically
+      neutral and universal.
+    - Supports Process Layer: ProcessStep, ProcessInstance, and
+      StepCompletion in the Process layer all specialize Activity.
+    - Enables cross-capability audit queries: "show me all activities
+      involving this Person" is one uniform query.
+
+  Domain examples:
+    - HR: performance review meeting, onboarding orientation session.
+    - Finance: journal entry posting, payment run, quarterly close.
+    - Customer Service: support call, case resolution, escalation review.
+    - IT: incident (specialized Activity), change window.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - Person
+  - Organization
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Classifiable
+  - common/base/Temporal
+  - common/codelists/types/ActivityTypeEnum
+  - common/codelists/lifecycles/ActivityLifecycleStateEnum
+
+classes:
+
+  Activity:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+      - Temporal
+    class_uri: schema:Action
+    description: >
+      A time-bound action or event. Concrete base class for many
+      specializations across Domain and Process layers.
+    slot_usage:
+      lifecycle_state:
+        range: ActivityLifecycleStateEnum
+    attributes:
+      activity_type:
+        range: ActivityTypeEnum
+        required: true
+        description: Top-level classifier (Meeting, Transaction, ProcessStep, Event, ...).
+      title:
+        range: string
+        required: true
+        description: Short human-readable title of the activity.
+      description:
+        range: string
+        description: Longer description of what the activity is or was.
+      scheduled_start:
+        range: datetime
+        description: When the activity is/was scheduled to start.
+      scheduled_end:
+        range: datetime
+        description: When the activity is/was scheduled to end.
+      actual_start:
+        range: datetime
+        description: When the activity actually started.
+      actual_end:
+        range: datetime
+        description: When the activity actually ended.
+      participants:
+        range: Entity
+        multivalued: true
+        description: >
+          Participants in this activity — Persons, Organizations, or
+          Teams. Union via the Entity supertype lets any kind of
+          party participate.
+      primary_actor:
+        range: Entity
+        description: The primary performer of the activity (Person or Organization).
+      location:
+        range: string
+        description: >
+          Location where the activity takes place. May reference an
+          Address or Room via entity_id, or be a free-text descriptor
+          (e.g., "Zoom", "HQ Main Auditorium").
+      outcome:
+        range: string
+        description: Short summary of the activity's outcome.

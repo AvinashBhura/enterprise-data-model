@@ -1,0 +1,57 @@
+id: https://example.org/edm/foundation/common/taxonomies/PositionTypeTaxonomy
+name: common_taxonomy_position_type
+title: Common — PositionTypeTaxonomy
+description: >
+  Abstract hierarchical classification of positions / job families.
+  Typical structure:
+    Technical
+      ├── Engineering
+      │     ├── Software Engineering
+      │     │     ├── Backend
+      │     │     ├── Frontend
+      │     │     └── Full-Stack
+      │     └── Hardware Engineering
+      ├── Data & Analytics
+      └── Design
+    Business
+      ├── Sales
+      ├── Marketing
+      ├── Finance
+      └── Legal
+    Operations
+    Customer-Facing
+
+  Aligns with SOC (Standard Occupational Classification) where
+  appropriate. Used to classify Position instances in the HR domain.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  skos: http://www.w3.org/2004/02/skos/core#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - OrganizationTypeTaxonomy
+
+classes:
+
+  PositionTypeTaxonomy:
+    description: Taxonomy container for job-family / position-type hierarchy.
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+      version:
+        range: string
+        required: true
+      description:
+        range: string
+      nodes:
+        range: TaxonomyNode
+        multivalued: true

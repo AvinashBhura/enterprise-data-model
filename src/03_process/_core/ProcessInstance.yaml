@@ -1,0 +1,103 @@
+id: https://example.org/edm/process/_core/ProcessInstance
+name: process_core_process_instance
+title: Process (_core) — ProcessInstance
+description: >
+  A live execution of a ProcessDefinition. Bound to a specific
+  ProcessDefinition version for its entire lifetime (Frozen-Contract /
+  Binding Immutability principle).
+
+  References a Domain entity as its "subject" — the thing the process
+  acts upon (e.g., an EmployeeRole for an onboarding instance, an
+  Order for an order-fulfillment instance).
+
+  Process migrations: instances cannot mutate their definition binding.
+  To migrate to a new version, terminate the old instance (state =
+  MIGRATED) and create a new instance with carried-over state.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Person
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - ProcessDefinition
+  - StepCompletion
+  - ProcessEvent
+  - enums/ProcessInstanceStateEnum
+
+classes:
+  ProcessInstance:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A live execution of a ProcessDefinition.
+    slot_usage:
+      lifecycle_state:
+        range: ProcessInstanceStateEnum
+        required: true
+    attributes:
+      definition:
+        range: ProcessDefinition
+        required: true
+        description: >
+          The ProcessDefinition (and version) this instance executes
+          against. IMMUTABLE for the lifetime of the instance per the
+          Frozen-Contract principle.
+      subject_entity_id:
+        range: string
+        required: true
+        description: >
+          entity_id of the Domain-layer entity this process operates
+          on (e.g., an EmployeeRole's entity_id for onboarding).
+          Stored as string to allow union-typed subjects across
+          process families.
+      subject_entity_type:
+        range: string
+        required: true
+        description: >
+          The class name of the subject entity (e.g.,
+          "EmployeeRole", "Order"). Combined with subject_entity_id
+          this fully resolves the subject reference.
+      initiated_by:
+        range: Person
+        description: Person who initiated the instance.
+      assigned_to_role:
+        range: string
+        description: entity_id of the Role currently responsible.
+      started_at:
+        range: datetime
+        required: true
+      completed_at:
+        range: datetime
+      cancelled_at:
+        range: datetime
+      due_at:
+        range: datetime
+        description: SLA-driven completion target.
+      step_completions:
+        range: StepCompletion
+        multivalued: true
+        description: Completion records for steps executed in this instance.
+      events:
+        range: ProcessEvent
+        multivalued: true
+        description: Event log for this instance.
+      migrated_to_instance:
+        range: ProcessInstance
+        description: >
+          If this instance was migrated to a new ProcessDefinition
+          version, the successor instance.
+      migrated_from_instance:
+        range: ProcessInstance
+        description: If this instance was created via migration, the predecessor.

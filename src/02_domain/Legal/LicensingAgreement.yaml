@@ -1,0 +1,60 @@
+id: https://example.org/edm/domain/Legal/LicensingAgreement
+name: domain_legal_licensing_agreement
+title: Domain (Legal) — LicensingAgreement
+description: A software or IP licensing agreement.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Agreement
+  - ../../01_foundation/common/codelists/types/AgreementTypeEnum
+  - ../../01_foundation/common/base/AmountType
+  - enums/LicenseLifecycleStateEnum
+
+classes:
+  LicensingAgreement:
+    is_a: Agreement
+    description: A software or IP licensing agreement.
+    slot_usage:
+      agreement_type:
+        equals_string: LICENSE
+      lifecycle_state:
+        range: LicenseLifecycleStateEnum
+        required: true
+    attributes:
+      license_type:
+        range: string
+        required: true
+        description: SOFTWARE, PATENT, TRADEMARK, COPYRIGHT, TRADE_SECRET.
+      direction:
+        range: string
+        required: true
+        description: INBOUND (we license from), OUTBOUND (we license to).
+      licensed_subject:
+        range: string
+        required: true
+        description: Description of what is being licensed.
+      scope:
+        range: string
+        description: License scope (territory, field-of-use, exclusivity).
+      is_exclusive:
+        range: boolean
+      is_perpetual:
+        range: boolean
+      annual_fee:
+        range: AmountType
+      royalty_terms:
+        range: string
+        description: Royalty terms, if applicable.
+      audit_rights:
+        range: boolean
+        description: Whether the licensor has audit rights.

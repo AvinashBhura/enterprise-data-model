@@ -1,0 +1,29 @@
+id: https://example.org/edm/application/Okta/enums/OktaSyncStatusEnum
+name: application_okta_sync_status_enum
+title: Application (Okta) — OktaSyncStatusEnum
+description: Okta-specific sync states.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OktaSyncStatusEnum:
+    description: Okta-specific sync states.
+    permissible_values:
+      PENDING:
+      IN_PROGRESS:
+      SYNCED:
+      OUT_OF_SYNC:
+      OKTA_USER_DEACTIVATED:
+      OKTA_API_RATE_LIMIT:
+      RETIRED:

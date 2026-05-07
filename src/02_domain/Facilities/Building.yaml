@@ -1,0 +1,58 @@
+id: https://example.org/edm/domain/Facilities/Building
+name: domain_facilities_building
+title: Domain (Facilities) — Building
+description: A physical building owned or leased by the enterprise.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Asset
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/codelists/types/AssetTypeEnum
+  - ../../01_foundation/common/base/QuantityType
+  - enums/BuildingLifecycleStateEnum
+
+classes:
+  Building:
+    is_a: Asset
+    description: A physical building.
+    slot_usage:
+      asset_type:
+        equals_string: PHYSICAL
+      lifecycle_state:
+        range: BuildingLifecycleStateEnum
+        required: true
+    attributes:
+      building_code:
+        range: string
+        required: true
+        description: Enterprise-issued building code (e.g., "HQ", "BLD-A").
+      building_name:
+        range: string
+      total_floor_area:
+        range: QuantityType
+        description: Total floor area (units typically MTK or square feet).
+      number_of_floors:
+        range: integer
+      seating_capacity:
+        range: integer
+      ownership_type:
+        range: string
+        description: OWNED, LEASED, MANAGED.
+      occupying_organizations:
+        range: Organization
+        multivalued: true
+        description: OrganizationalUnits occupying space in this building.
+      year_built:
+        range: integer
+      year_renovated:
+        range: integer

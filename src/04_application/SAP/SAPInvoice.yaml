@@ -1,0 +1,46 @@
+id: https://example.org/edm/application/SAP/SAPInvoice
+name: application_sap_invoice
+title: Application (SAP) — SAPInvoice
+description: SAP projection of an Invoice.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Finance/Invoice
+  - ../_shared/SyncMetadata
+
+classes:
+  SAPInvoice:
+    is_a: Invoice
+    description: SAP AP/AR invoice document projection.
+    attributes:
+      sap_invoice_doc_number:
+        range: string
+        required: true
+        description: SAP document number (BELNR).
+      sap_company_code:
+        range: string
+        required: true
+      sap_fiscal_year:
+        range: string
+        required: true
+      sap_posting_date:
+        range: date
+      sap_document_type:
+        range: string
+        description: SAP document type code (KR, RE, etc.).
+      sap_baseline_date:
+        range: date
+        description: Baseline date for payment terms calculation.
+      sync:
+        range: SyncMetadata
+        required: true

@@ -1,0 +1,70 @@
+id: https://example.org/edm/domain/IT/SoftwareLicense
+name: domain_it_software_license
+title: Domain (IT) — SoftwareLicense
+description: >
+  A software license instance held by the enterprise. Specializes
+  Foundation Asset. References the underlying LicensingAgreement
+  (Legal domain) that grants the right.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Asset
+  - ../../01_foundation/Person
+  - ../../01_foundation/common/codelists/types/AssetTypeEnum
+  - ../../01_foundation/common/base/AmountType
+  - Device
+  - enums/LicenseLifecycleStateEnum
+
+classes:
+  SoftwareLicense:
+    is_a: Asset
+    description: A software license instance.
+    slot_usage:
+      asset_type:
+        equals_string: DIGITAL
+      lifecycle_state:
+        range: LicenseLifecycleStateEnum
+        required: true
+    attributes:
+      product_name:
+        range: string
+        required: true
+      product_version:
+        range: string
+      vendor_name:
+        range: string
+      license_key:
+        range: string
+        description: License key / activation code (treat as sensitive).
+      seats_total:
+        range: integer
+        description: Total seats granted under this license.
+      seats_in_use:
+        range: integer
+        description: Seats currently allocated.
+      license_model:
+        range: string
+        description: PER_SEAT, PER_DEVICE, PER_CORE, FLOATING, SITE, ENTERPRISE.
+      assigned_to_person:
+        range: Person
+        description: Person the license is allocated to (if per-seat).
+      assigned_to_device:
+        range: Device
+        description: Device the license is bound to (if per-device).
+      annual_cost:
+        range: AmountType
+      renewal_date:
+        range: date
+      governing_agreement_id:
+        range: string
+        description: entity_id of the Legal LicensingAgreement that grants this license.

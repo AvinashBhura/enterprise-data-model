@@ -1,0 +1,55 @@
+id: https://example.org/edm/foundation/common/base/StateTransition
+name: common_base_state_transition
+title: Common — StateTransition (value type)
+description: >
+  A state transition record captured in lifecycle history. Used by the
+  Lifecycleable base type to track how an entity moved through its
+  lifecycle states over time.
+
+  This is a value type — a self-contained composite value, not an
+  independent enterprise entity.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  xsd: http://www.w3.org/2001/XMLSchema#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../Entity
+
+classes:
+
+  StateTransition:
+    description: >
+      A single transition from one lifecycle state to another. Captured
+      as immutable history on any Lifecycleable entity. Enables audit
+      trails and point-in-time reconstruction of lifecycle history.
+    attributes:
+      from_state:
+        range: string
+        required: true
+        description: The prior lifecycle state (as enum string value).
+      to_state:
+        range: string
+        required: true
+        description: The new lifecycle state (as enum string value).
+      transition_timestamp:
+        range: datetime
+        required: true
+        description: When the transition occurred.
+      transitioned_by:
+        range: Entity
+        description: >
+          The actor responsible for the transition. Typically references
+          a Person (via their entity_id), but may be a system/service
+          account in automated transitions.
+      reason:
+        range: string
+        description: Free-text reason or note explaining the transition.

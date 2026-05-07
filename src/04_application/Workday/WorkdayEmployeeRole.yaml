@@ -1,0 +1,51 @@
+id: https://example.org/edm/application/Workday/WorkdayEmployeeRole
+name: application_workday_employee_role
+title: Application (Workday) — WorkdayEmployeeRole
+description: >
+  Workday's projection of EmployeeRole. Workday's native term is
+  "Worker assignment"; EDM expresses this as an EmployeeRole
+  specialization with Workday-specific fields.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/HumanResources/EmployeeRole
+  - ../_shared/SyncMetadata
+
+classes:
+  WorkdayEmployeeRole:
+    is_a: EmployeeRole
+    description: Workday projection of an EmployeeRole.
+    attributes:
+      workday_worker_id:
+        range: string
+        required: true
+        description: Workday Worker ID.
+      workday_supervisory_org_id:
+        range: string
+        description: Workday Supervisory Organization (Workday-specific containment).
+      workday_position_id:
+        range: string
+        description: Workday Position ID.
+      workday_cost_center:
+        range: string
+      workday_pay_group:
+        range: string
+      workday_employee_type:
+        range: string
+        description: Raw Workday employee-type value (mapped to canonical EmploymentType).
+      workday_business_title:
+        range: string
+        description: Workday's business title (often differs from canonical job_title).
+      sync:
+        range: SyncMetadata
+        required: true

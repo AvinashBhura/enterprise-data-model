@@ -1,0 +1,71 @@
+id: https://example.org/edm/domain/Sales/Account
+name: domain_sales_account
+title: Domain (Sales) — Account
+description: >
+  A customer account — the company-level relationship a Sales team
+  manages. References an external Organization and adds sales-specific
+  attributes (segment, tier, account team).
+
+  Distinct from Finance Account (GL account). Both inherit from
+  Foundation Entity directly; cross-references use entity_id.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - ../../01_foundation/common/base/Classifiable
+  - ../../01_foundation/common/base/AmountType
+  - enums/SalesAccountLifecycleStateEnum
+
+classes:
+  Account:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+    description: A customer account at the company level.
+    slot_usage:
+      lifecycle_state:
+        range: SalesAccountLifecycleStateEnum
+        required: true
+    attributes:
+      account_name:
+        range: string
+        required: true
+      customer_organization:
+        range: Organization
+        required: true
+        description: The external Organization (typically LegalEntity) this account refers to.
+      segment:
+        range: string
+        description: Customer segment (ENTERPRISE, MID_MARKET, SMB, STRATEGIC).
+      tier:
+        range: string
+        description: Tier classifier (TIER_1, TIER_2, TIER_3).
+      industry:
+        range: string
+        description: Industry classification (references IndustryClassificationTaxonomy).
+      annual_revenue:
+        range: AmountType
+        description: Reported customer annual revenue.
+      employee_count:
+        range: integer
+      account_owner_role:
+        range: string
+        description: entity_id of the EmployeeRole owning this account.
+      parent_account:
+        range: Account
+        description: Parent account in customer hierarchies (e.g., subsidiaries).

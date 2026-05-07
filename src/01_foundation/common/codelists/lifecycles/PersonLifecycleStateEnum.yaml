@@ -1,0 +1,39 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/PersonLifecycleStateEnum
+name: common_codelist_person_lifecycle_state_enum
+title: Common — PersonLifecycleStateEnum
+description: >
+  Lifecycle states for a Person entity. Coarse-grained — tracks
+  whether the Person record is active, merged, or retired. Does NOT
+  track employment or role-level state (those live on Role
+  specializations).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  PersonLifecycleStateEnum:
+    description: Entity-level lifecycle states for a Person.
+    permissible_values:
+      PROSPECT:
+        description: Known to the enterprise but no formal engagement yet.
+      ACTIVE:
+        description: Has at least one active Role with the enterprise.
+      INACTIVE:
+        description: No currently-active Role but record remains.
+      MERGED:
+        description: Record has been merged into another Person record.
+      ARCHIVED:
+        description: Record is archived per data-retention policy.
+      DECEASED:
+        description: Person is deceased; record retained for historical reference.

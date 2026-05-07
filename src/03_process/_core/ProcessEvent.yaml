@@ -1,0 +1,58 @@
+id: https://example.org/edm/process/_core/ProcessEvent
+name: process_core_process_event
+title: Process (_core) — ProcessEvent
+description: >
+  An event recorded in the lifecycle of a ProcessInstance. Implements
+  the Ledger Principle: state lives in events; events point to domain
+  entities. Append-only.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Person
+  - ../../01_foundation/common/base/Identifiable
+  - ProcessStep
+  - enums/ProcessEventTypeEnum
+
+classes:
+  ProcessEvent:
+    is_a: Entity
+    mixins:
+      - Identifiable
+    description: An event recorded in a ProcessInstance's lifecycle.
+    attributes:
+      process_instance_id:
+        range: string
+        required: true
+        description: entity_id of the ProcessInstance.
+      event_type:
+        range: ProcessEventTypeEnum
+        required: true
+      occurred_at:
+        range: datetime
+        required: true
+      actor_person:
+        range: Person
+        description: Person responsible for the event (null for automated/system events).
+      actor_role:
+        range: string
+        description: entity_id of the Role under which the actor acted.
+      related_step:
+        range: ProcessStep
+        description: ProcessStep this event relates to (if applicable).
+      payload:
+        range: string
+        description: JSON-encoded event payload.
+      correlation_id:
+        range: string
+        description: Optional correlation identifier for distributed tracing.

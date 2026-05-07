@@ -1,0 +1,33 @@
+# Example instance — Priya Menon's EmployeeRole (Domain — HR)
+# Created Day 0 when offer accepted.
+
+# Conforms to: src/02_domain/HumanResources/EmployeeRole.yaml
+- entity_id: rol_4c2e1000-0002-4000-8000-000000000001
+  role_type: EMPLOYEE
+  held_by_person: prs_8a7f3c00-0001-4000-8000-000000000001  # Priya
+  engaging_party: org_acme_corp_us  # Acme Corp US LegalEntity
+  role_title: "Senior Software Engineer"
+
+  employee_number: "E10847"
+  employing_organization: org_infra_team        # Infra Team within Platform Department
+  employing_legal_entity: org_acme_corp_us
+  hire_date: "2026-05-15"
+  employment_type: FULL_TIME
+  primary_position: pos_senior_swe_infra        # Position record
+  employment_contract: agr_emp_contract_priya   # EmploymentContract record
+  manager_role: rol_manager_infra_lead          # Engineering manager's EmployeeRole
+
+  work_email: priya.menon@acme.com
+  job_title: "Senior Software Engineer"
+
+  effective_from: "2026-05-15T00:00:00Z"
+  lifecycle_state: PENDING_START
+  state_effective_from: "2026-04-15T11:30:00Z"
+
+  natural_identifiers:
+    - value: "E10847"
+      scheme: "acme_employee_number"
+      issuer: "Acme HR"
+
+  created_at: "2026-04-15T11:30:00Z"
+  created_by: "hr_intake_user"

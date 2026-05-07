@@ -1,0 +1,39 @@
+id: https://example.org/edm/application/Salesforce/SalesforceOrder
+name: application_salesforce_order
+title: Application (Salesforce) — SalesforceOrder
+description: Salesforce projection of a customer Order.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Sales/Order
+  - ../_shared/SyncMetadata
+
+classes:
+  SalesforceOrder:
+    is_a: Order
+    description: Salesforce Order projection.
+    attributes:
+      sf_order_id:
+        range: string
+        required: true
+      sf_record_url:
+        range: uri
+      sf_status:
+        range: string
+        description: Salesforce native Status picklist value.
+      sf_order_number:
+        range: string
+        description: Salesforce auto-generated order number.
+      sync:
+        range: SyncMetadata
+        required: true

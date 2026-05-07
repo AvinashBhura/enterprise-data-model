@@ -1,0 +1,38 @@
+id: https://example.org/edm/foundation/common/codelists/types/AssetTypeEnum
+name: common_codelist_asset_type_enum
+title: Common — AssetTypeEnum
+description: >
+  Flat codelist of asset types. For hierarchical classification
+  (Physical → Equipment → IT Equipment → Laptop), see
+  AssetTypeTaxonomy.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  AssetTypeEnum:
+    description: Top-level type classifier for Asset instances.
+    permissible_values:
+      PHYSICAL:
+        description: Tangible physical asset (equipment, vehicle, building).
+      DIGITAL:
+        description: Digital asset (software, data set, domain name).
+      FINANCIAL:
+        description: Financial asset (investment, receivable, cash).
+      INTELLECTUAL_PROPERTY:
+        description: Patents, trademarks, copyrights, trade secrets.
+      CONTRACTUAL:
+        description: Contractual rights treated as assets (licenses held).
+      HUMAN_CAPITAL:
+        description: Human-capital assets (rare; typically tracked as Roles instead).

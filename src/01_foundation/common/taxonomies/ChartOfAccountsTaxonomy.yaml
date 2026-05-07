@@ -1,0 +1,62 @@
+id: https://example.org/edm/foundation/common/taxonomies/ChartOfAccountsTaxonomy
+name: common_taxonomy_chart_of_accounts
+title: Common — ChartOfAccountsTaxonomy
+description: >
+  Chart of Accounts classification hierarchy for financial
+  reporting. Typical structure:
+    Assets
+      ├── Current Assets
+      │     ├── Cash & Equivalents
+      │     ├── Accounts Receivable
+      │     └── Inventory
+      └── Non-Current Assets
+            ├── Property, Plant & Equipment
+            └── Intangible Assets
+    Liabilities
+      ├── Current Liabilities
+      └── Long-Term Liabilities
+    Equity
+    Revenue
+    Expenses
+
+  Used to classify Finance.Account instances. An enterprise may
+  maintain a single global CoA or multiple (e.g., one per legal
+  entity). This taxonomy defines the abstract structure; actual
+  account instances live in the Finance domain.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  skos: http://www.w3.org/2004/02/skos/core#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - OrganizationTypeTaxonomy
+
+classes:
+
+  ChartOfAccountsTaxonomy:
+    description: Taxonomy container for the chart-of-accounts hierarchy.
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+      version:
+        range: string
+        required: true
+      description:
+        range: string
+      applies_to_legal_entity:
+        range: string
+        description: >
+          Optional — the legal entity this CoA applies to. If null,
+          treated as enterprise-global.
+      nodes:
+        range: TaxonomyNode
+        multivalued: true

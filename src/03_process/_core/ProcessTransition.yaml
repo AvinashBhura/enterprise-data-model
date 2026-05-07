@@ -1,0 +1,52 @@
+id: https://example.org/edm/process/_core/ProcessTransition
+name: process_core_process_transition
+title: Process (_core) — ProcessTransition
+description: >
+  An allowed transition between two ProcessSteps within a
+  ProcessDefinition. Captures conditional and unconditional flows.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/common/base/Identifiable
+  - ProcessStep
+
+classes:
+  ProcessTransition:
+    is_a: Entity
+    mixins:
+      - Identifiable
+    description: An allowed transition between two ProcessSteps.
+    attributes:
+      from_step:
+        range: ProcessStep
+        required: true
+      to_step:
+        range: ProcessStep
+        required: true
+      transition_type:
+        range: string
+        required: true
+        description: SEQUENTIAL, CONDITIONAL, PARALLEL_FORK, PARALLEL_JOIN, LOOP.
+      condition_expression:
+        range: string
+        description: For CONDITIONAL transitions, an expression evaluated to decide whether to take this path.
+      condition_description:
+        range: string
+        description: Human-readable description of the condition.
+      requires_approval:
+        range: boolean
+        description: Whether this transition requires manual approval.
+      approver_role:
+        range: string
+        description: Role required to approve this transition.

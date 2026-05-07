@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/Procurement/enums/RequisitionLifecycleStateEnum
+name: domain_procurement_requisition_lifecycle_state_enum
+title: Domain (Procurement) — RequisitionLifecycleStateEnum
+description: Lifecycle states for a PurchaseRequisition.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  RequisitionLifecycleStateEnum:
+    description: Lifecycle states for a PurchaseRequisition.
+    permissible_values:
+      DRAFT:
+        description: Being drafted by requester.
+      SUBMITTED:
+        description: Submitted for approval.
+      PENDING_APPROVAL:
+        description: Awaiting approval.
+      APPROVED:
+        description: Approved; can be converted to PO.
+      REJECTED:
+        description: Rejected by approver.
+      CONVERTED_TO_PO:
+        description: Converted to a PurchaseOrder.
+      CANCELLED:
+        description: Cancelled by requester.

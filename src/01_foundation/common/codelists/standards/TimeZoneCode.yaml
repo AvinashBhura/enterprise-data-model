@@ -1,0 +1,31 @@
+id: https://example.org/edm/foundation/common/codelists/standards/TimeZoneCode
+name: common_codelist_time_zone_code
+title: Common — TimeZoneCode (IANA tz database)
+description: >
+  IANA time zone database identifiers. This file declares the type
+  as a pattern-constrained string rather than enumerating every
+  zone, since the IANA database is large and evolves. Use the full
+  tz database as the authoritative source.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+types:
+
+  TimeZoneCode:
+    uri: xsd:string
+    base: str
+    description: >
+      IANA tz database time zone identifier (e.g.,
+      "America/Los_Angeles", "Europe/London", "Asia/Kolkata").
+    pattern: "^[A-Za-z_]+(/[A-Za-z_0-9+\\-]+)+$"

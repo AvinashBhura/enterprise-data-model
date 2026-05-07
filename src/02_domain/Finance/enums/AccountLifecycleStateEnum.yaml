@@ -1,0 +1,32 @@
+id: https://example.org/edm/domain/Finance/enums/AccountLifecycleStateEnum
+name: domain_finance_account_lifecycle_state_enum
+title: Domain (Finance) — AccountLifecycleStateEnum
+description: Lifecycle states for a GL Account.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  AccountLifecycleStateEnum:
+    description: Lifecycle states for a GL account.
+    permissible_values:
+      DRAFT:
+        description: Being defined; not yet activated.
+      ACTIVE:
+        description: Currently active and accepting postings.
+      INACTIVE:
+        description: Temporarily inactive; not accepting new postings.
+      CLOSED:
+        description: Permanently closed.
+      ARCHIVED:
+        description: Closed and archived per retention policy.

@@ -1,0 +1,106 @@
+id: https://example.org/edm/foundation/Address
+name: foundation_address
+title: Foundation — Address
+description: >
+  A specific location reference — physical or virtual. Addresses are
+  referenced (not embedded) so they can be shared across entities,
+  validated once, and carry their own lifecycle.
+
+  Justification as Foundational:
+    - Universality: addresses are referenced by Persons, Organizations,
+      Teams, Assets, Agreements, and more. Every capability needs them.
+    - Abstraction: exists independent of any specific business process.
+    - Semantic Integrity: one canonical structure used enterprise-wide.
+
+  Domain examples where Address is consumed:
+    - HR: employee home address, work location
+    - Sales: customer billing and shipping addresses
+    - Legal: registered office addresses for LegalEntity
+    - Facilities: building addresses, suite locations
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Classifiable
+  - common/codelists/standards/CountryCode
+  - common/codelists/types/AddressTypeEnum
+  - common/codelists/lifecycles/AddressLifecycleStateEnum
+
+classes:
+
+  Address:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+    class_uri: schema:PostalAddress
+    description: >
+      A structured postal or physical address. May be the address of
+      a Person (home), an Organization (registered, business), an
+      Asset (building location), or a Team (primary location).
+    slot_usage:
+      lifecycle_state:
+        range: AddressLifecycleStateEnum
+    attributes:
+      address_type:
+        range: AddressTypeEnum
+        required: true
+        description: The purpose for which this address is used.
+      line_1:
+        range: string
+        required: true
+        description: First address line (street, number).
+        slot_uri: schema:streetAddress
+      line_2:
+        range: string
+        description: Second address line (apartment, suite).
+      line_3:
+        range: string
+        description: Third address line (optional).
+      locality:
+        range: string
+        required: true
+        description: City, town, or locality name.
+        slot_uri: schema:addressLocality
+      region:
+        range: string
+        description: State, province, or region.
+        slot_uri: schema:addressRegion
+      postal_code:
+        range: string
+        description: Postal or ZIP code.
+        slot_uri: schema:postalCode
+      country:
+        range: CountryCodeEnum
+        required: true
+        description: ISO 3166-1 alpha-2 country code.
+        slot_uri: schema:addressCountry
+      latitude:
+        range: decimal
+        description: Latitude in decimal degrees (WGS-84).
+      longitude:
+        range: decimal
+        description: Longitude in decimal degrees (WGS-84).
+      timezone:
+        range: string
+        description: IANA time-zone identifier for this address.
+      is_validated:
+        range: boolean
+        description: Whether the address has been validated against a postal service.
+      validated_at:
+        range: datetime
+        description: When the address was last validated.

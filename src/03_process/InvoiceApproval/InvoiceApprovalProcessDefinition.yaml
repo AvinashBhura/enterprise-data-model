@@ -1,0 +1,45 @@
+id: https://example.org/edm/process/InvoiceApproval/InvoiceApprovalProcessDefinition
+name: process_invoice_approval_definition
+title: Process (InvoiceApproval) — InvoiceApprovalProcessDefinition
+description: A versioned invoice-approval workflow specification.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+  - ../../01_foundation/common/base/AmountType
+
+classes:
+  ApprovalThreshold:
+    description: An approval threshold rule.
+    attributes:
+      threshold_amount:
+        range: AmountType
+        required: true
+      required_approver_level:
+        range: string
+        required: true
+        description: The role level required to approve at or below this threshold.
+
+  InvoiceApprovalProcessDefinition:
+    is_a: ProcessDefinition
+    description: Invoice-approval workflow definition.
+    attributes:
+      requires_po_match:
+        range: boolean
+        description: Whether invoice must be matched to a PurchaseOrder.
+      approval_thresholds:
+        range: ApprovalThreshold
+        multivalued: true
+        description: Tiered approval thresholds.
+      max_approval_days:
+        range: integer

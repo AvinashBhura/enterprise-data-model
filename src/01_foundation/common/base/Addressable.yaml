@@ -1,0 +1,42 @@
+id: https://example.org/edm/foundation/common/base/Addressable
+name: common_base_addressable
+title: Common — Addressable (base type)
+description: >
+  Base type that grants an entity the capability to be associated with
+  one or more Addresses. Applied to entities that have physical or
+  virtual locations (Person, Organization, Team, Asset).
+
+  Per the Clean-Contract principle, Addressable owns only the address
+  association — it does not duplicate lifecycle, identifier, role, or
+  classification attributes.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../Address
+
+classes:
+
+  Addressable:
+    mixin: true
+    description: >
+      Applied to entities that can hold one or more Addresses. Each
+      address reference can carry its own purpose (home, business,
+      billing, shipping) via the Address entity's own type attribute.
+    attributes:
+      addresses:
+        range: Address
+        multivalued: true
+        description: >
+          Zero or more Address references. An entity may have multiple
+          addresses (e.g., a customer with distinct billing and shipping
+          addresses; a Person with home and work addresses).

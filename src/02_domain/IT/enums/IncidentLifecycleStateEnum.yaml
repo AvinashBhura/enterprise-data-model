@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/IT/enums/IncidentLifecycleStateEnum
+name: domain_it_incident_lifecycle_state_enum
+title: Domain (IT) — IncidentLifecycleStateEnum
+description: >
+  Lifecycle states for an Incident (entity-level coarse view). Fine
+  workflow state for incident resolution lives on
+  IncidentResolutionProcessInstance in the Process layer.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  IncidentLifecycleStateEnum:
+    description: Coarse lifecycle states for an Incident.
+    permissible_values:
+      REPORTED:
+      TRIAGED:
+      OPEN:
+        description: Acknowledged and being worked.
+      MITIGATED:
+        description: Impact reduced; full resolution pending.
+      RESOLVED:
+      CLOSED:
+      REOPENED:
+      CANCELLED:
+        description: False positive or duplicate; closed without action.

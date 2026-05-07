@@ -1,0 +1,39 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/RoleLifecycleStateEnum
+name: common_codelist_role_lifecycle_state_enum
+title: Common — RoleLifecycleStateEnum
+description: >
+  Lifecycle states for Role and its Domain specializations
+  (EmployeeRole, VendorRole, VisitorRole, etc.). These are the
+  high-level states every Role goes through, regardless of its
+  specific type.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  RoleLifecycleStateEnum:
+    description: High-level lifecycle states applicable to any Role.
+    permissible_values:
+      PROPOSED:
+        description: Role is proposed but not yet active.
+      PENDING_START:
+        description: Formally agreed, awaiting effective-from date.
+      ACTIVE:
+        description: Currently in effect.
+      SUSPENDED:
+        description: Temporarily paused (e.g., employee on leave).
+      TERMINATED:
+        description: Role has ended.
+      ARCHIVED:
+        description: Ended and archived per retention policy.

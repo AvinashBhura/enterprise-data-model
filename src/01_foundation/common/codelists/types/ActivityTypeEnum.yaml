@@ -1,0 +1,43 @@
+id: https://example.org/edm/foundation/common/codelists/types/ActivityTypeEnum
+name: common_codelist_activity_type_enum
+title: Common — ActivityTypeEnum
+description: Top-level type classifier for Activity instances.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  ActivityTypeEnum:
+    description: Broad category for activities happening in time.
+    permissible_values:
+      MEETING:
+        description: Scheduled interaction between participants.
+      TRANSACTION:
+        description: A business transaction (financial or non-financial).
+      PROCESS_STEP:
+        description: A step within a process instance.
+      EVENT:
+        description: A notable occurrence or state change.
+      TASK:
+        description: A discrete unit of work assigned to someone.
+      APPOINTMENT:
+        description: A scheduled service or consultation.
+      COMMUNICATION:
+        description: An outbound or inbound communication.
+      REVIEW:
+        description: A periodic or ad-hoc review activity.
+      AUDIT:
+        description: An audit or inspection activity.
+      INCIDENT:
+        description: A disruptive occurrence requiring response.

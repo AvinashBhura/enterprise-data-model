@@ -1,0 +1,68 @@
+id: https://example.org/edm/foundation/common/codelists/standards/UnitOfMeasureCode
+name: common_codelist_unit_of_measure_code
+title: Common — UnitOfMeasureCode (UN/CEFACT Recommendation 20)
+description: >
+  Unit of measure codes from UN/CEFACT Recommendation 20. This is a
+  representative subset covering the most common units across weight,
+  volume, time, and count.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  UnitOfMeasureCodeEnum:
+    description: UN/CEFACT unit-of-measure codes (subset).
+    permissible_values:
+      EA:
+        description: Each (unit count)
+      KG:
+        description: Kilogram
+      GRM:
+        description: Gram
+      LBR:
+        description: Pound
+      MTR:
+        description: Meter
+      KMT:
+        description: Kilometer
+      FOT:
+        description: Foot
+      LTR:
+        description: Liter
+      MLT:
+        description: Milliliter
+      GLL:
+        description: Gallon (US)
+      HUR:
+        description: Hour
+      MIN:
+        description: Minute
+      DAY:
+        description: Day
+      MON:
+        description: Month
+      ANN:
+        description: Year
+      PCE:
+        description: Piece
+      BX:
+        description: Box
+      PK:
+        description: Pack
+      PAL:
+        description: Pallet
+      MTK:
+        description: Square meter
+      MTQ:
+        description: Cubic meter

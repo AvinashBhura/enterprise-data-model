@@ -1,0 +1,30 @@
+# Example instance — OnboardingProcessInstance for Priya
+# Created Day 1 of onboarding.
+
+# Conforms to: src/03_process/Onboarding/OnboardingProcessInstance.yaml
+- entity_id: pri_5d3e2000-0003-4000-8000-000000000001
+  definition: pdef_onboarding_us_eng_v3_2     # OnboardingProcessDefinition v3.2
+  subject_entity_id: rol_4c2e1000-0002-4000-8000-000000000001  # Priya's EmployeeRole
+  subject_entity_type: EmployeeRole
+  initiated_by: prs_hr_partner                # the HR partner who kicked it off
+  assigned_to_role: rol_manager_infra_lead    # initially the hiring manager
+
+  started_at: "2026-05-12T08:00:00Z"          # 3 days before hire date
+  due_at: "2026-05-22T23:59:59Z"              # First-week target
+
+  target_start_date: "2026-05-15"
+  hiring_manager_role: rol_manager_infra_lead
+  buddy_role: rol_buddy_engineer
+
+  lifecycle_state: IN_PROGRESS
+  state_effective_from: "2026-05-12T08:00:00Z"
+
+  onboarding_state: INITIATED
+
+  natural_identifiers:
+    - value: "ONB-2026-00847"
+      scheme: "acme_onboarding_number"
+      issuer: "Acme HR"
+
+  created_at: "2026-05-12T08:00:00Z"
+  created_by: "hr_partner_user"

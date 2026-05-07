@@ -1,0 +1,119 @@
+id: https://example.org/edm/foundation/Asset
+name: foundation_asset
+title: Foundation — Asset
+description: >
+  A thing of value that the enterprise owns, manages, or is
+  responsible for. Laptops, servers, buildings, vehicles, software
+  licenses, patents, data sets, financial investments — all Assets.
+
+  Justification as Foundational:
+    - Universality: every capability manages some form of asset.
+      IT manages devices and software; Facilities manages buildings;
+      Finance manages investments; Legal manages IP.
+    - Abstraction: "thing of value owned or managed" is semantically
+      universal; specific asset natures belong in Domain subtypes.
+    - Semantic Integrity: one definition, one lifecycle pattern
+      (acquire → in-use → retire).
+
+  Domain specializations (Domain layer):
+    - Device, SoftwareLicense, AccessCredential (IT / Security)
+    - Building, Floor, Room (Facilities)
+    - IntellectualPropertyAsset (Legal)
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - Person
+  - Organization
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Addressable
+  - common/base/Classifiable
+  - common/base/Temporal
+  - common/base/AmountType
+  - common/codelists/types/AssetTypeEnum
+  - common/codelists/lifecycles/AssetLifecycleStateEnum
+
+classes:
+
+  Asset:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Addressable
+      - Classifiable
+      - Temporal
+    description: >
+      A thing of value. Concrete base class — specialized in Domain
+      layer for typed assets (Device, Building, IntellectualProperty).
+    slot_usage:
+      lifecycle_state:
+        range: AssetLifecycleStateEnum
+    attributes:
+      asset_type:
+        range: AssetTypeEnum
+        required: true
+        description: Top-level type (PHYSICAL, DIGITAL, FINANCIAL, INTELLECTUAL_PROPERTY).
+      name:
+        range: string
+        required: true
+        description: Human-readable name of the asset.
+      description:
+        range: string
+        description: Longer description.
+      owning_organization:
+        range: Organization
+        description: The Organization that owns or holds title to this asset.
+      assigned_to_person:
+        range: Person
+        description: >
+          Person the asset is currently assigned to (e.g., laptop
+          assigned to employee). Optional — some assets have no
+          personal assignee.
+      custodian:
+        range: Entity
+        description: >
+          Party (Person or Organization) currently responsible for
+          the asset's day-to-day care.
+      acquired_on:
+        range: date
+        description: Date the asset was acquired.
+      acquired_from:
+        range: Organization
+        description: Supplier / source organization, if applicable.
+      acquisition_cost:
+        range: AmountType
+        description: Cost of acquisition.
+      current_value:
+        range: AmountType
+        description: Current book or market value, if tracked.
+      warranty_expiration:
+        range: date
+        description: Warranty expiration date, if applicable.
+      retired_on:
+        range: date
+        description: Date the asset was retired from service.
+      disposal_method:
+        range: string
+        description: How the asset was disposed of (sold, recycled, destroyed).
+      serial_number:
+        range: string
+        description: >
+          Manufacturer's serial number (natural key for many physical
+          assets). Also expressible via natural_identifiers for
+          multiple schemes.
+      asset_tag:
+        range: string
+        description: Enterprise-issued asset tag.

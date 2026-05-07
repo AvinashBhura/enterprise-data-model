@@ -1,0 +1,44 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/AgreementLifecycleStateEnum
+name: common_codelist_agreement_lifecycle_state_enum
+title: Common — AgreementLifecycleStateEnum
+description: >
+  Lifecycle states for Agreement and its specializations (contracts,
+  orders, NDAs, licenses). Note: fine-grained workflow state during
+  negotiation lives in the Process layer (ContractLifecycle).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  AgreementLifecycleStateEnum:
+    description: Entity-level lifecycle states for an Agreement.
+    permissible_values:
+      DRAFT:
+        description: Being drafted; not yet circulated.
+      IN_REVIEW:
+        description: Under review by counterparties.
+      APPROVED:
+        description: Internally approved but not yet signed.
+      SIGNED:
+        description: All parties have signed.
+      EXECUTED:
+        description: In force; parties are performing.
+      AMENDED:
+        description: Amended; superseded by a newer version.
+      EXPIRED:
+        description: Reached end of its term.
+      TERMINATED:
+        description: Ended early by one or more parties.
+      ARCHIVED:
+        description: Ended and archived per retention policy.

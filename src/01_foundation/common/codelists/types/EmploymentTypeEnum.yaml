@@ -1,0 +1,37 @@
+id: https://example.org/edm/foundation/common/codelists/types/EmploymentTypeEnum
+name: common_codelist_employment_type_enum
+title: Common — EmploymentTypeEnum
+description: Employment arrangement types for EmployeeRole instances.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  EmploymentTypeEnum:
+    description: Type of employment arrangement.
+    permissible_values:
+      FULL_TIME:
+        description: Full-time permanent employee.
+      PART_TIME:
+        description: Part-time permanent employee.
+      TEMPORARY:
+        description: Fixed-term employee.
+      INTERN:
+        description: Internship arrangement.
+      APPRENTICE:
+        description: Apprenticeship arrangement.
+      SEASONAL:
+        description: Seasonal worker.
+      CASUAL:
+        description: Casual / on-call worker.

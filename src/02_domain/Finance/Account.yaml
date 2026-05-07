@@ -1,0 +1,70 @@
+id: https://example.org/edm/domain/Finance/Account
+name: domain_finance_account
+title: Domain (Finance) — Account
+description: >
+  A general-ledger account. Specifies a specific posting destination
+  in the financial system. Classified by the ChartOfAccountsTaxonomy
+  (in Common) and may carry account-specific attributes.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - ../../01_foundation/common/base/Classifiable
+  - ../../01_foundation/common/codelists/standards/CurrencyCode
+  - enums/AccountLifecycleStateEnum
+
+classes:
+  Account:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+    description: A GL account.
+    slot_usage:
+      lifecycle_state:
+        range: AccountLifecycleStateEnum
+        required: true
+    attributes:
+      account_code:
+        range: string
+        required: true
+        description: GL account code (natural key).
+      account_name:
+        range: string
+        required: true
+        description: Human-readable account name.
+      account_class:
+        range: string
+        description: Top-level class (ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE).
+      coa_node:
+        range: string
+        description: Reference to the ChartOfAccountsTaxonomy node.
+      currency:
+        range: CurrencyCodeEnum
+        description: Functional currency for this account.
+      legal_entity:
+        range: Organization
+        description: LegalEntity this account belongs to.
+      parent_account:
+        range: Account
+        description: Parent account in the chart hierarchy.
+      is_summary_account:
+        range: boolean
+        description: True for roll-up accounts that don't accept direct postings.
+      is_intercompany:
+        range: boolean
+        description: True for intercompany accounts.

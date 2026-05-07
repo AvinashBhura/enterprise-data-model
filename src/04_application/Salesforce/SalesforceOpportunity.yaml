@@ -1,0 +1,40 @@
+id: https://example.org/edm/application/Salesforce/SalesforceOpportunity
+name: application_salesforce_opportunity
+title: Application (Salesforce) — SalesforceOpportunity
+description: Salesforce projection of an Opportunity.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Sales/Opportunity
+  - ../_shared/SyncMetadata
+
+classes:
+  SalesforceOpportunity:
+    is_a: Opportunity
+    description: Salesforce Opportunity projection.
+    attributes:
+      sf_opportunity_id:
+        range: string
+        required: true
+      sf_record_url:
+        range: uri
+      sf_stage_name:
+        range: string
+        description: Salesforce native StageName.
+      sf_forecast_category:
+        range: string
+      sf_owner_user_id:
+        range: string
+      sync:
+        range: SyncMetadata
+        required: true

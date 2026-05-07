@@ -1,0 +1,49 @@
+# LinkML project-level configuration
+name: enterprise-data-model
+title: Enterprise Data Model
+description: >
+  A layered, LinkML-based Enterprise Data Model implementing a
+  "model once, use everywhere" approach. Five layers: Foundation
+  (+ Common), Domain, Process, Application.
+
+version: 0.1.0
+license: Apache-2.0
+
+# Default source directories, by layer
+sources:
+  foundation:
+    path: src/01_foundation
+  common:
+    path: src/01_foundation/common
+  domain:
+    path: src/02_domain
+  process:
+    path: src/03_process
+  application:
+    path: src/04_application
+
+# Output targets for code generation
+generators:
+  json_schema:
+    output: generated/json_schema
+  sql_ddl:
+    output: generated/sql
+  python:
+    output: generated/python
+  shacl:
+    output: generated/shacl
+  owl:
+    output: generated/owl
+  graphql:
+    output: generated/graphql
+  docs:
+    output: generated/docs
+
+# Validation options
+validation:
+  strict: true
+  check_dependency_direction: true
+  check_base_type_non_overlap: true
+  check_role_immutability: true
+  check_natural_key_placement: true
+  check_process_binding_immutability: true

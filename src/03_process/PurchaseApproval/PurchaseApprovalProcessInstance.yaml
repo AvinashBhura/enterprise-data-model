@@ -1,0 +1,45 @@
+id: https://example.org/edm/process/PurchaseApproval/PurchaseApprovalProcessInstance
+name: process_purchase_approval_instance
+title: Process (PurchaseApproval) — PurchaseApprovalProcessInstance
+description: A live purchase-approval execution.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - PurchaseApprovalProcessDefinition
+  - enums/PurchaseApprovalStateEnum
+
+classes:
+  PurchaseApprovalProcessInstance:
+    is_a: ProcessInstance
+    description: A live purchase-approval execution.
+    slot_usage:
+      definition:
+        range: PurchaseApprovalProcessDefinition
+    attributes:
+      approval_state:
+        range: PurchaseApprovalStateEnum
+        required: true
+      requires_legal_review:
+        range: boolean
+      requires_executive_review:
+        range: boolean
+      legal_reviewer_role:
+        range: string
+        description: entity_id of EmployeeRole providing legal review.
+      executive_approver_role:
+        range: string
+      competitive_bids_received:
+        range: integer
+      rejection_reason:
+        range: string

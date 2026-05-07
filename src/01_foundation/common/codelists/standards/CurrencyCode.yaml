@@ -1,0 +1,66 @@
+id: https://example.org/edm/foundation/common/codelists/standards/CurrencyCode
+name: common_codelist_currency_code
+title: Common — CurrencyCode (ISO 4217)
+description: >
+  ISO 4217 currency codes. This is a representative subset — expand
+  to the full ISO 4217 set for production use. Sourced from the
+  official ISO 4217 maintenance agency.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  CurrencyCodeEnum:
+    description: ISO 4217 three-letter currency codes.
+    permissible_values:
+      USD:
+        description: United States Dollar
+      EUR:
+        description: Euro
+      GBP:
+        description: Pound Sterling
+      JPY:
+        description: Japanese Yen
+      CNY:
+        description: Chinese Yuan Renminbi
+      INR:
+        description: Indian Rupee
+      AUD:
+        description: Australian Dollar
+      CAD:
+        description: Canadian Dollar
+      CHF:
+        description: Swiss Franc
+      SGD:
+        description: Singapore Dollar
+      HKD:
+        description: Hong Kong Dollar
+      SEK:
+        description: Swedish Krona
+      NOK:
+        description: Norwegian Krone
+      DKK:
+        description: Danish Krone
+      BRL:
+        description: Brazilian Real
+      MXN:
+        description: Mexican Peso
+      ZAR:
+        description: South African Rand
+      AED:
+        description: UAE Dirham
+      SAR:
+        description: Saudi Riyal
+      KRW:
+        description: South Korean Won

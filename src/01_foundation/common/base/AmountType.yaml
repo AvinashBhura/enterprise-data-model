@@ -1,0 +1,44 @@
+id: https://example.org/edm/foundation/common/base/AmountType
+name: common_base_amount_type
+title: Common — AmountType (value type)
+description: >
+  A monetary amount — a decimal value paired with a currency code.
+  This is a value type, not an entity: it does not stand alone and is
+  referenced as a typed attribute on entities (invoice total, salary,
+  contract value).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../codelists/standards/CurrencyCode
+
+classes:
+
+  AmountType:
+    description: >
+      A monetary amount: a decimal numeric value with its ISO 4217
+      currency code. Used wherever money appears in the model.
+    attributes:
+      value:
+        range: decimal
+        required: true
+        description: The numeric amount (positive or negative).
+      currency:
+        range: CurrencyCodeEnum
+        required: true
+        description: ISO 4217 currency code (USD, EUR, GBP, JPY, ...).
+      precision:
+        range: integer
+        description: >
+          Decimal precision (digits after the decimal point). Defaults
+          to the currency's standard minor-unit precision if omitted
+          (typically 2 for most currencies, 0 for JPY, 3 for KWD, etc.).

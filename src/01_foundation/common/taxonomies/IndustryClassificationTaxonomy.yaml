@@ -1,0 +1,60 @@
+id: https://example.org/edm/foundation/common/taxonomies/IndustryClassificationTaxonomy
+name: common_taxonomy_industry_classification
+title: Common — IndustryClassificationTaxonomy
+description: >
+  Industry classification hierarchy. Supports multiple standard
+  classification schemes — NAICS (North American Industry
+  Classification System), GICS (Global Industry Classification
+  Standard), ISIC (International Standard Industrial Classification),
+  SIC (Standard Industrial Classification).
+
+  Typical GICS structure:
+    Sector (e.g., Information Technology)
+      └── Industry Group (e.g., Software & Services)
+            └── Industry (e.g., Software)
+                  └── Sub-Industry (e.g., Application Software)
+
+  Used to classify external Organizations (customers, vendors,
+  partners) and LegalEntity instances by industry.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  skos: http://www.w3.org/2004/02/skos/core#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - OrganizationTypeTaxonomy
+
+classes:
+
+  IndustryClassificationTaxonomy:
+    description: >
+      Taxonomy container for industry classification. The
+      `scheme` attribute names which standard this taxonomy
+      instance represents (NAICS, GICS, ISIC, SIC).
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+      scheme:
+        range: string
+        required: true
+        description: Classification scheme (NAICS, GICS, ISIC, SIC).
+      scheme_version:
+        range: string
+        description: Version of the scheme (e.g., NAICS 2022).
+      version:
+        range: string
+        required: true
+      description:
+        range: string
+      nodes:
+        range: TaxonomyNode
+        multivalued: true

@@ -1,0 +1,56 @@
+id: https://example.org/edm/foundation/common/base/Identifiable
+name: common_base_identifiable
+title: Common — Identifiable (base type)
+description: >
+  Base type that grants an entity the capability to carry natural
+  identifiers and audit timestamps.
+
+  Note: The surrogate identifier (entity_id) already comes from Entity.
+  Identifiable adds natural keys and audit metadata on top. This is the
+  "Clean-Contract" principle in action — Identifiable owns a disjoint
+  slice of attributes from the other base types.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - NaturalIdentifier
+
+classes:
+
+  Identifiable:
+    mixin: true
+    description: >
+      Applied to entities that carry one or more natural/business
+      identifiers in addition to their surrogate entity_id, and that
+      track audit timestamps for creation and modification.
+    attributes:
+      natural_identifiers:
+        range: NaturalIdentifier
+        multivalued: true
+        description: >
+          Zero or more natural (business) keys that identify this
+          entity. Each carries its own scheme and issuer so multiple
+          identifier systems can coexist without conflict.
+      created_at:
+        range: datetime
+        description: Timestamp when this entity record was created.
+      created_by:
+        range: string
+        description: >
+          Actor who created this entity record. May be a user identifier,
+          system identifier, or service account name.
+      last_modified_at:
+        range: datetime
+        description: Timestamp of last modification to this entity record.
+      last_modified_by:
+        range: string
+        description: Actor who last modified this entity record.

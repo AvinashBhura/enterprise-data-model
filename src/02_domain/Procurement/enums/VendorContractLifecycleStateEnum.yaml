@@ -1,0 +1,42 @@
+id: https://example.org/edm/domain/Procurement/enums/VendorContractLifecycleStateEnum
+name: domain_procurement_vendor_contract_lifecycle_state_enum
+title: Domain (Procurement) — VendorContractLifecycleStateEnum
+description: Lifecycle states for a VendorContract.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  VendorContractLifecycleStateEnum:
+    description: Lifecycle states for a VendorContract.
+    permissible_values:
+      DRAFT:
+        description: Being drafted.
+      IN_NEGOTIATION:
+        description: Under negotiation with vendor.
+      LEGAL_REVIEW:
+        description: Under legal review.
+      APPROVED:
+        description: Approved internally; awaiting signature.
+      SIGNED:
+        description: Signed by all parties.
+      ACTIVE:
+        description: In effect.
+      AMENDED:
+        description: Amended; superseded.
+      EXPIRED:
+        description: Reached end of term.
+      TERMINATED:
+        description: Terminated early.
+      ARCHIVED:
+        description: Archived per retention policy.

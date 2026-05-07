@@ -1,0 +1,37 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/OrganizationLifecycleStateEnum
+name: common_codelist_organization_lifecycle_state_enum
+title: Common — OrganizationLifecycleStateEnum
+description: Lifecycle states for Organization and its subtypes.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  OrganizationLifecycleStateEnum:
+    description: Entity-level lifecycle states for an Organization.
+    permissible_values:
+      PLANNED:
+        description: Formation planned but not yet established.
+      ACTIVE:
+        description: Operational and conducting activities.
+      INACTIVE:
+        description: Temporarily suspended.
+      MERGED:
+        description: Merged into another Organization.
+      SPLIT:
+        description: Split into multiple successor Organizations.
+      RETIRED:
+        description: Permanently wound down.
+      DISSOLVED:
+        description: Legally dissolved (for LegalEntity).

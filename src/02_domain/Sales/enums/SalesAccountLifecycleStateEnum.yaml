@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/Sales/enums/SalesAccountLifecycleStateEnum
+name: domain_sales_account_lifecycle_state_enum
+title: Domain (Sales) — SalesAccountLifecycleStateEnum
+description: Lifecycle states for a Sales Account.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  SalesAccountLifecycleStateEnum:
+    description: Lifecycle states for a Sales Account.
+    permissible_values:
+      LEAD:
+        description: Identified but not yet qualified.
+      QUALIFIED:
+        description: Qualified prospect.
+      PROSPECT:
+        description: Active sales pursuit underway.
+      CUSTOMER:
+        description: Active paying customer.
+      INACTIVE:
+        description: No active engagement.
+      CHURNED:
+        description: Lost as a customer.
+      ARCHIVED:
+        description: Archived per retention policy.

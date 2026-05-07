@@ -1,0 +1,63 @@
+id: https://example.org/edm/foundation/common/codelists/standards/LanguageCode
+name: common_codelist_language_code
+title: Common — LanguageCode (ISO 639-1)
+description: ISO 639-1 two-letter language codes. Representative subset.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  LanguageCodeEnum:
+    description: ISO 639-1 two-letter language codes.
+    permissible_values:
+      en:
+        description: English
+      es:
+        description: Spanish
+      fr:
+        description: French
+      de:
+        description: German
+      it:
+        description: Italian
+      pt:
+        description: Portuguese
+      ja:
+        description: Japanese
+      zh:
+        description: Chinese
+      hi:
+        description: Hindi
+      ar:
+        description: Arabic
+      ru:
+        description: Russian
+      ko:
+        description: Korean
+      nl:
+        description: Dutch
+      sv:
+        description: Swedish
+      no:
+        description: Norwegian
+      da:
+        description: Danish
+      fi:
+        description: Finnish
+      pl:
+        description: Polish
+      tr:
+        description: Turkish
+      he:
+        description: Hebrew

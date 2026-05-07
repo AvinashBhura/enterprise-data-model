@@ -1,0 +1,54 @@
+id: https://example.org/edm/foundation/common/base/Temporal
+name: common_base_temporal
+title: Common — Temporal (base type)
+description: >
+  Base type that grants an entity bitemporal validity — both
+  valid-time (when the fact is true in the real world) and
+  transaction-time (when the fact was recorded in the system).
+
+  Applied selectively to entities where bitemporal semantics matter
+  (typically Role, Agreement, Activity, and some domain specializations).
+  Not applied universally — per the Minimalism principle, base types
+  are applied only where they add meaning.
+
+  Per the Clean-Contract principle, Temporal owns bitemporal attributes
+  only; it does not duplicate anything from Lifecycleable (which owns
+  state transitions) or other base types.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  Temporal:
+    mixin: true
+    description: >
+      Applied to entities that require full bitemporal tracking:
+        - valid-time: the period in the real world during which the
+          fact represented by this entity is true.
+        - transaction-time: the period during which this fact was
+          recorded in the system. Supports audit and point-in-time
+          reconstruction.
+    attributes:
+      valid_from:
+        range: datetime
+        description: Start of the real-world validity period.
+      valid_to:
+        range: datetime
+        description: End of the real-world validity period (open-ended if absent).
+      recorded_from:
+        range: datetime
+        description: When this record began to exist in the system.
+      recorded_to:
+        range: datetime
+        description: When this record ceased to exist in the system (if superseded).

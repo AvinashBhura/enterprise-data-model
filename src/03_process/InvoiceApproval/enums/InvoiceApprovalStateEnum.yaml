@@ -1,0 +1,33 @@
+id: https://example.org/edm/process/InvoiceApproval/enums/InvoiceApprovalStateEnum
+name: process_invoice_approval_state_enum
+title: Process (InvoiceApproval) — InvoiceApprovalStateEnum
+description: Workflow states for an InvoiceApprovalProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  InvoiceApprovalStateEnum:
+    description: Workflow states for invoice approval.
+    permissible_values:
+      RECEIVED:
+      VALIDATED:
+      MATCHED_TO_PO:
+      AWAITING_APPROVAL:
+      LEVEL_1_APPROVED:
+      LEVEL_2_APPROVED:
+      EXECUTIVE_APPROVED:
+      DISPUTED:
+      APPROVED_FOR_PAYMENT:
+      REJECTED:
+      ON_HOLD:

@@ -1,0 +1,34 @@
+id: https://example.org/edm/domain/IT/enums/LicenseLifecycleStateEnum
+name: domain_it_license_lifecycle_state_enum
+title: Domain (IT) — LicenseLifecycleStateEnum
+description: >
+  Lifecycle states for a SoftwareLicense (IT asset). Distinct from
+  the Legal LicensingAgreement enum — this tracks the IT-managed
+  license instance held against a vendor agreement.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  LicenseLifecycleStateEnum:
+    description: Lifecycle states for a SoftwareLicense IT asset.
+    permissible_values:
+      ACQUIRED:
+      ALLOCATED:
+        description: Reserved against an upcoming assignment.
+      ASSIGNED:
+        description: Assigned to a Person or Device.
+      ACTIVE:
+      RECLAIMED:
+      EXPIRED:
+      RETIRED:

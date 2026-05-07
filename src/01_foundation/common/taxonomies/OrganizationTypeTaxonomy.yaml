@@ -1,0 +1,91 @@
+id: https://example.org/edm/foundation/common/taxonomies/OrganizationTypeTaxonomy
+name: common_taxonomy_organization_type
+title: Common — OrganizationTypeTaxonomy
+description: >
+  Abstract hierarchical classification of organization-unit KINDS.
+  Defines containment rules — which types can legitimately contain
+  which others. Expressed here as a schema of TaxonomyNode instances
+  forming a parent-child tree.
+
+  IMPORTANT: This is NOT an enterprise's actual org chart. The actual
+  An "Engineering Division" is an Organization INSTANCE in the Domain
+  layer. This file defines the abstract category hierarchy that such
+  instances can be classified against.
+
+  Pairs with OrganizationTypeEnum (flat codelist) — the codelist
+  defines the valid values, this taxonomy defines the hierarchical
+  relationships between them. Aligns with SKOS skos:broader /
+  skos:narrower semantics.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  skos: http://www.w3.org/2004/02/skos/core#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  TaxonomyNode:
+    description: >
+      A single node in a taxonomy. Nodes form a tree via parent_node
+      references; leaves have no children. Compatible with SKOS
+      concept hierarchies.
+    class_uri: skos:Concept
+    attributes:
+      node_id:
+        identifier: true
+        range: string
+        required: true
+      label:
+        range: string
+        required: true
+      description:
+        range: string
+      parent_node:
+        range: TaxonomyNode
+        description: Null for the root node.
+      broader:
+        range: TaxonomyNode
+        multivalued: true
+        description: SKOS broader concepts (generalizations).
+        slot_uri: skos:broader
+      narrower:
+        range: TaxonomyNode
+        multivalued: true
+        description: SKOS narrower concepts (specializations).
+        slot_uri: skos:narrower
+
+  OrganizationTypeTaxonomy:
+    description: >
+      The taxonomy container for organization-type hierarchy. Holds
+      the set of TaxonomyNode instances that form the tree:
+        LegalEntity
+          └── BusinessUnit
+                └── Division
+                      └── Department
+                            └── Group
+                                  └── Team
+                                        └── Squad
+      Subsidiary and JointVenture sit as alternates under LegalEntity.
+      Regulatory bodies and Partners form separate roots outside the
+      internal hierarchy.
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+      version:
+        range: string
+        required: true
+      description:
+        range: string
+      nodes:
+        range: TaxonomyNode
+        multivalued: true

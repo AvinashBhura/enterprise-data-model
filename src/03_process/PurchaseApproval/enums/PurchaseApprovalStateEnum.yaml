@@ -1,0 +1,33 @@
+id: https://example.org/edm/process/PurchaseApproval/enums/PurchaseApprovalStateEnum
+name: process_purchase_approval_state_enum
+title: Process (PurchaseApproval) — PurchaseApprovalStateEnum
+description: Workflow states for a PurchaseApprovalProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  PurchaseApprovalStateEnum:
+    description: Workflow states for purchase approval.
+    permissible_values:
+      SUBMITTED:
+      VALIDATED:
+      BUDGET_CHECK_PASSED:
+      AWAITING_MANAGER_APPROVAL:
+      AWAITING_FINANCE_APPROVAL:
+      AWAITING_LEGAL_APPROVAL:
+      AWAITING_EXECUTIVE_APPROVAL:
+      APPROVED:
+      REJECTED:
+      INFORMATION_REQUESTED:
+      WITHDRAWN:

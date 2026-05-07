@@ -1,0 +1,39 @@
+id: https://example.org/edm/domain/Governance/enums/GovernanceRoleLifecycleStateEnum
+name: domain_governance_role_lifecycle_state_enum
+title: Domain (Governance) — GovernanceRoleLifecycleStateEnum
+description: >
+  Lifecycle states shared across governance Roles (BoardMemberRole,
+  CommitteeChairRole, CommitteeMemberRole, AdvisorRole).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  GovernanceRoleLifecycleStateEnum:
+    description: Lifecycle states for governance Roles.
+    permissible_values:
+      NOMINATED:
+        description: Nominated; not yet elected/appointed.
+      ELECTED:
+        description: Elected/appointed; awaiting term start.
+      ACTIVE:
+        description: Currently serving.
+      ON_LEAVE:
+        description: Temporarily on leave.
+      RESIGNED:
+        description: Resigned voluntarily before term end.
+      TERM_ENDED:
+        description: Term expired without renewal.
+      REMOVED:
+        description: Removed from role by formal action.
+      DECEASED:

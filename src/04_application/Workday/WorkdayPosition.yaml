@@ -1,0 +1,36 @@
+id: https://example.org/edm/application/Workday/WorkdayPosition
+name: application_workday_position
+title: Application (Workday) — WorkdayPosition
+description: Workday's projection of Position.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/HumanResources/Position
+  - ../_shared/SyncMetadata
+
+classes:
+  WorkdayPosition:
+    is_a: Position
+    description: Workday projection of a Position.
+    attributes:
+      workday_position_id:
+        range: string
+        required: true
+      workday_job_profile_id:
+        range: string
+        description: Reference to Workday Job Profile (a Workday-specific concept).
+      workday_compensation_grade:
+        range: string
+      sync:
+        range: SyncMetadata
+        required: true

@@ -1,0 +1,52 @@
+id: https://example.org/edm/process/Offboarding/OffboardingProcessInstance
+name: process_offboarding_instance
+title: Process (Offboarding) — OffboardingProcessInstance
+description: A live offboarding process execution.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - OffboardingProcessDefinition
+  - enums/OffboardingProcessStateEnum
+
+classes:
+  OffboardingProcessInstance:
+    is_a: ProcessInstance
+    description: A live offboarding process execution.
+    slot_usage:
+      definition:
+        range: OffboardingProcessDefinition
+    attributes:
+      offboarding_state:
+        range: OffboardingProcessStateEnum
+        required: true
+      separation_reason:
+        range: string
+        required: true
+      last_working_date:
+        range: date
+        required: true
+      notice_period_days:
+        range: integer
+      created_alumni_role:
+        range: string
+        description: entity_id of the AlumniRole created on completion.
+      knowledge_transfer_to_role:
+        range: string
+        description: entity_id of the EmployeeRole receiving knowledge transfer.
+      exit_interview_completed:
+        range: boolean
+      equipment_returned:
+        range: boolean
+      access_revoked:
+        range: boolean

@@ -1,0 +1,47 @@
+id: https://example.org/edm/domain/_shared/LegalEntityReference
+name: domain_shared_legal_entity_reference
+title: Domain (_shared) — LegalEntityReference
+description: >
+  A capability-neutral reference structure for LegalEntity instances
+  used across Finance, Legal, Procurement, and HR. This is NOT a
+  duplicate of Foundation.LegalEntity — it is a thin wrapper that
+  attaches cross-capability shared concerns (compliance status,
+  shared categorization).
+
+  Lives in _shared because no single capability owns it; changes
+  require EDM Steering Committee approval.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Organization
+
+classes:
+  LegalEntityReference:
+    is_a: LegalEntity
+    description: >
+      Shared cross-capability extension of LegalEntity. Adds shared
+      compliance and categorization attributes that no single
+      capability owns.
+    attributes:
+      compliance_status:
+        range: string
+        description: >
+          Aggregate compliance status across all regulatory regimes
+          this entity is subject to (free-text; specific regimes
+          tracked separately in the Legal domain).
+      is_consolidated:
+        range: boolean
+        description: Whether this entity is included in financial consolidation.
+      consolidation_method:
+        range: string
+        description: Consolidation method (FULL, EQUITY, PROPORTIONAL, NONE).

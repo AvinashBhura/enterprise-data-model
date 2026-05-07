@@ -1,0 +1,53 @@
+id: https://example.org/edm/process/IncidentResolution/IncidentResolutionProcessInstance
+name: process_incident_resolution_instance
+title: Process (IncidentResolution) — IncidentResolutionProcessInstance
+description: A live incident-resolution execution.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - IncidentResolutionProcessDefinition
+  - enums/IncidentResolutionStateEnum
+
+classes:
+  IncidentResolutionProcessInstance:
+    is_a: ProcessInstance
+    description: A live incident-resolution execution.
+    slot_usage:
+      definition:
+        range: IncidentResolutionProcessDefinition
+    attributes:
+      resolution_state:
+        range: IncidentResolutionStateEnum
+        required: true
+      first_response_at:
+        range: datetime
+      mitigated_at:
+        range: datetime
+      resolved_at:
+        range: datetime
+      verified_at:
+        range: datetime
+      response_sla_breached:
+        range: boolean
+      resolution_sla_breached:
+        range: boolean
+      escalation_level:
+        range: integer
+      root_cause_summary:
+        range: string
+      postmortem_required:
+        range: boolean
+      postmortem_document:
+        range: string
+        description: Document reference to the postmortem.

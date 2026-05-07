@@ -1,0 +1,41 @@
+id: https://example.org/edm/foundation/common/base/QuantityType
+name: common_base_quantity_type
+title: Common — QuantityType (value type)
+description: >
+  A quantity — a numeric value paired with a unit of measure. Used
+  wherever a measured quantity appears (weights, volumes, durations,
+  counts-with-units).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../codelists/standards/UnitOfMeasureCode
+
+classes:
+
+  QuantityType:
+    description: >
+      A quantity: a numeric value with its unit of measure. The unit
+      is drawn from a standard codelist (UN/CEFACT or ISO 80000) to
+      ensure consistent interpretation across systems.
+    attributes:
+      value:
+        range: decimal
+        required: true
+        description: The numeric value of the quantity.
+      unit_of_measure:
+        range: UnitOfMeasureCodeEnum
+        required: true
+        description: Standardized unit of measure code.
+      precision:
+        range: integer
+        description: Optional decimal precision for this measurement.

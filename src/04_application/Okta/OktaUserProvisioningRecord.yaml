@@ -1,0 +1,48 @@
+id: https://example.org/edm/application/Okta/OktaUserProvisioningRecord
+name: application_okta_user_provisioning_record
+title: Application (Okta) — OktaUserProvisioningRecord
+description: >
+  Okta-specific record of a user-provisioning step within an
+  onboarding (or other) process. Specializes StepCompletion so the
+  Process layer can record Okta provisioning as a step outcome.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../03_process/_core/StepCompletion
+  - ../_shared/SyncMetadata
+
+classes:
+  OktaUserProvisioningRecord:
+    is_a: StepCompletion
+    description: Okta provisioning record extending StepCompletion.
+    attributes:
+      okta_user_id:
+        range: string
+        required: true
+      okta_groups_assigned:
+        range: string
+        multivalued: true
+      okta_apps_assigned:
+        range: string
+        multivalued: true
+      okta_provisioning_status:
+        range: string
+        description: Raw Okta provisioning status.
+      okta_provisioned_at:
+        range: datetime
+      okta_event_id:
+        range: string
+        description: Okta system log event identifier.
+      sync:
+        range: SyncMetadata
+        required: true

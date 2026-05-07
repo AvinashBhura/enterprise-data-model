@@ -1,0 +1,32 @@
+# Example instance — OktaUserProvisioningRecord
+# Application-layer specialization of StepCompletion (Provision Okta account).
+
+# Conforms to: src/04_application/Okta/OktaUserProvisioningRecord.yaml
+- entity_id: stp_6e4f3000-0004-4000-8000-000000000002  # SAME entity_id as canonical StepCompletion
+  step: pstep_us_eng_v3_2_provision_okta
+  process_instance_id: pri_5d3e2000-0003-4000-8000-000000000001
+  activity_type: PROCESS_STEP
+  title: "Provision Okta Account"
+  outcome: COMPLETED
+  # ... canonical StepCompletion fields are inherited ...
+
+  # Okta-specific fields:
+  okta_user_id: "00u3j2nKLuZcq5z7B3a8"
+  okta_groups_assigned:
+    - okta_group_engineering
+    - okta_group_us_employees
+    - okta_group_platform_team
+  okta_apps_assigned:
+    - okta_app_github
+    - okta_app_slack
+    - okta_app_jira
+    - okta_app_confluence
+    - okta_app_zoom
+  okta_provisioning_status: ACTIVE
+  okta_provisioned_at: "2026-05-13T11:50:00Z"
+  okta_event_id: "ev_8j3kL2mN9pQrS4tU"
+  sync:
+    source_system: okta
+    source_record_id: "00u3j2nKLuZcq5z7B3a8"
+    last_synced_at: "2026-05-13T11:51:00Z"
+    sync_status: SYNCED

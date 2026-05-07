@@ -1,0 +1,34 @@
+id: https://example.org/edm/application/_shared/enums/SyncStatusEnum
+name: application_shared_sync_status_enum
+title: Application (_shared) — SyncStatusEnum
+description: Generic states for tracking sync of an Application-layer record with its source system.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  SyncStatusEnum:
+    description: Sync status states.
+    permissible_values:
+      PENDING:
+        description: Initial state — sync not yet attempted.
+      IN_PROGRESS:
+      SYNCED:
+        description: Successfully synced; in agreement with source.
+      OUT_OF_SYNC:
+        description: Source has changed; needs re-sync.
+      CONFLICT:
+        description: Two-way edit conflict; manual resolution needed.
+      FAILED:
+      RETIRED:
+        description: No longer being synced (record archived in source).

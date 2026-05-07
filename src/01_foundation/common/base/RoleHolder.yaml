@@ -1,0 +1,44 @@
+id: https://example.org/edm/foundation/common/base/RoleHolder
+name: common_base_role_holder
+title: Common — RoleHolder (base type)
+description: >
+  Base type that grants an entity the capability to hold or be the
+  subject of Roles. Applied to Person, Organization, Team — the
+  parties that engage in time-bound relationships via Roles.
+
+  This embodies the "Who-Plays-What" principle — relationships are
+  Roles, not class hierarchies. A Person holds an EmployeeRole; the
+  same Person can also hold a VendorRole later in time.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../Role
+
+classes:
+
+  RoleHolder:
+    mixin: true
+    description: >
+      Applied to entities that can hold or be the subject of Roles.
+      The inverse relationship (which entity a Role is held_by) lives
+      on the Role entity itself; this slot is the convenience forward
+      accessor from the holder's perspective.
+    attributes:
+      roles:
+        range: Role
+        multivalued: true
+        description: >
+          Zero or more Role references. Typically queried dynamically
+          (Role WHERE held_by = this.entity_id) rather than materialized,
+          but made explicit here so that generators can produce forward
+          accessors in downstream artifacts (Python classes, GraphQL).

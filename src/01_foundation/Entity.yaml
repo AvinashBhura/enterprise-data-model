@@ -1,0 +1,76 @@
+id: https://example.org/edm/foundation/Entity
+name: foundation_entity
+title: Foundation — Entity
+description: >
+  The conceptual root of the Enterprise Data Model. Entity represents
+  "something that exists as an identifiable enterprise thing."
+
+  Entity is concrete (not abstract) — it acts as a semantic anchor, not
+  a forced superclass. Foundation classes inherit from Entity to declare
+  semantic membership in the category of enterprise entities. Inheritance
+  is a declaration, not a structural obligation.
+
+  Principles anchored here:
+    - Highlander Principle (Universality): a concept exists only once.
+    - Boring Principle (Immutability): this file should almost never change.
+    - Origin Principle (Semantic Anchoring): Entity is where things begin,
+      not what they must become.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+  xsd: http://www.w3.org/2001/XMLSchema#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+types:
+  uuid:
+    uri: xsd:string
+    base: str
+    description: Universally Unique Identifier (UUID v4) as canonical surrogate key.
+    pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+
+classes:
+
+  Entity:
+    description: >
+      The semantic anchor of the EDM. Every Foundation-layer enterprise
+      concept inherits from Entity to declare, "I am an enterprise thing."
+      Entity carries only the absolute minimum: a globally unique surrogate
+      identifier that never changes across systems, reorganizations, or
+      integrations.
+
+      Entity is deliberately minimal. Cross-cutting concerns (natural keys,
+      audit timestamps, lifecycle state, classification, addresses, role
+      participation, bitemporal validity) are NOT on Entity; they live in
+      Common base types (Identifiable, Lifecycleable, Addressable,
+      Classifiable, RoleHolder, Temporal) and are composed onto entities
+      that need them.
+
+      Entity is concrete (abstract: false) — in rare cases it may be
+      instantiated directly, but in practice every Foundation concept
+      specializes it.
+
+    class_uri: schema:Thing
+
+    attributes:
+
+      entity_id:
+        identifier: true
+        range: uuid
+        required: true
+        description: >
+          The globally unique, system-generated surrogate identifier.
+          Never changes over the lifetime of the entity. This is the
+          stable join key used across every system, report, and
+          integration that references this entity. Business keys
+          (employee number, invoice number) may change; entity_id does not.
+        slot_uri: schema:identifier

@@ -1,0 +1,44 @@
+id: https://example.org/edm/foundation/common/taxonomies/GeographyTaxonomy
+name: common_taxonomy_geography
+title: Common — GeographyTaxonomy
+description: >
+  Geographic hierarchy used for regional rollups, reporting, and
+  classification. Typical structure:
+    World
+      ├── Region (AMER, EMEA, APAC, LATAM)
+      │     └── Country
+      │           └── State/Province
+      │                 └── City
+  Pairs with ISO 3166-1 (CountryCodeEnum) for the country level.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  skos: http://www.w3.org/2004/02/skos/core#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - OrganizationTypeTaxonomy
+
+classes:
+
+  GeographyTaxonomy:
+    description: Taxonomy container for geographic hierarchy.
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+      version:
+        range: string
+        required: true
+      description:
+        range: string
+      nodes:
+        range: TaxonomyNode
+        multivalued: true

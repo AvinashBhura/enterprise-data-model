@@ -1,0 +1,34 @@
+# Example instance — Workday application-layer projections
+# Created when Workday integration syncs the new hire.
+
+# WorkdayPerson — Workday's view of Priya
+# Conforms to: src/04_application/Workday/WorkdayPerson.yaml
+- entity_id: prs_8a7f3c00-0001-4000-8000-000000000001  # SAME entity_id as canonical Person
+  given_name: Priya
+  family_name: Menon
+  # ... canonical Person fields are inherited from Person ...
+  workday_worker_id: WD-998234
+  workday_universal_id: 3000WD-998234
+  workday_record_url: "https://acme.workday.com/d/inst/1$3001/3001$998234.htmld"
+  sync:
+    source_system: workday
+    source_record_id: WD-998234
+    last_synced_at: "2026-04-15T12:00:00Z"
+    sync_status: SYNCED
+
+# WorkdayEmployeeRole — Workday's view of Priya's employment
+# Conforms to: src/04_application/Workday/WorkdayEmployeeRole.yaml
+- entity_id: rol_4c2e1000-0002-4000-8000-000000000001  # SAME entity_id as canonical EmployeeRole
+  # ... canonical EmployeeRole fields are inherited ...
+  workday_worker_id: WD-998234
+  workday_supervisory_org_id: SUP_ORG_INFRA_TEAM
+  workday_position_id: POS-2026-001847
+  workday_cost_center: CC-ENG-PLATFORM-INFRA
+  workday_pay_group: US_BIWEEKLY
+  workday_employee_type: REG_FT
+  workday_business_title: "Senior Software Engineer"
+  sync:
+    source_system: workday
+    source_record_id: WD-998234
+    last_synced_at: "2026-04-15T12:00:00Z"
+    sync_status: SYNCED

@@ -1,0 +1,38 @@
+id: https://example.org/edm/process/OrderFulfillment/enums/OrderFulfillmentStateEnum
+name: process_order_fulfillment_state_enum
+title: Process (OrderFulfillment) — OrderFulfillmentStateEnum
+description: Workflow states for an OrderFulfillmentProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OrderFulfillmentStateEnum:
+    description: Workflow states for order fulfillment.
+    permissible_values:
+      RECEIVED:
+      VALIDATED:
+      CREDIT_CHECK_PASSED:
+      ALLOCATED:
+        description: Inventory allocated.
+      PICKING:
+      PACKING:
+      READY_TO_SHIP:
+      SHIPPED:
+      IN_TRANSIT:
+      DELIVERED:
+      INVOICED:
+      CLOSED:
+      ON_HOLD:
+      CANCELLED:
+      RETURNED:

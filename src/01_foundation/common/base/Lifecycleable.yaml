@@ -1,0 +1,63 @@
+id: https://example.org/edm/foundation/common/base/Lifecycleable
+name: common_base_lifecycleable
+title: Common — Lifecycleable (base type)
+description: >
+  Base type that grants an entity a coarse lifecycle state and its
+  transition history. The specific lifecycle state enum varies per
+  entity (one enum per entity, per the locked-in resolution).
+
+  This covers ENTITY-LEVEL lifecycle (Active / Inactive / Archived
+  semantics). Fine-grained WORKFLOW state belongs in the Process layer
+  on ProcessInstance.current_state, not here.
+
+  Per the Clean-Contract principle, Lifecycleable owns a disjoint
+  attribute slice — it does not duplicate anything from Identifiable,
+  Addressable, RoleHolder, Classifiable, or Temporal.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - StateTransition
+
+classes:
+
+  Lifecycleable:
+    mixin: true
+    description: >
+      Applied to entities that exhibit an entity-level lifecycle state
+      (e.g., Active, Inactive, Archived) and whose state transitions
+      should be tracked for audit.
+
+      The actual state enum (e.g., PersonLifecycleStateEnum,
+      EmployeeRoleLifecycleStateEnum) is defined on the concrete
+      entity, because each entity has its own state machine.
+    attributes:
+      lifecycle_state:
+        range: string
+        required: true
+        description: >
+          Current lifecycle state of the entity. The concrete subclass
+          narrows the range to its specific per-entity enum (e.g.,
+          PersonLifecycleStateEnum). Declared here as string to allow
+          per-entity specialization.
+      state_effective_from:
+        range: datetime
+        description: When the current lifecycle state became effective.
+      state_effective_to:
+        range: datetime
+        description: When the current lifecycle state ceases to be effective (if known).
+      state_history:
+        range: StateTransition
+        multivalued: true
+        description: >
+          Immutable history of lifecycle state transitions. Appended to
+          on every state change; never mutated in place.

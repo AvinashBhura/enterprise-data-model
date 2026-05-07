@@ -1,0 +1,45 @@
+id: https://example.org/edm/application/Workday/WorkdayPerson
+name: application_workday_person
+title: Application (Workday) — WorkdayPerson
+description: >
+  Workday's projection of Person. Adds Workday-specific identifiers
+  and the Workday-native concept of "Worker" (which encompasses
+  Person + employment context — but in EDM we keep Person and
+  EmployeeRole separate, as per the Role-based pattern).
+
+  Per the Extender Principle: WorkdayPerson inherits the canonical
+  Person semantics; Workday-specific fields are added, never altered.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Person
+  - ../_shared/SyncMetadata
+
+classes:
+  WorkdayPerson:
+    is_a: Person
+    description: Workday-specific projection of Person.
+    attributes:
+      workday_worker_id:
+        range: string
+        required: true
+        description: Workday Worker ID (vendor-issued natural key).
+      workday_universal_id:
+        range: string
+        description: Workday Universal ID (immutable, follows the worker across rehires).
+      workday_record_url:
+        range: uri
+        description: Direct link to the worker record in Workday.
+      sync:
+        range: SyncMetadata
+        required: true

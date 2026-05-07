@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/Sales/enums/QuoteLifecycleStateEnum
+name: domain_sales_quote_lifecycle_state_enum
+title: Domain (Sales) — QuoteLifecycleStateEnum
+description: Lifecycle states for a Quote.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  QuoteLifecycleStateEnum:
+    description: Lifecycle states for a Quote.
+    permissible_values:
+      DRAFT:
+        description: Being drafted.
+      INTERNAL_REVIEW:
+        description: Internally under review.
+      PRESENTED:
+        description: Sent to customer.
+      ACCEPTED:
+        description: Accepted by customer; convertible to Order.
+      DECLINED:
+        description: Declined by customer.
+      EXPIRED:
+        description: Expired without acceptance.
+      SUPERSEDED:
+        description: Replaced by a newer quote.

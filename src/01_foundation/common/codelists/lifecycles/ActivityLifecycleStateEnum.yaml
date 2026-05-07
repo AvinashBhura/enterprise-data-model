@@ -1,0 +1,40 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/ActivityLifecycleStateEnum
+name: common_codelist_activity_lifecycle_state_enum
+title: Common — ActivityLifecycleStateEnum
+description: >
+  Lifecycle states for Activity (the coarse entity-level view).
+  Fine-grained workflow states for ProcessStep, ProcessInstance, etc.
+  are defined on those Process-layer classes.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  ActivityLifecycleStateEnum:
+    description: Entity-level lifecycle states for an Activity.
+    permissible_values:
+      PLANNED:
+        description: Scheduled but not yet started.
+      IN_PROGRESS:
+        description: Currently in progress.
+      COMPLETED:
+        description: Completed successfully.
+      CANCELLED:
+        description: Cancelled before completion.
+      FAILED:
+        description: Ended without achieving its purpose.
+      ON_HOLD:
+        description: Paused; may resume later.
+      ARCHIVED:
+        description: Completed and archived.

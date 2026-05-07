@@ -1,0 +1,44 @@
+id: https://example.org/edm/foundation/common/codelists/types/OrganizationTypeEnum
+name: common_codelist_organization_type_enum
+title: Common — OrganizationTypeEnum
+description: >
+  Flat codelist of organization types. Used as a type classifier on
+  Organization instances. For hierarchical containment rules (what
+  can contain what), see OrganizationTypeTaxonomy.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  OrganizationTypeEnum:
+    description: Type classifier for Organization instances.
+    permissible_values:
+      LEGAL_ENTITY:
+        description: A jurisdictional legal entity (company, NGO, government body).
+      BUSINESS_UNIT:
+        description: A major operating unit of a legal entity, typically P&L-bearing.
+      DIVISION:
+        description: A large sub-unit within a business unit.
+      DEPARTMENT:
+        description: An operational unit within a division, typically function-aligned.
+      GROUP:
+        description: An informal grouping within a department (below Department, above Team).
+      REGULATORY_BODY:
+        description: A government or industry regulator.
+      PARTNER:
+        description: An external partner organization.
+      SUBSIDIARY:
+        description: A legal entity controlled by another legal entity.
+      JOINT_VENTURE:
+        description: A jointly-owned organization formed by two or more parents.

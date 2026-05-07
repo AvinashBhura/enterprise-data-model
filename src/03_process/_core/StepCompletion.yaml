@@ -1,0 +1,65 @@
+id: https://example.org/edm/process/_core/StepCompletion
+name: process_core_step_completion
+title: Process (_core) — StepCompletion
+description: >
+  Execution record for a single ProcessStep within a ProcessInstance.
+  Specializes Foundation Activity. Captures who completed the step,
+  when, with what outcome.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Activity
+  - ../../01_foundation/Person
+  - ../../01_foundation/common/codelists/types/ActivityTypeEnum
+  - ProcessStep
+  - enums/StepOutcomeEnum
+
+classes:
+  StepCompletion:
+    is_a: Activity
+    description: Execution record for a step within an instance.
+    slot_usage:
+      activity_type:
+        equals_string: PROCESS_STEP
+    attributes:
+      step:
+        range: ProcessStep
+        required: true
+        description: The ProcessStep this completion is for.
+      process_instance_id:
+        range: string
+        required: true
+        description: entity_id of the parent ProcessInstance.
+      started_at:
+        range: datetime
+      completed_at:
+        range: datetime
+      completed_by_person:
+        range: Person
+        description: Person who completed the step (null for automated steps).
+      completed_by_role:
+        range: string
+        description: entity_id of the Role under which the step was completed (the authority context).
+      outcome:
+        range: StepOutcomeEnum
+        required: true
+      outcome_notes:
+        range: string
+      input_payload:
+        range: string
+        description: JSON-encoded input data for the step (if recorded).
+      output_payload:
+        range: string
+        description: JSON-encoded output data from the step.
+      sla_breached:
+        range: boolean

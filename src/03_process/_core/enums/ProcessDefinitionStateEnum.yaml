@@ -1,0 +1,32 @@
+id: https://example.org/edm/process/_core/enums/ProcessDefinitionStateEnum
+name: process_core_definition_state_enum
+title: Process (_core) — ProcessDefinitionStateEnum
+description: Lifecycle states for a ProcessDefinition.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  ProcessDefinitionStateEnum:
+    description: Lifecycle states for a versioned ProcessDefinition.
+    permissible_values:
+      DRAFT:
+        description: Being authored; not usable for new instances.
+      IN_REVIEW:
+        description: Submitted for review/approval.
+      PUBLISHED:
+        description: Active version; new instances bind to this.
+      DEPRECATED:
+        description: Still valid for existing instances; not for new ones.
+      RETIRED:
+        description: No longer in use.

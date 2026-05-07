@@ -1,0 +1,40 @@
+id: https://example.org/edm/application/Salesforce/SalesforceAccount
+name: application_salesforce_account
+title: Application (Salesforce) — SalesforceAccount
+description: Salesforce projection of a Sales Account.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Sales/Account
+  - ../_shared/SyncMetadata
+
+classes:
+  SalesforceAccount:
+    is_a: Account
+    description: Salesforce Account projection of Sales Account.
+    attributes:
+      sf_account_id:
+        range: string
+        required: true
+      sf_record_url:
+        range: uri
+      sf_account_type:
+        range: string
+        description: Salesforce native Type picklist value.
+      sf_owner_user_id:
+        range: string
+      sf_account_source:
+        range: string
+      sync:
+        range: SyncMetadata
+        required: true

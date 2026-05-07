@@ -1,0 +1,47 @@
+id: https://example.org/edm/domain/Governance/CommitteeMemberRole
+name: domain_governance_committee_member_role
+title: Domain (Governance) — CommitteeMemberRole
+description: A Person serving as a member (not chair) of a formal committee.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Role
+  - ../../01_foundation/Person
+  - ../../01_foundation/Team
+  - ../../01_foundation/common/codelists/types/RoleTypeEnum
+  - enums/GovernanceRoleLifecycleStateEnum
+
+classes:
+  CommitteeMemberRole:
+    is_a: Role
+    description: Member of a formal committee.
+    slot_usage:
+      role_type:
+        equals_string: COMMITTEE_MEMBER
+      held_by_person:
+        required: true
+      lifecycle_state:
+        range: GovernanceRoleLifecycleStateEnum
+        required: true
+    attributes:
+      committee:
+        range: Team
+        required: true
+      term_start:
+        range: date
+        required: true
+      term_end:
+        range: date
+      voting_member:
+        range: boolean
+        description: Whether this member has voting rights.

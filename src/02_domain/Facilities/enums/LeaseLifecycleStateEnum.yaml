@@ -1,0 +1,32 @@
+id: https://example.org/edm/domain/Facilities/enums/LeaseLifecycleStateEnum
+name: domain_facilities_lease_lifecycle_state_enum
+title: Domain (Facilities) — LeaseLifecycleStateEnum
+description: Lifecycle states for a Lease.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  LeaseLifecycleStateEnum:
+    description: Lifecycle states for a Lease.
+    permissible_values:
+      DRAFT:
+      IN_NEGOTIATION:
+      EXECUTED:
+      ACTIVE:
+      AMENDED:
+      EXPIRING:
+        description: Approaching end of term; renewal/termination decision pending.
+      EXPIRED:
+      TERMINATED:
+      ARCHIVED:

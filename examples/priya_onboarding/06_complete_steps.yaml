@@ -1,0 +1,42 @@
+# Example instances — StepCompletion records as Priya's onboarding progresses.
+# Each StepCompletion is_a Activity (Foundation) and references its parent
+# ProcessInstance via process_instance_id.
+
+# Step: Provision Laptop (Day 1)
+# Conforms to: src/03_process/_core/StepCompletion.yaml
+- entity_id: stp_6e4f3000-0004-4000-8000-000000000001
+  step: pstep_us_eng_v3_2_provision_laptop
+  process_instance_id: pri_5d3e2000-0003-4000-8000-000000000001
+  activity_type: PROCESS_STEP
+  title: "Provision Laptop"
+  started_at: "2026-05-13T09:00:00Z"
+  completed_at: "2026-05-13T11:42:00Z"
+  completed_by_person: prs_it_tech_alex
+  completed_by_role: rol_it_tech_alex_role     # Role under which the action was authorized
+  outcome: COMPLETED
+  outcome_notes: "MacBook Pro M3, asset tag AC-LAP-008473, shipped to home"
+  sla_breached: false
+
+# Step: Provision Okta account (Day 1)
+- entity_id: stp_6e4f3000-0004-4000-8000-000000000002
+  step: pstep_us_eng_v3_2_provision_okta
+  process_instance_id: pri_5d3e2000-0003-4000-8000-000000000001
+  activity_type: PROCESS_STEP
+  title: "Provision Okta Account"
+  started_at: "2026-05-13T11:45:00Z"
+  completed_at: "2026-05-13T11:50:00Z"
+  completed_by_person: prs_automation_service
+  outcome: COMPLETED
+  outcome_notes: "Okta account auto-provisioned via SCIM; MFA enrollment pending"
+
+# Step: Compliance training (Day 2)
+- entity_id: stp_6e4f3000-0004-4000-8000-000000000003
+  step: pstep_us_eng_v3_2_compliance_training
+  process_instance_id: pri_5d3e2000-0003-4000-8000-000000000001
+  activity_type: PROCESS_STEP
+  title: "Complete Compliance Training"
+  started_at: "2026-05-15T08:30:00Z"
+  completed_at: "2026-05-15T11:15:00Z"
+  completed_by_person: prs_8a7f3c00-0001-4000-8000-000000000001  # Priya completed it herself
+  completed_by_role: rol_4c2e1000-0002-4000-8000-000000000001    # her own EmployeeRole
+  outcome: COMPLETED

@@ -1,0 +1,50 @@
+id: https://example.org/edm/process/ContractLifecycle/ContractLifecycleProcessInstance
+name: process_contract_lifecycle_instance
+title: Process (ContractLifecycle) — ContractLifecycleProcessInstance
+description: A live contract-lifecycle execution.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - ContractLifecycleProcessDefinition
+  - enums/ContractLifecycleStateEnum
+
+classes:
+  ContractLifecycleProcessInstance:
+    is_a: ProcessInstance
+    description: A live contract-lifecycle execution.
+    slot_usage:
+      definition:
+        range: ContractLifecycleProcessDefinition
+    attributes:
+      contract_state:
+        range: ContractLifecycleStateEnum
+        required: true
+      legal_reviewer_role:
+        range: string
+        description: entity_id of the EmployeeRole providing legal review.
+      counterparty_signatory:
+        range: string
+        description: Name or identifier of the counterparty signatory.
+      negotiation_rounds:
+        range: integer
+      redline_count:
+        range: integer
+        description: Number of redline iterations.
+      target_execution_date:
+        range: date
+      actual_execution_date:
+        range: date
+      renewal_decision:
+        range: string
+        description: RENEW, RENEW_WITH_AMENDMENTS, DO_NOT_RENEW, TERMINATE_EARLY.

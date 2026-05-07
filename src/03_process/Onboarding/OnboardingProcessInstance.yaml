@@ -1,0 +1,62 @@
+id: https://example.org/edm/process/Onboarding/OnboardingProcessInstance
+name: process_onboarding_instance
+title: Process (Onboarding) — OnboardingProcessInstance
+description: >
+  A live execution of an OnboardingProcessDefinition for a specific
+  EmployeeRole or ContractorRole.
+
+  The subject is the ROLE being onboarded, not the Person — because a
+  single Person could have multiple onboarding journeys over time
+  (initial hire, rehire, role change), each tied to a specific Role.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessInstance
+  - OnboardingProcessDefinition
+  - enums/OnboardingProcessStateEnum
+
+classes:
+  OnboardingProcessInstance:
+    is_a: ProcessInstance
+    description: A live onboarding process execution.
+    slot_usage:
+      definition:
+        range: OnboardingProcessDefinition
+    attributes:
+      onboarding_state:
+        range: OnboardingProcessStateEnum
+        required: true
+        description: >
+          Fine-grained onboarding workflow state. Coexists with the
+          base ProcessInstance.lifecycle_state for coarse instance
+          state.
+      target_start_date:
+        range: date
+        required: true
+        description: The Role's planned start date.
+      actual_start_date:
+        range: date
+      buddy_role:
+        range: string
+        description: entity_id of the EmployeeRole assigned as onboarding buddy.
+      hiring_manager_role:
+        range: string
+        description: entity_id of the EmployeeRole of the hiring manager.
+      first_day_complete:
+        range: boolean
+      first_week_complete:
+        range: boolean
+      first_30_days_complete:
+        range: boolean
+      first_90_days_complete:
+        range: boolean

@@ -1,0 +1,42 @@
+id: https://example.org/edm/process/IncidentResolution/IncidentResolutionProcessDefinition
+name: process_incident_resolution_definition
+title: Process (IncidentResolution) — IncidentResolutionProcessDefinition
+description: A versioned incident-resolution workflow specification.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+
+classes:
+  IncidentResolutionProcessDefinition:
+    is_a: ProcessDefinition
+    description: Incident-resolution workflow definition.
+    attributes:
+      applies_to_severities:
+        range: string
+        multivalued: true
+        description: Severity levels this definition applies to (SEV1, SEV2, ...).
+      target_response_minutes:
+        range: integer
+        description: SLA — minutes from detection to first response.
+      target_resolution_minutes:
+        range: integer
+        description: SLA — minutes from detection to resolution.
+      requires_root_cause_analysis:
+        range: boolean
+      requires_postmortem:
+        range: boolean
+      escalation_path:
+        range: string
+        multivalued: true
+        description: Ordered list of role types in the escalation chain.

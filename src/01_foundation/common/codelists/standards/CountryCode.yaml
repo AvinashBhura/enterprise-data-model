@@ -1,0 +1,75 @@
+id: https://example.org/edm/foundation/common/codelists/standards/CountryCode
+name: common_codelist_country_code
+title: Common — CountryCode (ISO 3166-1 alpha-2)
+description: >
+  ISO 3166-1 alpha-2 country codes. Representative subset — expand
+  to the full ISO 3166-1 set for production.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  CountryCodeEnum:
+    description: ISO 3166-1 alpha-2 two-letter country codes.
+    permissible_values:
+      US:
+        description: United States of America
+      GB:
+        description: United Kingdom
+      CA:
+        description: Canada
+      AU:
+        description: Australia
+      DE:
+        description: Germany
+      FR:
+        description: France
+      IT:
+        description: Italy
+      ES:
+        description: Spain
+      NL:
+        description: Netherlands
+      SE:
+        description: Sweden
+      NO:
+        description: Norway
+      DK:
+        description: Denmark
+      CH:
+        description: Switzerland
+      IE:
+        description: Ireland
+      JP:
+        description: Japan
+      CN:
+        description: China
+      IN:
+        description: India
+      SG:
+        description: Singapore
+      HK:
+        description: Hong Kong
+      KR:
+        description: South Korea
+      BR:
+        description: Brazil
+      MX:
+        description: Mexico
+      ZA:
+        description: South Africa
+      AE:
+        description: United Arab Emirates
+      SA:
+        description: Saudi Arabia

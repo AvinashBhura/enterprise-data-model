@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/Sales/enums/OpportunityLifecycleStateEnum
+name: domain_sales_opportunity_lifecycle_state_enum
+title: Domain (Sales) — OpportunityLifecycleStateEnum
+description: Lifecycle states for an Opportunity.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OpportunityLifecycleStateEnum:
+    description: Lifecycle states for an Opportunity.
+    permissible_values:
+      DISCOVERY:
+        description: Discovery / qualification phase.
+      QUALIFIED:
+        description: Qualified opportunity.
+      PROPOSAL:
+        description: Proposal stage.
+      NEGOTIATION:
+        description: Under negotiation.
+      CLOSED_WON:
+        description: Closed-won.
+      CLOSED_LOST:
+        description: Closed-lost.
+      ABANDONED:
+        description: Abandoned without close.

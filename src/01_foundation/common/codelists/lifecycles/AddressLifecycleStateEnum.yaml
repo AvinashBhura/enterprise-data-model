@@ -1,0 +1,36 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/AddressLifecycleStateEnum
+name: common_codelist_address_lifecycle_state_enum
+title: Common — AddressLifecycleStateEnum
+description: >
+  Lifecycle states for Address. Most addresses are simply ACTIVE or
+  INACTIVE, but full tracking supports moves, validation, and
+  historical reconstruction.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  AddressLifecycleStateEnum:
+    description: Entity-level lifecycle states for an Address.
+    permissible_values:
+      UNVERIFIED:
+        description: Entered but not yet validated.
+      ACTIVE:
+        description: In active use.
+      INACTIVE:
+        description: No longer active; superseded or moved.
+      INVALID:
+        description: Failed validation; needs correction.
+      ARCHIVED:
+        description: Retained for historical reference only.

@@ -1,0 +1,46 @@
+id: https://example.org/edm/foundation/common/codelists/lifecycles/AssetLifecycleStateEnum
+name: common_codelist_asset_lifecycle_state_enum
+title: Common — AssetLifecycleStateEnum
+description: >
+  Lifecycle states for Asset and its specializations (Device,
+  Building, IntellectualPropertyAsset). Captures the acquire →
+  in-use → retire pattern common to all assets.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+
+  AssetLifecycleStateEnum:
+    description: Entity-level lifecycle states for an Asset.
+    permissible_values:
+      PLANNED:
+        description: Planned for acquisition.
+      ORDERED:
+        description: On order from supplier.
+      RECEIVED:
+        description: Received but not yet in service.
+      IN_SERVICE:
+        description: Active and in use.
+      IN_STORAGE:
+        description: In inventory; not currently in use.
+      IN_MAINTENANCE:
+        description: Temporarily withdrawn for maintenance or repair.
+      RETIRED:
+        description: Withdrawn from service, awaiting disposal.
+      DISPOSED:
+        description: Sold, recycled, or otherwise disposed of.
+      LOST:
+        description: Reported lost or stolen.
+      WRITTEN_OFF:
+        description: Written off the books.

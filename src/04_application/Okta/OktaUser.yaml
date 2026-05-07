@@ -1,0 +1,50 @@
+id: https://example.org/edm/application/Okta/OktaUser
+name: application_okta_user
+title: Application (Okta) — OktaUser
+description: Okta projection of a UserAccount.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/IT/UserAccount
+  - ../_shared/SyncMetadata
+
+classes:
+  OktaUser:
+    is_a: UserAccount
+    description: Okta User projection.
+    attributes:
+      okta_user_id:
+        range: string
+        required: true
+        description: 20-character Okta user ID.
+      okta_login:
+        range: string
+        required: true
+      okta_status:
+        range: string
+        description: Okta native status (STAGED, PROVISIONED, ACTIVE, RECOVERY, PASSWORD_EXPIRED, LOCKED_OUT, SUSPENDED, DEPROVISIONED).
+      okta_groups_assigned:
+        range: string
+        multivalued: true
+        description: Okta group IDs the user is assigned to.
+      okta_apps_assigned:
+        range: string
+        multivalued: true
+        description: Okta application IDs the user is assigned to.
+      okta_factors_enrolled:
+        range: string
+        multivalued: true
+        description: Okta MFA factors enrolled (PUSH, SMS, TOKEN, WEBAUTHN, ...).
+      sync:
+        range: SyncMetadata
+        required: true

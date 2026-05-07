@@ -1,0 +1,41 @@
+id: https://example.org/edm/process/ContractLifecycle/ContractLifecycleProcessDefinition
+name: process_contract_lifecycle_definition
+title: Process (ContractLifecycle) — ContractLifecycleProcessDefinition
+description: A versioned contract-lifecycle workflow specification.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../_core/ProcessDefinition
+
+classes:
+  ContractLifecycleProcessDefinition:
+    is_a: ProcessDefinition
+    description: Contract-lifecycle workflow definition.
+    attributes:
+      applies_to_agreement_types:
+        range: string
+        multivalued: true
+        description: Agreement types this definition handles.
+      requires_legal_review:
+        range: boolean
+      requires_executive_signature:
+        range: boolean
+      auto_renewal_handling:
+        range: string
+        description: AUTO_NOTIFY, AUTO_RENEW, MANUAL_REVIEW.
+      renewal_notice_lead_days:
+        range: integer
+        description: Days ahead of expiration to begin renewal review.
+      template_document:
+        range: string
+        description: Reference to a master template document.

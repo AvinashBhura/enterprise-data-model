@@ -1,0 +1,36 @@
+id: https://example.org/edm/domain/IT/enums/DeviceLifecycleStateEnum
+name: domain_it_device_lifecycle_state_enum
+title: Domain (IT) — DeviceLifecycleStateEnum
+description: Lifecycle states for a Device.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  DeviceLifecycleStateEnum:
+    description: Lifecycle states for an IT Device.
+    permissible_values:
+      ORDERED:
+      RECEIVED:
+      PROVISIONED:
+        description: Configured and ready for assignment.
+      ASSIGNED:
+        description: Assigned to a Person.
+      IN_USE:
+      IN_REPAIR:
+      RETURNED:
+        description: Returned by previous holder, awaiting reassignment.
+      RETIRED:
+      DISPOSED:
+      LOST:
+      STOLEN:

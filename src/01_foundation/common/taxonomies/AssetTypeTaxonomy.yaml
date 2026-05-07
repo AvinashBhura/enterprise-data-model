@@ -1,0 +1,61 @@
+id: https://example.org/edm/foundation/common/taxonomies/AssetTypeTaxonomy
+name: common_taxonomy_asset_type
+title: Common — AssetTypeTaxonomy
+description: >
+  Abstract hierarchical classification of assets. Typical structure:
+    Physical
+      ├── Equipment
+      │     ├── IT Equipment
+      │     │     ├── Laptop
+      │     │     ├── Desktop
+      │     │     ├── Server
+      │     │     └── Network Device
+      │     └── Office Equipment
+      ├── Vehicle
+      └── Real Estate
+            ├── Building
+            └── Land
+    Digital
+      ├── Software License
+      ├── Domain Name
+      └── Dataset
+    Financial
+      ├── Cash
+      ├── Receivable
+      └── Investment
+    Intellectual Property
+      ├── Patent
+      ├── Trademark
+      └── Copyright
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  skos: http://www.w3.org/2004/02/skos/core#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - OrganizationTypeTaxonomy
+
+classes:
+
+  AssetTypeTaxonomy:
+    description: Taxonomy container for asset classification hierarchy.
+    attributes:
+      taxonomy_name:
+        range: string
+        required: true
+      version:
+        range: string
+        required: true
+      description:
+        range: string
+      nodes:
+        range: TaxonomyNode
+        multivalued: true

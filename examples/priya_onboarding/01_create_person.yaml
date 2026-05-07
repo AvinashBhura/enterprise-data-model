@@ -1,0 +1,28 @@
+# Example instance — Priya Menon Person record (Foundation)
+# Created when offer is accepted.
+
+# Conforms to: src/01_foundation/Person.yaml
+- entity_id: prs_8a7f3c00-0001-4000-8000-000000000001
+  given_name: Priya
+  family_name: Menon
+  preferred_name: Priya
+  date_of_birth: "1992-06-14"
+  pronouns: "she/her"
+  nationality:
+    - IN
+    - US
+  primary_language: en
+  additional_languages:
+    - hi
+  email_addresses:
+    - priya.menon.personal@example.com
+  phone_numbers:
+    - "+14155550199"
+  lifecycle_state: ACTIVE
+  state_effective_from: "2026-04-15T10:00:00Z"
+  natural_identifiers:
+    - value: "PMENON-2026"
+      scheme: "global_person_id"
+      issuer: "Acme HR Master Data"
+  created_at: "2026-04-15T10:00:00Z"
+  created_by: "hr_intake_user"

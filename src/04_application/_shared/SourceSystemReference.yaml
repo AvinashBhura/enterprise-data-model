@@ -1,0 +1,37 @@
+id: https://example.org/edm/application/_shared/SourceSystemReference
+name: application_shared_source_system_reference
+title: Application (_shared) — SourceSystemReference
+description: >
+  Universal source-system binding. Used when a canonical entity may be
+  represented in multiple source systems (a single Person known to
+  Workday, Okta, and Salesforce simultaneously).
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  SourceSystemReference:
+    description: A reference to an entity's representation in a source system.
+    attributes:
+      source_system:
+        range: string
+        required: true
+      source_record_id:
+        range: string
+        required: true
+      source_record_url:
+        range: uri
+        description: Optional deep link to the record in the source system UI.
+      authoritative:
+        range: boolean
+        description: Whether this source is the system of record for this attribute set.

@@ -1,0 +1,61 @@
+id: https://example.org/edm/domain/Governance/BoardMemberRole
+name: domain_governance_board_member_role
+title: Domain (Governance) — BoardMemberRole
+description: A Person serving on a governing board.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Role
+  - ../../01_foundation/Person
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/codelists/types/RoleTypeEnum
+  - enums/GovernanceRoleLifecycleStateEnum
+
+classes:
+  BoardMemberRole:
+    is_a: Role
+    description: A Person serving on a governing board.
+    slot_usage:
+      role_type:
+        equals_string: BOARD_MEMBER
+      held_by_person:
+        required: true
+      lifecycle_state:
+        range: GovernanceRoleLifecycleStateEnum
+        required: true
+    attributes:
+      legal_entity:
+        range: Organization
+        required: true
+        description: The LegalEntity whose board the Person sits on.
+      board_seat:
+        range: string
+        description: Specific seat/position designation.
+      member_class:
+        range: string
+        description: INSIDE, INDEPENDENT, EXECUTIVE, NON_EXECUTIVE, INVESTOR_DESIGNATED.
+      term_start:
+        range: date
+        required: true
+      term_end:
+        range: date
+      committees:
+        range: string
+        multivalued: true
+        description: entity_id of Team(s) (committees) this member sits on.
+      independent_director:
+        range: boolean
+        description: Whether considered independent under exchange rules.
+      compensation:
+        range: string
+        description: Brief compensation summary (cash, equity).

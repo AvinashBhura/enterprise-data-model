@@ -1,0 +1,52 @@
+id: https://example.org/edm/application/_shared/SyncMetadata
+name: application_shared_sync_metadata
+title: Application (_shared) — SyncMetadata
+description: >
+  Common sync metadata attached to every Application-layer record.
+  Tracks when the record was last synchronized with its source
+  system, the source-system identifier, and the current sync status.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - enums/SyncStatusEnum
+
+classes:
+  SyncMetadata:
+    description: >
+      A reusable mixin/value type capturing sync metadata. Application
+      classes typically embed this as a single attribute.
+    attributes:
+      source_system:
+        range: string
+        required: true
+        description: Source system identifier (e.g., "workday", "salesforce", "sap").
+      source_record_id:
+        range: string
+        required: true
+        description: Native identifier of this record in its source system.
+      source_record_version:
+        range: string
+        description: Source-system version identifier (etag, version number).
+      last_synced_at:
+        range: datetime
+      last_sync_attempt_at:
+        range: datetime
+      sync_status:
+        range: SyncStatusEnum
+        required: true
+      sync_error_message:
+        range: string
+        description: Error message if last sync attempt failed.
+      sync_error_count:
+        range: integer
+        description: Consecutive sync failures (for backoff/alerting).

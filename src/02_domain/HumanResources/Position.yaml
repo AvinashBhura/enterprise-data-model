@@ -1,0 +1,72 @@
+id: https://example.org/edm/domain/HumanResources/Position
+name: domain_hr_position
+title: Domain (HR) — Position
+description: >
+  A defined job slot, independent of who fills it. Positions exist
+  even when vacant.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../01_foundation/Entity
+  - ../../01_foundation/Organization
+  - ../../01_foundation/common/base/Identifiable
+  - ../../01_foundation/common/base/Lifecycleable
+  - ../../01_foundation/common/base/Classifiable
+  - ../../01_foundation/common/base/AmountType
+  - enums/PositionLifecycleStateEnum
+
+classes:
+  Position:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Classifiable
+    description: A job slot defined within an OrganizationalUnit.
+    slot_usage:
+      lifecycle_state:
+        range: PositionLifecycleStateEnum
+        required: true
+    attributes:
+      position_code:
+        range: string
+        required: true
+      title:
+        range: string
+        required: true
+      description:
+        range: string
+      organizational_unit:
+        range: Organization
+        required: true
+      reports_to_position:
+        range: Position
+      position_level:
+        range: string
+      position_type:
+        range: string
+        description: References a node in PositionTypeTaxonomy.
+      is_management:
+        range: boolean
+      is_individual_contributor:
+        range: boolean
+      target_compensation_min:
+        range: AmountType
+      target_compensation_max:
+        range: AmountType
+      headcount_authorized:
+        range: integer
+      established_date:
+        range: date
+      eliminated_date:
+        range: date

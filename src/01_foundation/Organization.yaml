@@ -1,0 +1,175 @@
+id: https://example.org/edm/foundation/Organization
+name: foundation_organization
+title: Foundation — Organization
+description: >
+  A formal, structured body — a company, government agency, division,
+  or department. Organizations have identity, a name, a purpose, and
+  typically a structure of units within them. They persist through
+  changes in membership.
+
+  Justification as Foundational:
+    - Universality: every capability interacts with Organizations —
+      internal (divisions, departments) and external (customers,
+      vendors, partners, regulators).
+    - Immutability: the concept of "an organization" has meant the
+      same thing since commerce began.
+    - Abstraction: exists independent of any specific business process.
+    - Anti-replication: prevents each capability from building its own
+      "departments" or "entities" or "cost centers" with subtly
+      different shapes.
+
+  Organization is abstract. Concrete subtypes — LegalEntity,
+  OrganizationalUnit — live in this same file since they are the
+  universal subtypes relevant to any enterprise. Business-unit,
+  division, department distinctions are handled via the
+  organization_type classifier (OrganizationTypeEnum) to keep
+  subtyping minimal.
+
+  Domain examples:
+    - HR: Engineering Division is an OrganizationalUnit containing
+      multiple Department units. Each employee's EmployeeRole
+      references the unit they belong to.
+    - Sales: Globex Inc. is an Organization (external LegalEntity).
+      Multiple Contracts, Orders, and Contacts link to it.
+    - Legal: Regulatory bodies (SEC, European Commission) are
+      Organizations referenced by compliance records.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+  - common/base/Addressable
+  - common/base/RoleHolder
+  - common/base/Classifiable
+  - common/codelists/standards/CountryCode
+  - common/codelists/types/OrganizationTypeEnum
+  - common/codelists/lifecycles/OrganizationLifecycleStateEnum
+
+classes:
+
+  Organization:
+    is_a: Entity
+    abstract: true
+    mixins:
+      - Identifiable
+      - Lifecycleable
+      - Addressable
+      - RoleHolder
+      - Classifiable
+    class_uri: schema:Organization
+    description: >
+      A formal body. Abstract — instantiate LegalEntity or
+      OrganizationalUnit. Supports self-reference via
+      parent_organization to express org-chart hierarchies.
+    slot_usage:
+      lifecycle_state:
+        range: OrganizationLifecycleStateEnum
+    attributes:
+      legal_name:
+        range: string
+        required: true
+        description: Official legal or formal name of the organization.
+        slot_uri: schema:legalName
+      trading_name:
+        range: string
+        description: Trading / "doing business as" name, if different.
+        slot_uri: schema:name
+      organization_type:
+        range: OrganizationTypeEnum
+        required: true
+        description: >
+          Type classifier (LEGAL_ENTITY, BUSINESS_UNIT, DIVISION,
+          DEPARTMENT, GROUP). Allows hierarchical roll-up without
+          requiring subclass explosion.
+      parent_organization:
+        range: Organization
+        description: >
+          Parent in the org-chart hierarchy. Null for roots (e.g., the
+          enterprise's ultimate holding company, or an unaffiliated
+          external entity).
+      established_on:
+        range: date
+        description: Date the organization was established or incorporated.
+        slot_uri: schema:foundingDate
+      dissolved_on:
+        range: date
+        description: Date the organization was dissolved, if applicable.
+        slot_uri: schema:dissolutionDate
+      primary_contact_email:
+        range: string
+        description: Primary contact email for the organization.
+        pattern: "^[\\w.\\-+]+@[\\w.\\-]+\\.\\w+$"
+      primary_contact_phone:
+        range: string
+        description: Primary contact phone (E.164 format recommended).
+      website_url:
+        range: uri
+        description: Primary website URL.
+        slot_uri: schema:url
+
+  LegalEntity:
+    is_a: Organization
+    description: >
+      A jurisdictional legal entity — company, NGO, government agency,
+      subsidiary, joint venture. Carries jurisdiction-specific
+      identifiers and regulatory attributes.
+    attributes:
+      registration_number:
+        range: string
+        description: >
+          Legal registration number (e.g., company number, EIN,
+          corporation ID). Additional natural keys (tax IDs for
+          multiple jurisdictions) belong in natural_identifiers via
+          Identifiable.
+      registration_jurisdiction:
+        range: CountryCodeEnum
+        description: Country in which this entity is registered.
+      registration_date:
+        range: date
+        description: Date of legal registration.
+      tax_identifier:
+        range: string
+        description: Primary tax identifier (EIN for US, VAT for EU, etc.).
+      legal_form:
+        range: string
+        description: Legal form (e.g., "LLC", "Plc", "GmbH", "S.A.", "Trust").
+      ultimate_parent:
+        range: LegalEntity
+        description: >
+          Ultimate parent legal entity (for group hierarchies); null
+          for top-level parent.
+
+  OrganizationalUnit:
+    is_a: Organization
+    description: >
+      A unit within a legal entity — business unit, division,
+      department, group. Has internal structure but no independent
+      legal standing.
+    attributes:
+      parent_legal_entity:
+        range: LegalEntity
+        description: >
+          The LegalEntity this unit belongs to. A division may belong
+          to LegalEntity "Acme Corp" even if its direct
+          parent_organization is another OrganizationalUnit.
+      cost_center_code:
+        range: string
+        description: Cost-center code for financial roll-up.
+      profit_center_code:
+        range: string
+        description: Profit-center code for financial roll-up.
+      head_count_target:
+        range: integer
+        description: Planned head count for this unit.

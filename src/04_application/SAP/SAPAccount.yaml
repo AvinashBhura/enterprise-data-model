@@ -1,0 +1,41 @@
+id: https://example.org/edm/application/SAP/SAPAccount
+name: application_sap_account
+title: Application (SAP) — SAPAccount
+description: SAP projection of a G/L Account.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../02_domain/Finance/Account
+  - ../_shared/SyncMetadata
+
+classes:
+  SAPAccount:
+    is_a: Account
+    description: SAP G/L Account projection.
+    attributes:
+      sap_gl_account:
+        range: string
+        required: true
+        description: SAP G/L account code (SAKNR).
+      sap_company_code:
+        range: string
+        required: true
+      sap_chart_of_accounts:
+        range: string
+        description: SAP chart of accounts identifier (KTOPL).
+      sap_account_group:
+        range: string
+        description: SAP G/L account group.
+      sync:
+        range: SyncMetadata
+        required: true

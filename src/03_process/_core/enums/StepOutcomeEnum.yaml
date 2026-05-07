@@ -1,0 +1,32 @@
+id: https://example.org/edm/process/_core/enums/StepOutcomeEnum
+name: process_core_step_outcome_enum
+title: Process (_core) — StepOutcomeEnum
+description: Possible outcomes recorded on a StepCompletion.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  StepOutcomeEnum:
+    description: Outcome of a process step's execution.
+    permissible_values:
+      COMPLETED:
+        description: Step completed successfully.
+      SKIPPED:
+        description: Step was deliberately skipped.
+      FAILED:
+        description: Step attempted but failed.
+      CANCELLED:
+        description: Step cancelled before completion.
+      DEFERRED:
+        description: Step deferred to a later instance.

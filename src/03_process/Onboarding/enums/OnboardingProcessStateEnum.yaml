@@ -1,0 +1,38 @@
+id: https://example.org/edm/process/Onboarding/enums/OnboardingProcessStateEnum
+name: process_onboarding_state_enum
+title: Process (Onboarding) — OnboardingProcessStateEnum
+description: Fine-grained workflow states for an OnboardingProcessInstance.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+
+enums:
+  OnboardingProcessStateEnum:
+    description: Workflow states specific to onboarding instances.
+    permissible_values:
+      INITIATED:
+      OFFER_VERIFIED:
+      BACKGROUND_CHECK_IN_PROGRESS:
+      BACKGROUND_CHECK_PASSED:
+      EQUIPMENT_ORDERED:
+      EQUIPMENT_PROVISIONED:
+      ACCESS_PROVISIONED:
+      ORIENTATION_SCHEDULED:
+      ORIENTATION_COMPLETE:
+      SYSTEMS_TRAINING_COMPLETE:
+      COMPLIANCE_TRAINING_COMPLETE:
+      FIRST_DAY_COMPLETE:
+      FIRST_WEEK_COMPLETE:
+      COMPLETE:
+      CANCELLED:
+      ON_HOLD:

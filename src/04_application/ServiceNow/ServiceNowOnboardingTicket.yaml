@@ -1,0 +1,50 @@
+id: https://example.org/edm/application/ServiceNow/ServiceNowOnboardingTicket
+name: application_servicenow_onboarding_ticket
+title: Application (ServiceNow) — ServiceNowOnboardingTicket
+description: >
+  ServiceNow's projection of an OnboardingProcessInstance — typically
+  represented as a Service Catalog request (REQ) with multiple
+  Requested Items (RITM) for individual onboarding steps.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../03_process/Onboarding/OnboardingProcessInstance
+  - ../_shared/SyncMetadata
+
+classes:
+  ServiceNowOnboardingTicket:
+    is_a: OnboardingProcessInstance
+    description: ServiceNow service-catalog request projection of an OnboardingProcessInstance.
+    attributes:
+      snow_sys_id:
+        range: string
+        required: true
+      snow_request_number:
+        range: string
+        required: true
+        description: ServiceNow request number (REQ0001234).
+      snow_catalog_item_sys_id:
+        range: string
+        description: ServiceNow catalog item this request was raised against.
+      snow_requested_for_sys_id:
+        range: string
+        description: ServiceNow sys_id of the Person being onboarded.
+      snow_assignment_group:
+        range: string
+      snow_state:
+        range: string
+      snow_url:
+        range: uri
+      sync:
+        range: SyncMetadata
+        required: true
