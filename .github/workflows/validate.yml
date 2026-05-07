@@ -31,11 +31,8 @@ jobs:
       - name: Check dependency direction (one-way gate)
         run: python tools/check_dependency_direction.py
 
-      - name: Check architectural rules
-        run: pytest tests/architectural_rules/ -v
+      - name: Check architectural rule compliance
+        run: python tools/check_principle_compliance.py
 
-      - name: Run cross-layer tests
-        run: pytest tests/cross_layer/ -v
-
-      - name: Run validation tests
-        run: pytest tests/validation/ -v
+      - name: Run all tests
+        run: pytest tests/ -v

@@ -5,6 +5,18 @@ use everywhere" approach. The EDM is designed to provide a stable,
 canonical representation of enterprise concepts that every system,
 report, and integration can rely on.
 
+> **Working with Claude Code?** Read `CLAUDE.md` first. It explains the
+> file conventions, the operational rules, and the verification loop
+> Claude Code should run after every change.
+
+## Quick Start
+
+```bash
+make install   # install dev dependencies
+make check     # run all four quality gates
+make help      # see all available commands
+```
+
 ## Architecture
 
 Five layers, stacked from most stable (bottom) to most volatile (top),
