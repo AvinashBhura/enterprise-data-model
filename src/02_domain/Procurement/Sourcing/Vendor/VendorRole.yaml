@@ -1,0 +1,73 @@
+id: https://example.org/edm/domain/Procurement/VendorRole
+name: domain_procurement_vendor_role
+title: Domain (Procurement) — VendorRole
+description: >
+  A Person OR Organization engaged as a vendor / supplier. Uses union
+  range on held_by because vendors can be either:
+    - Independent consultants (Person)
+    - Vendor companies (Organization)
+  This is the case the union-range pattern was designed for.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Role
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/Organization
+  - ../../../../01_foundation/common/codelists/types/RoleTypeEnum
+  - VendorContract
+  - enums/VendorLifecycleStateEnum
+
+classes:
+  VendorRole:
+    is_a: Role
+    description: A Person or Organization engaged as a supplier.
+    slot_usage:
+      role_type:
+        equals_string: VENDOR
+      lifecycle_state:
+        range: VendorLifecycleStateEnum
+        required: true
+    attributes:
+      vendor_number:
+        range: string
+        required: true
+        description: Enterprise-issued vendor number (natural key).
+      engaging_organization:
+        range: Organization
+        required: true
+        description: Our LegalEntity engaging this vendor.
+      vendor_category:
+        range: string
+        description: Category of supply (IT, FACILITIES, PROFESSIONAL_SERVICES, ...).
+      preferred_supplier:
+        range: boolean
+        description: Whether designated as a preferred supplier.
+      diversity_status:
+        range: string
+        multivalued: true
+        description: >
+          Diversity classifications (e.g., MBE, WBE, DBE, VOSB) where
+          tracked for diversity supplier programs.
+      payment_terms:
+        range: string
+        description: Default payment terms (e.g., NET_30, NET_60).
+      tax_id:
+        range: string
+        description: Vendor tax ID; also expressible via natural_identifiers.
+      master_contract:
+        range: VendorContract
+        description: Master VendorContract governing this engagement.
+      qualification_date:
+        range: date
+      last_review_date:
+        range: date

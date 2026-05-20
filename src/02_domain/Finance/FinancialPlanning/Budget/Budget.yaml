@@ -1,0 +1,73 @@
+id: https://example.org/edm/domain/Finance/Budget
+name: domain_finance_budget
+title: Domain (Finance) — Budget
+description: A planned financial commitment for a fiscal period and unit.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/Organization
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/base/Lifecycleable
+  - ../../../../01_foundation/common/base/AmountType
+  - FiscalPeriod
+  - enums/BudgetLifecycleStateEnum
+  - ../../../../01_foundation/Document
+
+classes:
+  BudgetLine:
+    is_a: Document
+    description: A single budget allocation line.
+    attributes:
+      account_code:
+        range: string
+        required: true
+      cost_center_code:
+        range: string
+      planned_amount:
+        range: AmountType
+        required: true
+      forecast_amount:
+        range: AmountType
+      actual_amount:
+        range: AmountType
+
+  Budget:
+    is_a: Agreement
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A planned financial commitment.
+    slot_usage:
+      lifecycle_state:
+        range: BudgetLifecycleStateEnum
+        required: true
+    attributes:
+      budget_name:
+        range: string
+        required: true
+      fiscal_period:
+        range: FiscalPeriod
+        required: true
+      owning_organization:
+        range: Organization
+        required: true
+        description: OrganizationalUnit owning this budget.
+      total_planned:
+        range: AmountType
+      lines:
+        range: BudgetLine
+        multivalued: true
+      version:
+        range: string
+        description: Budget version (e.g., "FY2026 Plan v2").

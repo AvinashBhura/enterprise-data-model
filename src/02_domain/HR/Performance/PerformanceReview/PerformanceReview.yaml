@@ -1,0 +1,51 @@
+id: https://example.org/edm/domain/HumanResources/PerformanceReview
+name: domain_hr_performance_review
+title: Domain (HR) — PerformanceReview
+description: A periodic performance evaluation event. Specializes Activity.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Activity
+  - ../../../../01_foundation/common/codelists/types/ActivityTypeEnum
+  - EmployeeRole
+
+classes:
+  PerformanceReview:
+    is_a: Activity
+    description: A periodic performance evaluation event for an employee.
+    slot_usage:
+      activity_type:
+        equals_string: REVIEW
+    attributes:
+      reviewee_role:
+        range: EmployeeRole
+        required: true
+      reviewer_role:
+        range: EmployeeRole
+        required: true
+      review_period_start:
+        range: date
+        required: true
+      review_period_end:
+        range: date
+        required: true
+      cycle_identifier:
+        range: string
+      overall_rating:
+        range: string
+      strengths:
+        range: string
+      development_areas:
+        range: string
+      goals_for_next_period:
+        range: string

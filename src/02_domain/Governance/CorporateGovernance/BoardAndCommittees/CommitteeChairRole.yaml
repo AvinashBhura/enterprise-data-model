@@ -1,0 +1,49 @@
+id: https://example.org/edm/domain/Governance/CommitteeChairRole
+name: domain_governance_committee_chair_role
+title: Domain (Governance) — CommitteeChairRole
+description: A Person leading a formal committee Team.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Role
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/Team
+  - ../../../../01_foundation/common/codelists/types/RoleTypeEnum
+  - enums/GovernanceRoleLifecycleStateEnum
+
+classes:
+  CommitteeChairRole:
+    is_a: Role
+    description: Chair of a formal committee.
+    slot_usage:
+      role_type:
+        equals_string: COMMITTEE_CHAIR
+      held_by_person:
+        required: true
+      lifecycle_state:
+        range: GovernanceRoleLifecycleStateEnum
+        required: true
+    attributes:
+      committee:
+        range: Team
+        required: true
+        description: The Team (with team_type=COMMITTEE) being chaired.
+      term_start:
+        range: date
+        required: true
+      term_end:
+        range: date
+      consecutive_terms_allowed:
+        range: integer
+      meetings_per_year:
+        range: integer

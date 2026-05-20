@@ -1,0 +1,71 @@
+id: https://example.org/edm/domain/Legal/RegulatoryObligation
+name: domain_legal_regulatory_obligation
+title: Domain (Legal) — RegulatoryObligation
+description: A specific compliance obligation arising from regulation.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/Organization
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/base/Lifecycleable
+  - ../../../../01_foundation/common/codelists/standards/CountryCode
+  - enums/RegulatoryObligationLifecycleStateEnum
+
+classes:
+  RegulatoryObligation:
+    is_a: Document
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A compliance obligation arising from regulation.
+    slot_usage:
+      lifecycle_state:
+        range: RegulatoryObligationLifecycleStateEnum
+        required: true
+    attributes:
+      obligation_name:
+        range: string
+        required: true
+      regulation_reference:
+        range: string
+        required: true
+        description: Reference to the regulation (e.g., "GDPR Art. 30", "SOX 404").
+      regulator:
+        range: Organization
+        description: The regulatory body imposing this obligation.
+      jurisdiction:
+        range: CountryCodeEnum
+        description: Country / jurisdiction this obligation applies in.
+      applies_to_legal_entity:
+        range: Organization
+        multivalued: true
+        description: Our LegalEntities subject to this obligation.
+      domain_area:
+        range: string
+        description: Compliance area (PRIVACY, FINANCIAL, SAFETY, ENVIRONMENTAL, ...).
+      obligation_description:
+        range: string
+        required: true
+      penalty_for_violation:
+        range: string
+      review_frequency:
+        range: string
+        description: How often to review compliance (ANNUAL, QUARTERLY, MONTHLY).
+      last_reviewed_at:
+        range: datetime
+      next_review_due:
+        range: date
+      responsible_role:
+        range: string
+        description: entity_id of the EmployeeRole accountable for this obligation.

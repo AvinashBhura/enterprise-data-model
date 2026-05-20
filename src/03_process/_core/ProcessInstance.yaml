@@ -37,7 +37,7 @@ imports:
 
 classes:
   ProcessInstance:
-    is_a: Entity
+    is_a: Activity
     mixins:
       - Identifiable
       - Lifecycleable

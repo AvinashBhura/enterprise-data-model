@@ -1,0 +1,59 @@
+id: https://example.org/edm/domain/HumanResources/Offer
+name: domain_hr_offer
+title: Domain (HR) — Offer
+description: A pre-employment offer letter. Becomes an EmploymentContract when accepted.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Agreement
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/common/codelists/types/AgreementTypeEnum
+  - ../../../../01_foundation/common/base/AmountType
+  - Position
+  - CompensationPackage
+  - EmploymentContract
+  - enums/OfferLifecycleStateEnum
+
+classes:
+  Offer:
+    is_a: Agreement
+    description: A pre-employment offer letter.
+    slot_usage:
+      agreement_type:
+        equals_string: OFFER
+      lifecycle_state:
+        range: OfferLifecycleStateEnum
+        required: true
+    attributes:
+      candidate:
+        range: Person
+        required: true
+      target_position:
+        range: Position
+        required: true
+      proposed_compensation:
+        range: CompensationPackage
+      proposed_start_date:
+        range: date
+        required: true
+      offer_expiration:
+        range: date
+      sign_on_bonus:
+        range: AmountType
+      relocation_amount:
+        range: AmountType
+      contingencies:
+        range: string
+        multivalued: true
+      resulting_employment_contract:
+        range: EmploymentContract

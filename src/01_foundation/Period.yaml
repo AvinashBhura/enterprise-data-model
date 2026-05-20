@@ -1,0 +1,57 @@
+id: https://example.org/edm/foundation/Period
+name: foundation_period
+title: Foundation — Period
+description: >
+  A defined time interval with start and end. Supports hierarchical
+  containment (a fiscal quarter contains months; a fiscal year contains
+  quarters). Distinct from Activity (Periods are intervals, not events)
+  and from a simple datetime pair (Periods have identity and semantics).
+
+  Domain examples that specialize Period:
+  - FiscalPeriod (accounting period)
+  - ReportingPeriod
+  - PlanningPeriod
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  time: http://www.w3.org/2006/time#
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+
+classes:
+  Period:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A defined time interval.
+    class_uri: time:Interval
+    attributes:
+      period_code:
+        range: string
+        required: true
+        description: Identifier for the period (e.g., "FY2026", "Q3-2026").
+      period_type:
+        range: string
+        required: true
+        description: YEAR, QUARTER, MONTH, WEEK, DAY, CUSTOM.
+      start_date:
+        range: date
+        required: true
+      end_date:
+        range: date
+        required: true
+      parent_period:
+        range: Period
+        description: Containing period for hierarchical containment.

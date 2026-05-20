@@ -1,0 +1,75 @@
+id: https://example.org/edm/domain/Sales/Order
+name: domain_sales_order
+title: Domain (Sales) — Order
+description: >
+  A confirmed customer purchase commitment. Specializes Foundation
+  Agreement. Order fulfillment workflow lives in
+  03_process/OrderFulfillment/.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Agreement
+  - ../../../../01_foundation/Address
+  - ../../../../01_foundation/common/codelists/types/AgreementTypeEnum
+  - ../../../../01_foundation/common/base/AmountType
+  - Account
+  - Opportunity
+  - Quote
+  - OrderLine
+  - enums/OrderLifecycleStateEnum
+
+classes:
+  Order:
+    is_a: Agreement
+    description: A confirmed customer purchase commitment.
+    slot_usage:
+      agreement_type:
+        equals_string: CUSTOMER_ORDER
+      lifecycle_state:
+        range: OrderLifecycleStateEnum
+        required: true
+    attributes:
+      order_number:
+        range: string
+        required: true
+      account:
+        range: Account
+        required: true
+      originating_quote:
+        range: Quote
+      originating_opportunity:
+        range: Opportunity
+      lines:
+        range: OrderLine
+        multivalued: true
+        required: true
+      subtotal:
+        range: AmountType
+      tax_total:
+        range: AmountType
+      grand_total:
+        range: AmountType
+        required: true
+      ordered_at:
+        range: datetime
+        required: true
+      requested_delivery_date:
+        range: date
+      promised_delivery_date:
+        range: date
+      shipping_address:
+        range: Address
+      billing_address:
+        range: Address
+      payment_terms:
+        range: string

@@ -1,0 +1,89 @@
+id: https://example.org/edm/domain/Procurement/PurchaseOrder
+name: domain_procurement_purchase_order
+title: Domain (Procurement) — PurchaseOrder
+description: A specific purchase commitment to a vendor.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Agreement
+  - ../../../../01_foundation/common/codelists/types/AgreementTypeEnum
+  - ../../../../01_foundation/common/base/AmountType
+  - ../../../../01_foundation/common/base/QuantityType
+  - VendorRole
+  - VendorContract
+  - PurchaseRequisition
+  - enums/PurchaseOrderLifecycleStateEnum
+  - ../../../../01_foundation/Document
+
+classes:
+  PurchaseOrderLine:
+    is_a: Document
+    description: A single line on a PurchaseOrder.
+    attributes:
+      line_number:
+        range: integer
+        required: true
+      item_description:
+        range: string
+        required: true
+      quantity:
+        range: QuantityType
+        required: true
+      unit_price:
+        range: AmountType
+      line_total:
+        range: AmountType
+      gl_account_code:
+        range: string
+      cost_center_code:
+        range: string
+
+  PurchaseOrder:
+    is_a: Agreement
+    description: A specific purchase commitment.
+    slot_usage:
+      agreement_type:
+        equals_string: PURCHASE_ORDER
+      lifecycle_state:
+        range: PurchaseOrderLifecycleStateEnum
+        required: true
+    attributes:
+      po_number:
+        range: string
+        required: true
+      vendor_role:
+        range: VendorRole
+        required: true
+      master_contract:
+        range: VendorContract
+        description: VendorContract this PO is issued under.
+      requisition:
+        range: PurchaseRequisition
+        description: Originating requisition, if any.
+      lines:
+        range: PurchaseOrderLine
+        multivalued: true
+        required: true
+      subtotal:
+        range: AmountType
+      tax_total:
+        range: AmountType
+      grand_total:
+        range: AmountType
+        required: true
+      issued_at:
+        range: datetime
+      requested_delivery_date:
+        range: date
+      promised_delivery_date:
+        range: date

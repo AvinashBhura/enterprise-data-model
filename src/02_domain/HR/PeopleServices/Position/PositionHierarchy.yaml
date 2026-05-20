@@ -1,0 +1,44 @@
+id: https://example.org/edm/domain/HumanResources/PositionHierarchy
+name: domain_hr_position_hierarchy
+title: Domain (HR) — PositionHierarchy
+description: A first-class record of a reporting relationship between two Positions.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/base/Temporal
+  - Position
+
+classes:
+  PositionHierarchy:
+    is_a: Document
+    mixins:
+      - Identifiable
+      - Temporal
+    description: A reporting relationship between two Positions.
+    attributes:
+      subordinate_position:
+        range: Position
+        required: true
+      supervisor_position:
+        range: Position
+        required: true
+      relationship_type:
+        range: string
+        description: SOLID, DOTTED, MATRIX.
+      effective_from:
+        range: date
+        required: true
+      effective_to:
+        range: date

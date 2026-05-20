@@ -1,0 +1,72 @@
+id: https://example.org/edm/domain/IT/Device
+name: domain_it_device
+title: Domain (IT) — Device
+description: >
+  An IT device — laptop, desktop, server, phone, network equipment.
+  Specializes Foundation Asset.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Asset
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/common/codelists/types/AssetTypeEnum
+  - enums/DeviceLifecycleStateEnum
+
+classes:
+  Device:
+    is_a: Asset
+    description: An IT device.
+    slot_usage:
+      asset_type:
+        equals_string: PHYSICAL
+      lifecycle_state:
+        range: DeviceLifecycleStateEnum
+        required: true
+    attributes:
+      device_category:
+        range: string
+        required: true
+        description: LAPTOP, DESKTOP, SERVER, PHONE, TABLET, NETWORK_DEVICE, PERIPHERAL.
+      manufacturer:
+        range: string
+      model:
+        range: string
+      operating_system:
+        range: string
+      operating_system_version:
+        range: string
+      mac_address:
+        range: string
+      hostname:
+        range: string
+      assigned_to_person:
+        range: Person
+        description: Person currently using the device.
+      assigned_role:
+        range: string
+        description: entity_id of the EmployeeRole the device is assigned to.
+      assigned_at:
+        range: datetime
+      mdm_enrolled:
+        range: boolean
+        description: Whether the device is enrolled in mobile device management.
+      encryption_enabled:
+        range: boolean
+      last_seen_at:
+        range: datetime
+        description: When IT-management last detected the device online.
+      warranty_expiration:
+        range: date
+      lease_expiration:
+        range: date
+        description: For leased devices.

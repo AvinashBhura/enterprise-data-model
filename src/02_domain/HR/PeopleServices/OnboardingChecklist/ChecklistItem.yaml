@@ -1,0 +1,48 @@
+id: https://example.org/edm/domain/HumanResources/ChecklistItem
+name: domain_hr_checklist_item
+title: Domain (HR) — ChecklistItem
+description: An individual item on an OnboardingChecklist template.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/codelists/types/RoleTypeEnum
+
+classes:
+  ChecklistItem:
+    is_a: Document
+    mixins:
+      - Identifiable
+    description: A single checklist item — a thing that must be completed.
+    attributes:
+      item_name:
+        range: string
+        required: true
+      description:
+        range: string
+      sequence_number:
+        range: integer
+      is_required:
+        range: boolean
+        required: true
+      responsible_role:
+        range: RoleTypeEnum
+      target_completion_days:
+        range: integer
+      depends_on_items:
+        range: ChecklistItem
+        multivalued: true
+      category:
+        range: string
+        description: IT, FACILITIES, COMPLIANCE, ORIENTATION, ...

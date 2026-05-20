@@ -1,0 +1,58 @@
+id: https://example.org/edm/domain/HumanResources/OnboardingChecklist
+name: domain_hr_onboarding_checklist
+title: Domain (HR) — OnboardingChecklist
+description: >
+  A TEMPLATE defining onboarding requirements. The checklist itself is
+  stable Domain noun-data; live executions of onboarding are
+  ProcessInstances in 03_process/Onboarding/.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/base/Lifecycleable
+  - ChecklistItem
+
+classes:
+  OnboardingChecklist:
+    is_a: Document
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A template defining onboarding requirements.
+    attributes:
+      checklist_name:
+        range: string
+        required: true
+      version:
+        range: string
+        required: true
+      applies_to_position_types:
+        range: string
+        multivalued: true
+      applies_to_employment_types:
+        range: string
+        multivalued: true
+      applies_to_jurisdictions:
+        range: string
+        multivalued: true
+      items:
+        range: ChecklistItem
+        multivalued: true
+        required: true
+      typical_duration_days:
+        range: integer
+      published_on:
+        range: date
+      retired_on:
+        range: date

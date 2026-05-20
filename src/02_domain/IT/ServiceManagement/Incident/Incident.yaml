@@ -1,0 +1,85 @@
+id: https://example.org/edm/domain/IT/Incident
+name: domain_it_incident
+title: Domain (IT) — Incident
+description: >
+  An IT incident — issue, outage, security event. Specializes
+  Foundation Activity. Resolution workflow lives in
+  03_process/IncidentResolution/.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Activity
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/common/codelists/types/ActivityTypeEnum
+  - Device
+  - enums/IncidentLifecycleStateEnum
+
+classes:
+  Incident:
+    is_a: Activity
+    description: An IT incident.
+    slot_usage:
+      activity_type:
+        equals_string: INCIDENT
+      lifecycle_state:
+        range: IncidentLifecycleStateEnum
+        required: true
+    attributes:
+      incident_number:
+        range: string
+        required: true
+        description: Enterprise-issued incident number.
+      severity:
+        range: string
+        required: true
+        description: SEV1, SEV2, SEV3, SEV4 (enterprise-defined scale).
+      priority:
+        range: string
+        description: P1, P2, P3, P4.
+      category:
+        range: string
+        description: HARDWARE, SOFTWARE, NETWORK, SECURITY, DATA, ACCESS, OTHER.
+      reported_by_person:
+        range: Person
+      affected_persons:
+        range: Person
+        multivalued: true
+        description: Persons impacted by this incident.
+      affected_devices:
+        range: Device
+        multivalued: true
+      affected_services:
+        range: string
+        multivalued: true
+        description: Service identifiers (e.g., "email", "vpn", "github").
+      reported_at:
+        range: datetime
+        required: true
+      acknowledged_at:
+        range: datetime
+      resolved_at:
+        range: datetime
+      closed_at:
+        range: datetime
+      mttr_minutes:
+        range: integer
+        description: Mean time to resolution, in minutes.
+      root_cause:
+        range: string
+      resolution_summary:
+        range: string
+      assigned_to_role:
+        range: string
+        description: entity_id of the EmployeeRole owning the incident.
+      sla_breached:
+        range: boolean

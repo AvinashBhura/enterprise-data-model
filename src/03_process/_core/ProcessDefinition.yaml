@@ -33,7 +33,7 @@ imports:
 
 classes:
   ProcessDefinition:
-    is_a: Entity
+    is_a: Document
     mixins:
       - Identifiable
       - Lifecycleable

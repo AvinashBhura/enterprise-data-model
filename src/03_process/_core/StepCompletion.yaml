@@ -23,6 +23,7 @@ imports:
   - ../../01_foundation/common/codelists/types/ActivityTypeEnum
   - ProcessStep
   - enums/StepOutcomeEnum
+  - ../../01_foundation/Role
 
 classes:
   StepCompletion:
@@ -48,7 +49,7 @@ classes:
         range: Person
         description: Person who completed the step (null for automated steps).
       completed_by_role:
-        range: string
+        range: Role
         description: entity_id of the Role under which the step was completed (the authority context).
       outcome:
         range: StepOutcomeEnum

@@ -17,9 +17,11 @@ imports:
   - linkml:types
   - ../_core/ProcessDefinition
   - ../../01_foundation/common/base/AmountType
+  - ../../01_foundation/Document
 
 classes:
   ApprovalThreshold:
+    is_a: Document
     description: An approval threshold rule.
     attributes:
       threshold_amount:

@@ -1,0 +1,52 @@
+id: https://example.org/edm/domain/Finance/CostCenter
+name: domain_finance_cost_center
+title: Domain (Finance) — CostCenter
+description: >
+  A cost center — accounting unit for cost allocation. Typically
+  aligned with an OrganizationalUnit but kept as a separate Finance
+  noun because cost centers can outlive organizational structures
+  and may not map 1:1 with org units.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/Organization
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/base/Lifecycleable
+
+classes:
+  CostCenter:
+    is_a: OrganizationalUnit
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: An accounting unit for cost allocation.
+    attributes:
+      cost_center_code:
+        range: string
+        required: true
+        description: Cost center code (natural key).
+      name:
+        range: string
+        required: true
+      description:
+        range: string
+      organizational_unit:
+        range: Organization
+        description: OrganizationalUnit aligned with this cost center.
+      parent_cost_center:
+        range: CostCenter
+        description: Parent cost center for roll-up.
+      manager_role:
+        range: string
+        description: entity_id of the EmployeeRole responsible for this cost center.

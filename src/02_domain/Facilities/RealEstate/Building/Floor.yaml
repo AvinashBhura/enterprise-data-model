@@ -1,0 +1,46 @@
+id: https://example.org/edm/domain/Facilities/Floor
+name: domain_facilities_floor
+title: Domain (Facilities) — Floor
+description: A floor within a Building.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Asset
+  - ../../../../01_foundation/common/codelists/types/AssetTypeEnum
+  - ../../../../01_foundation/common/base/QuantityType
+  - Building
+
+classes:
+  Floor:
+    is_a: Asset
+    description: A floor within a Building.
+    slot_usage:
+      asset_type:
+        equals_string: PHYSICAL
+    attributes:
+      floor_number:
+        range: integer
+        required: true
+        description: Floor number (negative for basements).
+      floor_label:
+        range: string
+        description: Human label (e.g., "Ground", "Mezzanine", "L3").
+      building:
+        range: Building
+        required: true
+      floor_area:
+        range: QuantityType
+      seating_capacity:
+        range: integer
+      number_of_rooms:
+        range: integer

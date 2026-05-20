@@ -1,0 +1,64 @@
+id: https://example.org/edm/foundation/Document
+name: foundation_document
+title: Foundation — Document
+description: >
+  A formal informational artifact — a template, specification, policy,
+  procedure, checklist, definition, or other documented record. Documents
+  carry meaning that exists independent of any single party or activity,
+  and can be versioned, published, and referenced.
+
+  Distinct from Agreement (Documents may have no parties), Activity
+  (Documents are static specifications, not events), and Asset
+  (Documents are informational, not necessarily of economic value).
+
+  Domain examples that specialize Document:
+  - OnboardingChecklist (HR template)
+  - ProcessDefinition (workflow specification)
+  - RegulatoryObligation (compliance requirement)
+  - LedgerAccount (registered ledger position)
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+  schema: https://schema.org/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - Entity
+  - common/base/Identifiable
+  - common/base/Lifecycleable
+
+classes:
+  Document:
+    is_a: Entity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A formal informational artifact.
+    class_uri: schema:CreativeWork
+    attributes:
+      document_title:
+        range: string
+        required: true
+      document_type:
+        range: string
+        description: Classification of the document (template, policy, specification, ...).
+      version:
+        range: string
+        description: Version identifier (SemVer or other scheme).
+      published_at:
+        range: datetime
+      retired_at:
+        range: datetime
+      content_reference:
+        range: uri
+        description: Optional URI to the document's contents (if stored externally).
+      replaces_document:
+        range: Document
+        description: Predecessor document this supersedes.

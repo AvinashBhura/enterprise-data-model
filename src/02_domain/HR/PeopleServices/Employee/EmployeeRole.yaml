@@ -1,0 +1,92 @@
+id: https://example.org/edm/domain/HumanResources/EmployeeRole
+name: domain_hr_employee_role
+title: Domain (HR) — EmployeeRole
+description: >
+  A Role representing a Person's engagement as an employee of an
+  Organization under an EmploymentContract.
+
+  Critical: Employee is a ROLE, not a Person subtype. The Person remains
+  the stable identity across all engagements; EmployeeRole captures the
+  time-bound employment relationship.
+
+  Per the Role Immutability operational rule: changes to
+  employing_organization, primary_position, or employment_type end
+  the current EmployeeRole and begin a new one.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Role
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/Organization
+  - ../../../../01_foundation/common/codelists/types/RoleTypeEnum
+  - ../../../../01_foundation/common/codelists/types/EmploymentTypeEnum
+  - Position
+  - CompensationPackage
+  - EmploymentContract
+  - enums/EmploymentLifecycleStateEnum
+
+classes:
+  EmployeeRole:
+    is_a: Role
+    description: A Person's engagement as an employee.
+    slot_usage:
+      role_type:
+        equals_string: EMPLOYEE
+      held_by_person:
+        required: true
+      lifecycle_state:
+        range: EmploymentLifecycleStateEnum
+        required: true
+    attributes:
+      employee_number:
+        range: string
+        required: true
+        description: >
+          Enterprise-issued employee number — natural key scoped to
+          this role.
+      employing_organization:
+        range: Organization
+        required: true
+      employing_legal_entity:
+        range: Organization
+        description: LegalEntity that legally employs the Person.
+      hire_date:
+        range: date
+        required: true
+      separation_date:
+        range: date
+      separation_reason:
+        range: string
+      employment_type:
+        range: EmploymentTypeEnum
+        required: true
+      primary_position:
+        range: Position
+        required: true
+      additional_positions:
+        range: Position
+        multivalued: true
+      employment_contract:
+        range: EmploymentContract
+      compensation_package:
+        range: CompensationPackage
+      manager_role:
+        range: EmployeeRole
+        description: The EmployeeRole of this employee's manager.
+      work_email:
+        range: string
+        pattern: "^[\\w.\\-+]+@[\\w.\\-]+\\.\\w+$"
+      work_phone:
+        range: string
+      job_title:
+        range: string

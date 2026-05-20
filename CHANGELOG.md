@@ -5,6 +5,130 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] — Strict-Foundation + Hierarchical Domain
+
+Major architectural refactor. **This is a breaking change** — file paths,
+inheritance chains, and slot types changed throughout Domain, Process, and
+Application layers. All quality gates pass: 186 schemas valid, 457 imports
+upward-only, 38 compliance checks pass, 16 architectural-rule tests pass.
+
+### Foundation expansion
+
+- **Added `Document`** — formal informational artifacts (templates,
+  specifications, policies, checklists, definitions). Used by
+  OnboardingChecklist, ProcessDefinition, ProcessStep, ProcessTransition,
+  RegulatoryObligation, GL Account, OrderLine, PositionHierarchy,
+  PurchaseRequisition, and all `*Line` line-item classes.
+- **Added `Period`** — defined time intervals with hierarchical containment.
+  Used by FiscalPeriod.
+
+Foundation now contains 11 concrete entities anchoring the model.
+
+### Strict-Foundation principle (Closed-Ontology Rule)
+
+`Entity` is now strictly an anchor — only Foundation entities may inherit
+directly from it. Every Domain, Process, and Application entity has been
+re-anchored to a specific Foundation kind:
+
+| Entity | Old `is_a` | New `is_a` |
+|---|---|---|
+| `Position` | Entity | Role |
+| `PositionHierarchy` | Entity | Document |
+| `OnboardingChecklist`, `ChecklistItem` | Entity | Document |
+| `CompensationPackage` | Entity | Agreement |
+| `Account` (Finance GL) | Entity | Document |
+| `Budget` | Entity | Agreement |
+| `FiscalPeriod` | Entity | Period |
+| `CostCenter` | Entity | OrganizationalUnit |
+| `Account` (Sales) | Entity | Asset |
+| `Opportunity` | Entity | Activity |
+| `OrderLine` | Entity | Document |
+| `PurchaseRequisition` | Entity | Document |
+| `RegulatoryObligation` | Entity | Document |
+| `AccessGrant` | Entity | Agreement |
+| `UserAccount` | Entity | Asset |
+| `ProcessDefinition` | Entity | Document |
+| `ProcessInstance` | Entity | Activity |
+| `ProcessTransition` | Entity | Document |
+| `ProcessEvent` | Entity | Activity |
+| Line-item classes (QuoteLine, InvoiceLine, JournalEntryLine, BudgetLine, PurchaseOrderLine, RequisitionLine, ApprovalThreshold) | (none) | Document |
+
+Enforced by new test:
+`tests/architectural_rules/test_entity_inheritance_discipline.py`.
+
+### Hierarchical Domain restructure
+
+Domain layer reorganized into 3-level hierarchy:
+`<RootDomain>/<SubDomain>/<DataDomain>/<Entity>.yaml`
+
+The 9 capability-named folders (HumanResources, Finance, Sales, Procurement,
+Legal, Security, IT, Facilities, Governance) were renamed to root domains
+and decomposed into sub-domains:
+
+- `HR/` — TalentAcquisition, PeopleServices, Compensation, Performance
+- `Finance/` — GeneralLedger, AccountsPayable, FinancialPlanning, CostAccounting
+- `Sales/` — CustomerManagement, PipelineManagement, OrderManagement
+- `Procurement/` — Sourcing, Purchasing
+- `Legal/` — Contracts, Compliance, IntellectualProperty
+- `Security/` — PhysicalSecurity, LogicalSecurity
+- `IT/` — ServiceManagement, AssetManagement, IdentityManagement
+- `Facilities/` — RealEstate
+- `Governance/` — CorporateGovernance
+
+80 Domain files moved; all imports updated automatically. Placement rules
+documented in `docs/architecture/data_domain_organization.md`.
+
+### Process layer reference tightening
+
+- `StepCompletion.completed_by_role` — `string` → `Role` (typed Foundation reference)
+- `ProcessEvent.actor_role` — `string` → `Role`
+
+Generic `ProcessInstance.subject_entity_id` remains a string at the base
+class for polymorphism; family-specific subclasses can narrow it via
+`slot_usage`.
+
+### Business capabilities documentation
+
+New `docs/capabilities/` folder with 10 capability documents covering:
+Customer Management, Employee Management, Order Fulfillment, Financial
+Accounting, Procurement, Legal & Compliance, Workplace Security, IT
+Service Management, Facilities Management, Corporate Governance.
+
+Each capability document lists data domains consumed and processes used —
+establishing the conceptual separation between *what the business does*
+(capabilities), *what information it maintains* (data domains), and *how
+it operationalizes* (processes).
+
+### Operational rules added
+
+Two new operational rules added to `docs/architecture/principles.md`:
+
+- **Strict-Foundation Anchoring (Closed-Ontology Rule)**
+- **Typed Cross-Entity References (No-Loose-Strings Rule)**
+
+### Migration
+
+The pre-refactor checkpoint is preserved as
+`edm-pre-refactor-checkpoint.zip`. To migrate consuming code:
+
+1. Update Domain import paths (the script
+   `migration/v0.5.0_import_rewrite.py` can help)
+2. Update inheritance chains in any custom subclasses
+3. Replace loose `entity_id` string references with typed slots
+4. Re-run `make check` to verify
+
+### Statistics
+
+- Schemas: 184 → 186 (+2 Foundation)
+- Classes: 127 → 129 (Document, Period added)
+- Imports checked: 442 → 457
+- Tests: 14 → 16 (added entity-inheritance discipline tests)
+- Domain folders: 10 flat → 9 root + ~25 sub-domains + ~50 data domains
+- Files moved: 80
+- Inheritance updates: 27 (20 from migration + 7 line-item classes)
+
+---
+
 ## [0.4.0] — Batch 4 Complete
 
 ### Added — Application Layer (`src/04_application/`)

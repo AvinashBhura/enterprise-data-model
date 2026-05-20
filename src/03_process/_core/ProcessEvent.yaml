@@ -23,10 +23,11 @@ imports:
   - ../../01_foundation/common/base/Identifiable
   - ProcessStep
   - enums/ProcessEventTypeEnum
+  - ../../01_foundation/Role
 
 classes:
   ProcessEvent:
-    is_a: Entity
+    is_a: Activity
     mixins:
       - Identifiable
     description: An event recorded in a ProcessInstance's lifecycle.
@@ -45,7 +46,7 @@ classes:
         range: Person
         description: Person responsible for the event (null for automated/system events).
       actor_role:
-        range: string
+        range: Role
         description: entity_id of the Role under which the actor acted.
       related_step:
         range: ProcessStep

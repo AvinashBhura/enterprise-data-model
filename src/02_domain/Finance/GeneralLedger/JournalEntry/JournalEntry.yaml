@@ -1,0 +1,85 @@
+id: https://example.org/edm/domain/Finance/JournalEntry
+name: domain_finance_journal_entry
+title: Domain (Finance) — JournalEntry
+description: >
+  An accounting journal entry — a balanced set of debits and credits
+  posted to one or more Accounts. Specializes Foundation Activity
+  since it is a transactional event.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Activity
+  - ../../../../01_foundation/common/codelists/types/ActivityTypeEnum
+  - ../../../../01_foundation/common/base/AmountType
+  - Account
+  - FiscalPeriod
+  - enums/JournalEntryLifecycleStateEnum
+  - ../../../../01_foundation/Document
+
+classes:
+  JournalEntryLine:
+    is_a: Document
+    description: A single line in a JournalEntry — one debit or credit.
+    attributes:
+      account:
+        range: Account
+        required: true
+      debit_amount:
+        range: AmountType
+        description: Debit amount (null if this line is a credit).
+      credit_amount:
+        range: AmountType
+        description: Credit amount (null if this line is a debit).
+      memo:
+        range: string
+        description: Line-level memo.
+      cost_center_code:
+        range: string
+        description: Optional cost center allocation.
+
+  JournalEntry:
+    is_a: Activity
+    description: A balanced set of debits and credits posted to GL accounts.
+    slot_usage:
+      activity_type:
+        equals_string: TRANSACTION
+      lifecycle_state:
+        range: JournalEntryLifecycleStateEnum
+        required: true
+    attributes:
+      entry_number:
+        range: string
+        required: true
+        description: Journal entry number.
+      posting_date:
+        range: date
+        required: true
+        description: Date the entry posts to the GL.
+      fiscal_period:
+        range: FiscalPeriod
+        required: true
+        description: Fiscal period this entry belongs to.
+      lines:
+        range: JournalEntryLine
+        multivalued: true
+        required: true
+        description: The set of debit/credit lines (must balance).
+      source_module:
+        range: string
+        description: Source module (AP, AR, GL, INVENTORY, PAYROLL, ...).
+      reversed_by:
+        range: JournalEntry
+        description: If reversed, the reversing entry.
+      reverses:
+        range: JournalEntry
+        description: If this is a reversing entry, the entry it reverses.

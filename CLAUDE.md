@@ -24,10 +24,10 @@ pip install -e ".[dev]"
 make check
 
 # Or run the four checks individually:
-python tools/validate_all.py            # 184 schemas parse cleanly
-python tools/check_dependency_direction.py  # 442 imports flow upward
+python tools/validate_all.py            # 186 schemas parse cleanly
+python tools/check_dependency_direction.py  # 457 imports flow upward
 python tools/check_principle_compliance.py  # 38 architectural rules
-pytest tests/                           # 14 tests
+pytest tests/                           # 16 tests
 ```
 
 If any of those four fail, **do not proceed** until they pass.
@@ -37,14 +37,22 @@ If any of those four fail, **do not proceed** until they pass.
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │ 5. APPLICATION    src/04_application/    vendor projections   │
+│                   organized by vendor (Workday, SAP, ...)     │
 ├──────────────────────────────────────────────────────────────┤
 │ 4. PROCESS        src/03_process/        workflows + instances│
+│                   organized by process family (Onboarding, ...│
 ├──────────────────────────────────────────────────────────────┤
 │ 3. DOMAIN         src/02_domain/         capability nouns     │
+│                   3-level hierarchy:                          │
+│                   <Root>/<SubDomain>/<DataDomain>/Entity.yaml │
+│                   e.g., HR/PeopleServices/Employee/...        │
 ├──────────────────────────────────────────────────────────────┤
 │ 2. COMMON         src/01_foundation/common/   toolkit         │
 ├──────────────────────────────────────────────────────────────┤
 │ 1. FOUNDATION     src/01_foundation/    permanent concepts    │
+│                   Entity (anchor) + 10 concrete kinds:        │
+│                   Person, Organization, Team, Role, Activity, │
+│                   Agreement, Asset, Address, Document, Period │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -52,8 +60,12 @@ If any of those four fail, **do not proceed** until they pass.
 rule. A schema in a lower layer must NEVER import from a higher layer.
 
 For the full architecture story, read `docs/architecture/overview.md`.
+For Domain layer organization rules, read
+`docs/architecture/data_domain_organization.md`.
+For business capabilities (separate from data domains), read
+`docs/capabilities/`.
 
-## Five Operational Rules (Non-Negotiable)
+## Operational Rules (Non-Negotiable)
 
 These are documented in `docs/architecture/operational_rules.md` and
 enforced by tests in `tests/architectural_rules/`. Read them before
@@ -70,6 +82,17 @@ making changes.
 5. **Codelist vs Taxonomy vs Instance Data** — Codelists are flat;
    taxonomies are hierarchical; specific instances belong in Domain
    master data, not Common.
+6. **Strict-Foundation Anchoring (v0.5.0+)** — Only Foundation entities
+   directly specialize `Entity`. Every Domain, Process, and Application
+   entity must specialize a more specific Foundation kind (Person,
+   Organization, Role, Activity, Agreement, Asset, Address, Document,
+   Period, or one of their subtypes). Enforced by
+   `tests/architectural_rules/test_entity_inheritance_discipline.py`.
+7. **Typed Cross-Entity References (v0.5.0+)** — References between EDM
+   entities must be typed slots (range a target entity), not loose
+   `entity_id` strings. Exception: generic ProcessInstance.subject_entity_id
+   on the base class, which family-specific subclasses narrow via
+   `slot_usage`.
 
 ## Twenty-Seven Principles
 

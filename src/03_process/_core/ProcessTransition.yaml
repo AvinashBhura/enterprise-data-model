@@ -23,7 +23,7 @@ imports:
 
 classes:
   ProcessTransition:
-    is_a: Entity
+    is_a: Document
     mixins:
       - Identifiable
     description: An allowed transition between two ProcessSteps.

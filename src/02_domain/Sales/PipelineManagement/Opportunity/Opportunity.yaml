@@ -1,0 +1,65 @@
+id: https://example.org/edm/domain/Sales/Opportunity
+name: domain_sales_opportunity
+title: Domain (Sales) — Opportunity
+description: A specific sales pursuit at an Account.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Entity
+  - ../../../../01_foundation/common/base/Identifiable
+  - ../../../../01_foundation/common/base/Lifecycleable
+  - ../../../../01_foundation/common/base/AmountType
+  - Account
+  - enums/OpportunityLifecycleStateEnum
+
+classes:
+  Opportunity:
+    is_a: Activity
+    mixins:
+      - Identifiable
+      - Lifecycleable
+    description: A specific sales pursuit.
+    slot_usage:
+      lifecycle_state:
+        range: OpportunityLifecycleStateEnum
+        required: true
+    attributes:
+      opportunity_name:
+        range: string
+        required: true
+      account:
+        range: Account
+        required: true
+      expected_value:
+        range: AmountType
+        required: true
+      probability_percent:
+        range: decimal
+        description: Win probability (0-100).
+      expected_close_date:
+        range: date
+      actual_close_date:
+        range: date
+      sales_stage:
+        range: string
+        description: Sales stage label (DISCOVERY, PROPOSAL, NEGOTIATION, ...).
+      owner_role:
+        range: string
+        description: entity_id of the EmployeeRole owning this opportunity.
+      win_loss_reason:
+        range: string
+        description: Reason for win or loss.
+      competitors:
+        range: string
+        multivalued: true
+        description: Names of competing vendors in this pursuit.

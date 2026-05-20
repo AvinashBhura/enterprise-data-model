@@ -1,0 +1,68 @@
+id: https://example.org/edm/domain/Legal/IntellectualPropertyAsset
+name: domain_legal_intellectual_property_asset
+title: Domain (Legal) — IntellectualPropertyAsset
+description: An IP asset — patent, trademark, copyright, trade secret.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Asset
+  - ../../../../01_foundation/Organization
+  - ../../../../01_foundation/Person
+  - ../../../../01_foundation/common/codelists/types/AssetTypeEnum
+  - ../../../../01_foundation/common/codelists/standards/CountryCode
+  - enums/IPAssetLifecycleStateEnum
+
+classes:
+  IntellectualPropertyAsset:
+    is_a: Asset
+    description: An intellectual-property asset.
+    slot_usage:
+      asset_type:
+        equals_string: INTELLECTUAL_PROPERTY
+      lifecycle_state:
+        range: IPAssetLifecycleStateEnum
+        required: true
+    attributes:
+      ip_type:
+        range: string
+        required: true
+        description: PATENT, TRADEMARK, COPYRIGHT, TRADE_SECRET, DOMAIN_NAME.
+      title:
+        range: string
+        required: true
+      registration_number:
+        range: string
+        description: Registration / application number.
+      filing_jurisdiction:
+        range: CountryCodeEnum
+        description: Jurisdiction where filed.
+      filing_date:
+        range: date
+      grant_date:
+        range: date
+      expiration_date:
+        range: date
+      inventors:
+        range: Person
+        multivalued: true
+        description: Named inventors (for patents).
+      authors:
+        range: Person
+        multivalued: true
+        description: Named authors (for copyrights).
+      assignee:
+        range: Organization
+        description: Legal entity owning the IP.
+      next_maintenance_due:
+        range: date
+        description: Next maintenance / renewal fee due date.

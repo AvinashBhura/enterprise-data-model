@@ -1,0 +1,58 @@
+id: https://example.org/edm/domain/Facilities/Room
+name: domain_facilities_room
+title: Domain (Facilities) — Room
+description: A specific room within a Floor — office, conference room, lab, etc.
+
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  edm: https://example.org/edm/
+
+default_prefix: edm
+default_range: string
+
+imports:
+  - linkml:types
+  - ../../../../01_foundation/Asset
+  - ../../../../01_foundation/common/codelists/types/AssetTypeEnum
+  - ../../../../01_foundation/common/base/QuantityType
+  - Floor
+
+classes:
+  Room:
+    is_a: Asset
+    description: A specific room within a Floor.
+    slot_usage:
+      asset_type:
+        equals_string: PHYSICAL
+    attributes:
+      room_number:
+        range: string
+        required: true
+        description: Room number / identifier.
+      room_name:
+        range: string
+        description: Human-readable name (e.g., "Aurora Conf Room").
+      room_type:
+        range: string
+        required: true
+        description: OFFICE, OPEN_DESK, CONFERENCE, PHONE_BOOTH, LAB, KITCHEN, RESTROOM, STORAGE, MECHANICAL.
+      floor:
+        range: Floor
+        required: true
+      capacity:
+        range: integer
+        description: Maximum occupants (for meeting rooms).
+      area:
+        range: QuantityType
+      bookable:
+        range: boolean
+        description: Whether the room is bookable through a reservation system.
+      av_equipped:
+        range: boolean
+        description: Whether the room has audio/video conferencing equipment.
+      accessibility_features:
+        range: string
+        multivalued: true

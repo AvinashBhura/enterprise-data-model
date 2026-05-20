@@ -15,7 +15,7 @@ Twenty-seven principles, organized by layer. Each principle has a
 | 4 | Semantic Integrity | **The Common Language Principle** | "One meaning, understood by everyone." Neutral enterprise terminology. |
 | 5 | Minimalism | **The Spartan Principle** | "Only concrete entities live here — nothing else earns a seat." |
 | 6 | Entity-Purity | **The Noun Principle** | "The business is made of things, not construction material." |
-| 7 | Semantic Anchoring | **The Origin Principle** | "Entity is where things begin, not what they must become." |
+| 7 | Semantic Anchoring | **The Origin Principle** | "Entity is where things begin, not what they must become." Strict form: **only Foundation entities inherit directly from Entity**; every Domain/Process/Application entity specializes a specific Foundation kind. |
 
 ## Common Sub-Layer (5)
 
@@ -56,6 +56,8 @@ Twenty-seven principles, organized by layer. Each principle has a
 | 3 | Source-System Transparency | **The Fingerprint Principle** | "Every Application entity names its source system." |
 | 4 | Bidirectional Mapping | **The Contract Principle** | "Every projection documents its transformation to and from the canonical shape." |
 | 5 | No Upstream Pollution | **The One-Way Gate Principle** | "Foundation, Common, Domain, and Process never import from Application." |
+| 6 | Strict-Foundation Anchoring | **The Closed-Ontology Rule** | "Only Foundation entities directly specialize Entity. Domain, Process, and Application entities must specialize a specific Foundation kind." |
+| 7 | Typed Cross-Entity References | **The No-Loose-Strings Rule** | "Every reference from one EDM entity to another is a typed slot ranged on the target entity. Loose `entity_id` strings are forbidden except at generic abstraction levels (e.g., `ProcessInstance.subject_entity_id` on the base class, narrowed by family-specific subclasses)." |
 
 ---
 
